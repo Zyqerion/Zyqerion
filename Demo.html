@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zyqerion Demo</title>
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:#101010;
+      --text:#f2f2f2;
+      --muted:#b8b8b8;
+      --line:#232323;
+      --accent:#22ff88;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:linear-gradient(to bottom, #090909, #060606);
+      color:var(--text);
+    }
+
+    .container{
+      width:min(1000px, 92%);
+      margin:0 auto;
+      padding:28px 0 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:26px;
+    }
+
+    .brand{
+      font-size:28px;
+      font-weight:800;
+      color:var(--accent);
+    }
+
+    a{
+      color:var(--accent);
+      text-decoration:none;
+    }
+
+    h1{
+      font-size:clamp(34px, 5vw, 56px);
+      line-height:1.05;
+      margin:18px 0;
+    }
+
+    p.lead{
+      font-size:19px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width:760px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1.2fr;
+      gap:24px;
+      margin-top:30px;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+    }
+
+    .title{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#999;
+      margin-bottom:14px;
+    }
+
+    .dropzone{
+      border:1px dashed #2f2f2f;
+      border-radius:18px;
+      padding:26px;
+      text-align:center;
+      background:#0d0d0d;
+    }
+
+    .dropzone input{
+      margin-top:12px;
+      width:100%;
+    }
+
+    textarea, input[type="text"]{
+      width:100%;
+      border-radius:16px;
+      border:1px solid #2a2a2a;
+      background:#111;
+      color:#fff;
+      padding:16px;
+      font-size:16px;
+      outline:none;
+    }
+
+    textarea{
+      min-height:220px;
+      resize:vertical;
+    }
+
+    button{
+      margin-top:14px;
+      padding:15px 22px;
+      border:none;
+      border-radius:14px;
+      background:var(--accent);
+      color:#000;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .answer{
+      margin-top:18px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(34,255,136,0.08);
+      border:1px solid rgba(34,255,136,0.18);
+      line-height:1.75;
+    }
+
+    .sample{
+      margin-top:18px;
+      color:#bcbcbc;
+      font-size:15px;
+      line-height:1.8;
+    }
+
+    .pill{
+      display:inline-block;
+      margin:6px 8px 0 0;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid #2a2a2a;
+      color:#ddd;
+      font-size:14px;
+    }
+
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">Zyqerion</div>
+      <a href="index.html">← Back to site</a>
+    </div>
+
+    <h1>Zyqerion demo prototype</h1>
+
+    <p class="lead">
+      This is a simple clickable demo you can show to potential pilot customers.
+      Upload or paste company text, ask a question, and Zyqerion returns a demo answer based on the content.
+    </p>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="title">Step 1 — Add company knowledge</div>
+
+        <div class="dropzone">
+          <strong>Upload a text file</strong>
+          <div class="sample">For this demo, .txt works best on mobile.</div>
+          <input id="fileInput" type="file" accept=".txt" />
+        </div>
+
+        <div class="sample" style="margin-top:18px;">
+          Or paste sample knowledge below:
+        </div>
+
+        <textarea id="knowledgeInput">Employee onboarding starts with account setup, access to internal documentation, manager introduction, and a 30-day training path. Support policy requires first response within 4 business hours for priority issues and within 1 business day for standard issues. Payment terms are net 14 for consulting clients.</textarea>
+      </div>
+
+      <div class="panel">
+        <div class="title">Step 2 — Ask Zyqerion</div>
+
+        <input id="questionInput" type="text" placeholder="Example: How does onboarding work?" />
+        <button onclick="answerQuestion()">Ask AI</button>
+
+        <div class="sample">
+          Try:
+          <span class="pill">How does onboarding work?</span>
+          <span class="pill">What are our support response times?</span>
+          <span class="pill">What are the payment terms?</span>
+        </div>
+
+        <div id="answerBox" class="answer" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const knowledgeInput = document.getElementById('knowledgeInput');
+    const questionInput = document.getElementById('questionInput');
+    const answerBox = document.getElementById('answerBox');
+
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const text = await file.text();
+      knowledgeInput.value = text;
+    });
+
+    function answerQuestion(){
+      const knowledge = knowledgeInput.value.trim();
+      const q = questionInput.value.trim().toLowerCase();
+
+      if (!knowledge || !q){
+        answerBox.style.display = 'block';
+        answerBox.textContent = 'Please add company knowledge and type a question first.';
+        return;
+      }
+
+      let answer = '';
+
+      if (q.includes('onboarding')) {
+        answer = 'According to the provided company knowledge, onboarding starts with account setup, access to internal documentation, a manager introduction, and a 30-day training path.';
+      } else if (q.includes('support') || q.includes('response')) {
+        answer = 'According to the provided support policy, first response time is within 4 business hours for priority issues and within 1 business day for standard issues.';
+      } else if (q.includes('payment') || q.includes('terms')) {
+        answer = 'According to the provided payment policy, consulting clients are on net 14 payment terms.';
+      } else {
+        answer = 'Demo answer: Zyqerion would use the uploaded company knowledge to generate a grounded answer here. For a live version, this would be connected to a real AI backend.';
+      }
+
+      answerBox.style.display = 'block';
+      answerBox.textContent = answer;
+    }
+  </script>
+</body>
+</html>
