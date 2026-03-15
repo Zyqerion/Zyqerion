@@ -10,11 +10,12 @@
   />
   <style>
     :root {
-      --bg: #06101d;
+      --bg: #020503;
+      --bg-2: #07110a;
       --text: #f5f7fb;
-      --muted: #aab6c7;
-      --border: rgba(255,255,255,0.12);
-      --primary-text: #08111f;
+      --muted: #a8b3ab;
+      --border: rgba(86,255,120,0.14);
+      --primary-text: #031006;
       --success: #9fe6bf;
       --max: 1120px;
     }
@@ -27,9 +28,9 @@
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(116,170,255,0.18), transparent 30%),
-        radial-gradient(circle at 80% 10%, rgba(94,214,180,0.10), transparent 24%),
-        linear-gradient(180deg, var(--bg) 0%, #081426 100%);
+        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.12), transparent 26%),
+        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 22%),
+        linear-gradient(180deg, #010302 0%, #07110a 100%);
       line-height: 1.55;
       position: relative;
       overflow-x: hidden;
@@ -45,8 +46,8 @@
       height: 900px;
       background: radial-gradient(
         circle,
-        rgba(120,170,255,0.18) 0%,
-        rgba(120,170,255,0.08) 35%,
+        rgba(57,255,92,0.14) 0%,
+        rgba(57,255,92,0.06) 35%,
         transparent 70%
       );
       pointer-events: none;
@@ -67,23 +68,30 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(6,16,29,0.72);
+      background: rgba(2,5,3,0.82);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(86,255,120,0.10);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
+      padding: 14px 0;
       gap: 16px;
     }
 
-    .brand {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.2px;
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .logo-img {
+      height: 44px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(57,255,92,0.12));
     }
 
     .btn {
@@ -104,14 +112,14 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #b4cbff, #d3e0ff);
-      color: var(--primary-text);
-      box-shadow: 0 10px 35px rgba(169,196,255,0.26);
+      background: linear-gradient(135deg, #7dff96, #39ff5c);
+      color: #031006;
+      box-shadow: 0 10px 35px rgba(57,255,92,0.22);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.10);
+      border-color: rgba(86,255,120,0.14);
       color: var(--text);
     }
 
@@ -124,9 +132,9 @@
       display: inline-block;
       padding: 9px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.04);
-      color: #d5e2ff;
+      border: 1px solid rgba(86,255,120,0.14);
+      background: rgba(255,255,255,0.03);
+      color: #c8ffd2;
       font-size: 0.92rem;
       margin-bottom: 18px;
     }
@@ -137,7 +145,7 @@
       font-size: clamp(2.4rem, 5vw, 4.8rem);
       line-height: 1;
       letter-spacing: -0.05em;
-      background: linear-gradient(90deg, #ffffff, #cfe1ff);
+      background: linear-gradient(90deg, #ffffff, #b7ffc3, #7dff96);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -161,11 +169,11 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
       border: 1px solid var(--border);
       border-radius: 22px;
       padding: 22px;
-      box-shadow: 0 0 40px rgba(169,196,255,0.18), 0 0 120px rgba(169,196,255,0.05);
+      box-shadow: 0 0 40px rgba(57,255,92,0.12), 0 0 120px rgba(57,255,92,0.04);
     }
 
     .label {
@@ -190,9 +198,9 @@
       width: 100%;
       min-height: 180px;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.045);
       color: var(--text);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(86,255,120,0.14);
       border-radius: 16px;
       font: inherit;
       outline: none;
@@ -201,12 +209,12 @@
     }
 
     textarea::placeholder {
-      color: #91a1b7;
+      color: #91a198;
     }
 
     textarea:focus {
-      border-color: #aac5ff;
-      box-shadow: 0 0 0 3px rgba(169,196,255,0.14);
+      border-color: #39ff5c;
+      box-shadow: 0 0 0 3px rgba(57,255,92,0.14);
     }
 
     .actions {
@@ -233,7 +241,7 @@
       text-align: left;
       padding: 12px 14px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(86,255,120,0.12);
       color: var(--text);
       border-radius: 12px;
       cursor: pointer;
@@ -243,7 +251,7 @@
 
     .prompt-chip:hover {
       background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.18);
+      border-color: rgba(86,255,120,0.18);
     }
 
     .output-shell {
@@ -260,8 +268,8 @@
       border-radius: 999px;
       font-size: 0.9rem;
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #d5e2ff;
+      border: 1px solid rgba(86,255,120,0.12);
+      color: #d5ffe0;
     }
 
     .status-dot {
@@ -273,8 +281,8 @@
     }
 
     .report-card {
-      background: rgba(2,10,22,0.42);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(2,10,22,0.38);
+      border: 1px solid rgba(86,255,120,0.10);
       border-radius: 18px;
       padding: 18px;
     }
@@ -311,15 +319,15 @@
       padding: 10px 12px;
       border-radius: 12px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(86,255,120,0.10);
     }
 
     .overall-score {
       margin-top: 14px;
       padding: 16px;
       border-radius: 16px;
-      background: rgba(180,203,255,0.08);
-      border: 1px solid rgba(180,203,255,0.18);
+      background: rgba(57,255,92,0.08);
+      border: 1px solid rgba(57,255,92,0.18);
     }
 
     .overall-score .small {
@@ -334,6 +342,7 @@
       font-size: 2rem;
       font-weight: 800;
       letter-spacing: -0.04em;
+      color: #d9ffe0;
     }
 
     .section {
@@ -366,7 +375,7 @@
     footer {
       padding: 20px 0 36px;
       color: var(--muted);
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(86,255,120,0.08);
     }
 
     .footer-inner {
@@ -385,13 +394,19 @@
       .hero {
         padding-top: 60px;
       }
+
+      .logo-img {
+        height: 36px;
+      }
     }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="/" class="brand">Zyqerion</a>
+      <a href="/" class="brand-logo" aria-label="Zyqerion home">
+        <img src="/zyqerion-logo.png" alt="Zyqerion logo" class="logo-img" />
+      </a>
       <a href="/" class="btn btn-secondary">Back to site</a>
     </div>
   </nav>
