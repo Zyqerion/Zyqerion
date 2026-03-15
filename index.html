@@ -3,51 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zyqerion — AI Research for Founders and Builders</title>
+  <title>Zyqerion — AI Research for Founders</title>
   <meta
     name="description"
-    content="Zyqerion helps founders and builders understand markets, competitors, and opportunities faster with AI-powered research."
+    content="AI research for founders. Understand markets, competitors, and startup opportunities in minutes."
   />
   <style>
     :root {
-      --bg: #07111f;
-      --bg-soft: #0d1b2e;
+      --bg: #06101d;
+      --bg2: #0a1830;
       --card: rgba(255,255,255,0.06);
-      --card-border: rgba(255,255,255,0.12);
-      --text: #f4f7fb;
-      --muted: #a9b7c8;
-      --primary: #8ab4ff;
-      --primary-strong: #c7d9ff;
-      --accent: #7df9c1;
-      --danger: #ffb4b4;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 18px;
-      --max: 1120px;
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #aab6c7;
+      --primary: #a9c4ff;
+      --primaryText: #08111f;
+      --soft: rgba(255,255,255,0.04);
+      --glow: 0 0 40px rgba(169,196,255,0.18);
+      --radius: 22px;
+      --max: 1080px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(122, 162, 255, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(125, 249, 193, 0.10), transparent 25%),
-        linear-gradient(180deg, #06101d 0%, #081523 100%);
       color: var(--text);
-      line-height: 1.6;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(116, 170, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(94, 214, 180, 0.10), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, #081426 100%);
+      line-height: 1.55;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .container {
       width: min(var(--max), calc(100% - 32px));
@@ -57,132 +48,117 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 20;
+      background: rgba(6,16,29,0.72);
       backdrop-filter: blur(12px);
-      background: rgba(7, 17, 31, 0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
     .nav-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 16px 0;
       gap: 16px;
     }
 
     .brand {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.2px;
     }
 
-    .nav-links {
+    .nav-actions {
       display: flex;
-      gap: 18px;
+      gap: 12px;
       align-items: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       padding: 12px 18px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid transparent;
       font-weight: 600;
       transition: 0.2s ease;
       cursor: pointer;
+      font: inherit;
     }
+
+    .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-      color: #07111f;
-      box-shadow: 0 10px 30px rgba(138, 180, 255, 0.28);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.04);
+      background: linear-gradient(135deg, #b4cbff, #d3e0ff);
+      color: var(--primaryText);
+      box-shadow: 0 10px 35px rgba(169,196,255,0.26);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
       color: var(--text);
-      border-color: rgba(255,255,255,0.12);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.08);
     }
 
     .hero {
-      padding: 84px 0 56px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 28px;
-      align-items: center;
+      padding: 84px 0 36px;
+      text-align: center;
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--primary-strong);
-      padding: 8px 12px;
+      display: inline-block;
+      padding: 9px 14px;
       border-radius: 999px;
-      font-size: 0.9rem;
-      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #d5e2ff;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: clamp(2.4rem, 5vw, 4.6rem);
-      line-height: 1.05;
-      margin: 0 0 18px;
-      letter-spacing: -0.04em;
+      margin: 0 auto 16px;
+      max-width: 900px;
+      font-size: clamp(2.5rem, 6vw, 5.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
     }
 
     .hero p {
-      font-size: 1.08rem;
+      margin: 0 auto 26px;
+      max-width: 720px;
       color: var(--muted);
-      max-width: 700px;
-      margin: 0 0 26px;
+      font-size: 1.08rem;
     }
 
     .hero-actions {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
-      margin-bottom: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
     }
 
-    .social-proof {
+    .subtext {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .hero-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+    .demo-section {
+      padding: 24px 0 42px;
     }
 
-    .terminal-bar {
+    .demo-shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 22px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      box-shadow: var(--glow);
+    }
+
+    .terminal-top {
       display: flex;
       gap: 8px;
       margin-bottom: 18px;
@@ -192,221 +168,196 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.18);
     }
 
-    .prompt-box,
-    .output-box {
-      background: rgba(0,0,0,0.22);
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: rgba(2,10,22,0.42);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 220px;
     }
 
     .label {
       font-size: 0.78rem;
+      letter-spacing: 0.10em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
-    .prompt {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .output-list {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      color: var(--text);
-    }
-
-    section {
-      padding: 34px 0;
-    }
-
-    .section-head {
-      max-width: 760px;
-      margin-bottom: 24px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      margin: 0 0 10px;
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .grid-3,
-    .grid-4,
-    .grid-2 {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.08rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .prompt-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .prompt-item {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      padding: 14px 16px;
-      color: var(--text);
-    }
-
-    .highlight {
-      color: var(--accent);
+    .prompt-text {
+      font-size: 1.35rem;
+      line-height: 1.35;
       font-weight: 600;
     }
 
-    .pricing {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      align-items: stretch;
+    .typing {
+      display: inline-block;
+      margin-left: 6px;
+      animation: blink 1s infinite;
     }
 
-    .price-card {
-      background: linear-gradient(180deg, rgba(125,249,193,0.08), rgba(255,255,255,0.04));
-      border: 1px solid rgba(125,249,193,0.18);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: var(--shadow);
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
     }
 
-    .price {
-      font-size: 2.6rem;
-      font-weight: 800;
-      margin: 8px 0 8px;
+    .report-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 1.04rem;
+      line-height: 1.8;
+    }
+
+    .section {
+      padding: 24px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
       letter-spacing: -0.04em;
     }
 
-    .price-note {
+    .section-head p {
+      margin: 0 auto;
+      max-width: 680px;
       color: var(--muted);
-      margin-bottom: 20px;
     }
 
-    .checklist {
-      margin: 0;
-      padding-left: 18px;
+    .prompts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .cta {
-      padding: 52px 0 74px;
+    .prompt-card,
+    .info-card {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
     }
 
-    .cta-box {
+    .prompt-card {
+      font-size: 1.03rem;
+    }
+
+    .report-offer {
+      max-width: 900px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 26px;
-      box-shadow: var(--shadow);
+      gap: 16px;
     }
 
-    .waitlist-form {
+    .price-box {
+      background: linear-gradient(180deg, rgba(101, 202, 180, 0.09), rgba(255,255,255,0.04));
+      border: 1px solid rgba(101, 202, 180, 0.18);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .price {
+      font-size: 4rem;
+      line-height: 1;
+      margin: 10px 0 14px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .muted { color: var(--muted); }
+
+    .waitlist {
+      padding: 36px 0 70px;
+    }
+
+    .waitlist-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--glow);
+    }
+
+    .waitlist-box h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .waitlist-box p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    form {
       display: grid;
       gap: 12px;
     }
 
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 15px 16px;
       font: inherit;
       outline: none;
     }
 
+    textarea { min-height: 130px; resize: vertical; }
+
     input::placeholder,
-    textarea::placeholder {
-      color: #8fa0b4;
-    }
+    textarea::placeholder { color: #91a1b7; }
 
     input:focus,
     textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(138,180,255,0.14);
-    }
-
-    .small {
-      font-size: 0.9rem;
-      color: var(--muted);
+      border-color: #aac5ff;
+      box-shadow: 0 0 0 3px rgba(169,196,255,0.14);
     }
 
     footer {
-      padding: 22px 0 40px;
+      padding: 20px 0 36px;
       color: var(--muted);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    @media (max-width: 900px) {
-      .hero-grid,
-      .pricing,
-      .cta-box,
-      .grid-4,
-      .grid-3,
-      .grid-2 {
+    @media (max-width: 820px) {
+      .demo-grid,
+      .prompts,
+      .report-offer {
         grid-template-columns: 1fr;
       }
 
-      .nav-links {
-        display: none;
-      }
-
       .hero {
-        padding-top: 60px;
+        padding-top: 68px;
       }
     }
   </style>
@@ -414,205 +365,123 @@
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="#" class="brand">Zyqerion</a>
-      <div class="nav-links">
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#prompts">Examples</a>
-        <a href="#reports">Reports</a>
-        <a href="#waitlist">Waitlist</a>
+      <a href="/" class="brand">Zyqerion</a>
+      <div class="nav-actions">
+        <a href="/demo.html" class="btn btn-secondary">Try the Demo</a>
       </div>
-      <a class="btn btn-secondary" href="/demo.html">Try the Demo</a>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">AI research for founders and builders</div>
-        <h1>Understand markets, competitors, and opportunities faster.</h1>
-        <p>
-          Zyqerion helps you turn a simple prompt into structured research.
-          Explore startup markets, discover risks, and uncover opportunities
-          without spending hours searching manually.
-        </p>
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">AI research for founders</div>
+      <h1>Understand markets in minutes.</h1>
+      <p>
+        Turn one prompt into clearer research on competitors, opportunities, and startup markets.
+      </p>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/demo.html">Try the Demo</a>
-          <a class="btn btn-secondary" href="#waitlist">Join the Waitlist</a>
-        </div>
-
-        <div class="social-proof">
-          Early access for founders, solo builders, and startup researchers.
-        </div>
+      <div class="hero-actions">
+        <a href="/demo.html" class="btn btn-primary">Try the Demo</a>
+        <a href="#waitlist" class="btn btn-secondary">Join Waitlist</a>
       </div>
 
-      <div class="hero-card">
-        <div class="terminal-bar">
+      <div class="subtext">Early access for founders, solo builders, and startup researchers.</div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <div class="container">
+      <div class="demo-shell">
+        <div class="terminal-top">
           <span class="dot"></span>
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
 
-        <div class="prompt-box">
-          <div class="label">Prompt</div>
-          <div class="prompt">Analyze the AI startup market in Europe</div>
-        </div>
-
-        <div class="output-box">
-          <div class="label">Report includes</div>
-          <ul class="output-list">
-            <li>Key market trends</li>
-            <li>Top funded startups</li>
-            <li>Competitive signals</li>
-            <li>Risks and opportunities</li>
-            <li>Practical next steps</li>
-          </ul>
-        </div>
-
-        <div class="small">
-          Built for faster startup research and clearer decision-making.
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section id="problem">
-    <div class="container">
-      <div class="section-head">
-        <h2>Research takes too long.</h2>
-        <p>
-          Founders spend too much time collecting information, comparing competitors,
-          summarizing sources, and trying to turn scattered notes into useful insight.
-        </p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Too many tabs</h3>
-          <p>Important information is spread across articles, databases, and random notes.</p>
-        </div>
-        <div class="card">
-          <h3>Slow decision-making</h3>
-          <p>Manual research delays product choices, market validation, and strategy work.</p>
-        </div>
-        <div class="card">
-          <h3>Messy output</h3>
-          <p>Even after hours of work, you often end up with incomplete conclusions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="solution">
-    <div class="container">
-      <div class="section-head">
-        <h2>Meet your AI research agent.</h2>
-        <p>
-          Zyqerion is built to help you go from question to structured analysis faster.
-          Ask a topic. Get a clearer research-style result.
-        </p>
-      </div>
-
-      <div class="grid-4">
-        <div class="card">
-          <h3>1. Ask a question</h3>
-          <p>Start with a market, startup idea, competitor set, or industry trend.</p>
-        </div>
-        <div class="card">
-          <h3>2. Analyze faster</h3>
-          <p>Turn raw research direction into usable structure and key themes.</p>
-        </div>
-        <div class="card">
-          <h3>3. See what matters</h3>
-          <p>Focus on risks, opportunities, signals, and practical next actions.</p>
-        </div>
-        <div class="card">
-          <h3>4. Build with clarity</h3>
-          <p>Use research to support product direction, positioning, and decisions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="prompts">
-    <div class="container">
-      <div class="section-head">
-        <h2>Example research prompts</h2>
-        <p>
-          These are the kinds of questions Zyqerion is designed to help explore.
-        </p>
-      </div>
-
-      <div class="prompt-list">
-        <div class="prompt-item">Analyze the AI startup market in Europe</div>
-        <div class="prompt-item">Identify opportunities in AI tools for small businesses</div>
-        <div class="prompt-item">Compare top competitors in the productivity SaaS market</div>
-        <div class="prompt-item">Research trends in fintech startups for the next 3 years</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="reports">
-    <div class="container">
-      <div class="pricing">
-        <div class="price-card">
-          <div class="label">Optional early monetization</div>
-          <h2 style="margin:0 0 10px;">Custom AI research reports</h2>
-          <p class="price">$19</p>
-          <div class="price-note">Per report. Delivered manually at first to avoid platform costs.</div>
-          <ul class="checklist">
-            <li>Market overview</li>
-            <li>Competitor breakdown</li>
-            <li>Opportunity insights</li>
-            <li>Strategic recommendations</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Why this is budget-friendly</h3>
-          <p>
-            You do <span class="highlight">not</span> need to automate this immediately.
-            You can collect requests through the waitlist form and deliver the first reports manually.
-          </p>
-          <p style="margin-top:12px;">
-            That means you can test demand and potentially generate income before taking on API costs.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta" id="waitlist">
-    <div class="container">
-      <div class="cta-box">
-        <div>
-          <div class="section-head" style="margin-bottom:12px;">
-            <h2>Join early access</h2>
-            <p>
-              Get updates, test future releases, and be among the first users shaping Zyqerion.
-            </p>
+        <div class="demo-grid">
+          <div class="panel">
+            <div class="label">Prompt</div>
+            <div class="prompt-text">
+              Analyze the AI startup market in Europe
+              <span class="typing">...</span>
+            </div>
           </div>
-          <p class="small">
-            You can also use this form to request a custom research report.
+
+          <div class="panel">
+            <div class="label">Output</div>
+            <ul class="report-list">
+              <li>Key market trends</li>
+              <li>Top funded startups</li>
+              <li>Competitive signals</li>
+              <li>Risks and opportunities</li>
+              <li>Strategic next steps</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Example prompts</h2>
+        <p>Built for founder-style questions, not generic chat.</p>
+      </div>
+
+      <div class="prompts">
+        <div class="prompt-card">Analyze the AI startup market in Europe</div>
+        <div class="prompt-card">Compare top competitors in the productivity SaaS market</div>
+        <div class="prompt-card">Identify opportunities in AI tools for small businesses</div>
+        <div class="prompt-card">Research fintech startup trends for the next 3 years</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="report-offer">
+        <div class="price-box">
+          <div class="label">Early monetization</div>
+          <h2 style="margin:0;">Custom research reports</h2>
+          <div class="price">$19</div>
+          <p class="muted" style="margin:0;">
+            Delivered manually at first, so you can test demand before paying for AI infrastructure.
           </p>
         </div>
 
-        <form
-          class="waitlist-form"
-          action="https://formspree.io/f/your-form-id"
-          method="POST"
-        >
+        <div class="info-card">
+          <h3 style="margin-top:0;">What’s included</h3>
+          <p class="muted">
+            Market overview, competitor breakdown, opportunity insights, and strategic recommendations.
+          </p>
+          <p class="muted" style="margin-bottom:0;">
+            Good for early validation, founder research, and startup idea analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="container">
+      <div class="waitlist-box">
+        <h2>Join early access</h2>
+        <p>
+          Get updates, test future releases, or request a custom research report.
+        </p>
+
+        <form action="https://formspree.io/f/your-form-id" method="POST">
           <input type="text" name="name" placeholder="Your name" required />
           <input type="email" name="email" placeholder="Your email" required />
           <textarea
             name="message"
-            rows="5"
             placeholder="What would you like to research, or why do you want early access?"
           ></textarea>
           <button class="btn btn-primary" type="submit">Join the Waitlist</button>
-          <div class="small">No spam. Early access updates only.</div>
         </form>
+
+        <p class="muted" style="margin-top:14px; margin-bottom:0;">No spam. Early access updates only.</p>
       </div>
     </div>
   </section>
@@ -620,7 +489,7 @@
   <footer>
     <div class="container footer-inner">
       <div>© Zyqerion</div>
-      <div>AI research for founders and builders</div>
+      <div>AI research for founders</div>
     </div>
   </footer>
 </body>
