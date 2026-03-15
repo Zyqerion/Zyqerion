@@ -3,608 +3,625 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zyqerion</title>
+  <title>Zyqerion — AI Research for Founders and Builders</title>
+  <meta
+    name="description"
+    content="Zyqerion helps founders and builders understand markets, competitors, and opportunities faster with AI-powered research."
+  />
   <style>
-    :root{
-      --bg:#070707;
-      --panel:#101010;
-      --panel-2:#151515;
-      --text:#f2f2f2;
-      --muted:#b8b8b8;
-      --line:#232323;
-      --accent:#22ff88;
-      --accent-dark:#0edb73;
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1b2e;
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.12);
+      --text: #f4f7fb;
+      --muted: #a9b7c8;
+      --primary: #8ab4ff;
+      --primary-strong: #c7d9ff;
+      --accent: #7df9c1;
+      --danger: #ffb4b4;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --max: 1120px;
     }
 
-    *{
-      box-sizing:border-box;
+    * {
+      box-sizing: border-box;
     }
 
-    html{
-      scroll-behavior:smooth;
+    html {
+      scroll-behavior: smooth;
     }
 
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
       background:
-        radial-gradient(circle at top, rgba(34,255,136,0.10), transparent 28%),
-        linear-gradient(to bottom, #090909, #060606);
-      color:var(--text);
-      text-align:center;
+        radial-gradient(circle at top left, rgba(122, 162, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(125, 249, 193, 0.10), transparent 25%),
+        linear-gradient(180deg, #06101d 0%, #081523 100%);
+      color: var(--text);
+      line-height: 1.6;
     }
 
-    .container{
-      width:min(1120px, 92%);
-      margin:0 auto;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:22px 0;
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
     }
 
-    .brand{
-      font-size:28px;
-      font-weight:800;
-      color:var(--accent);
-      letter-spacing:-0.03em;
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 17, 31, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .nav-right{
-      display:flex;
-      gap:12px;
-      align-items:center;
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 16px;
     }
 
-    .nav-link{
-      color:var(--muted);
-      text-decoration:none;
-      font-size:15px;
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
     }
 
-    .btn{
-      display:inline-block;
-      padding:16px 28px;
-      border-radius:14px;
-      text-decoration:none;
-      font-weight:700;
-      font-size:17px;
-      border:none;
-      cursor:pointer;
-      transition:0.2s ease;
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .btn-primary{
-      background:var(--accent);
-      color:#000;
-      box-shadow:0 10px 30px rgba(34,255,136,0.18);
+    .nav-links a:hover {
+      color: var(--text);
     }
 
-    .btn-primary:hover{
-      background:var(--accent-dark);
-      transform:translateY(-1px);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: 0.2s ease;
+      cursor: pointer;
     }
 
-    .btn-secondary{
-      background:transparent;
-      color:var(--text);
-      border:1px solid var(--line);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      color: #07111f;
+      box-shadow: 0 10px 30px rgba(138, 180, 255, 0.28);
     }
 
-    .hero{
-      padding:48px 0 42px;
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
     }
 
-    .eyebrow{
-      display:inline-block;
-      padding:10px 16px;
-      border:1px solid rgba(34,255,136,0.18);
-      background:rgba(34,255,136,0.06);
-      color:var(--accent);
-      border-radius:999px;
-      font-size:14px;
-      font-weight:700;
-      margin-bottom:26px;
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.12);
     }
 
-    h1{
-      margin:0 auto;
-      max-width:900px;
-      font-size:clamp(44px, 8vw, 84px);
-      line-height:0.96;
-      letter-spacing:-0.05em;
-      font-weight:900;
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
     }
 
-    .hero-sub{
-      margin:28px auto 0;
-      max-width:760px;
-      font-size:clamp(20px, 2.5vw, 24px);
-      line-height:1.65;
-      color:var(--muted);
+    .hero {
+      padding: 84px 0 56px;
     }
 
-    .hero-cta{
-      margin-top:36px;
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      flex-wrap:wrap;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
     }
 
-    .proof{
-      margin-top:22px;
-      color:#8b8b8b;
-      font-size:14px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--primary-strong);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
     }
 
-    .hero-card{
-      margin-top:56px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:26px;
-      box-shadow:0 30px 80px rgba(0,0,0,0.35);
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
     }
 
-    .demo-window{
-      background:linear-gradient(180deg, #0d0d0d, #111111);
-      border:1px solid #1c1c1c;
-      border-radius:22px;
-      padding:24px;
-      text-align:left;
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 0 26px;
     }
 
-    .demo-top{
-      display:flex;
-      gap:8px;
-      margin-bottom:20px;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:#2d2d2d;
+    .social-proof {
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .demo-grid{
-      display:grid;
-      grid-template-columns:1fr 1.2fr;
-      gap:18px;
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .mini-panel{
-      background:var(--panel-2);
-      border:1px solid #1f1f1f;
-      border-radius:18px;
-      padding:18px;
+    .terminal-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
     }
 
-    .mini-title{
-      font-size:13px;
-      color:#9f9f9f;
-      margin-bottom:12px;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
     }
 
-    .doc-item{
-      background:#1a1a1a;
-      border:1px solid #252525;
-      border-radius:14px;
-      padding:14px;
-      margin-bottom:10px;
-      color:#d8d8d8;
-      font-size:15px;
+    .prompt-box,
+    .output-box {
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
     }
 
-    .chat-bubble{
-      padding:14px 16px;
-      border-radius:16px;
-      margin-bottom:12px;
-      line-height:1.55;
-      font-size:15px;
+    .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
 
-    .chat-user{
-      background:#191919;
-      color:#f0f0f0;
-      border:1px solid #252525;
+    .prompt {
+      color: var(--text);
+      font-weight: 500;
     }
 
-    .chat-ai{
-      background:rgba(34,255,136,0.08);
-      color:#defbe9;
-      border:1px solid rgba(34,255,136,0.18);
+    .output-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--text);
     }
 
-    .section{
-      padding:92px 0 0;
+    section {
+      padding: 34px 0;
     }
 
-    .section h2{
-      font-size:clamp(34px, 4vw, 56px);
-      line-height:1.02;
-      letter-spacing:-0.04em;
-      margin:0;
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 24px;
     }
 
-    .section p.lead{
-      max-width:760px;
-      margin:22px auto 0;
-      color:var(--muted);
-      font-size:20px;
-      line-height:1.7;
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
     }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:22px;
-      margin-top:40px;
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
     }
 
-    .card{
-      text-align:left;
-      background:linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:28px;
+    .grid-3,
+    .grid-4,
+    .grid-2 {
+      display: grid;
+      gap: 18px;
     }
 
-    .card-icon{
-      width:48px;
-      height:48px;
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(34,255,136,0.08);
-      border:1px solid rgba(34,255,136,0.18);
-      color:var(--accent);
-      font-weight:800;
-      margin-bottom:18px;
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .card h3{
-      margin:0 0 12px;
-      font-size:24px;
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.7;
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:22px;
-      margin-top:40px;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
     }
 
-    .step{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:28px;
-      text-align:left;
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
     }
 
-    .step-number{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(34,255,136,0.08);
-      border:1px solid rgba(34,255,136,0.18);
-      color:var(--accent);
-      font-weight:800;
-      margin-bottom:16px;
+    .card p {
+      margin: 0;
+      color: var(--muted);
     }
 
-    .split{
-      display:grid;
-      grid-template-columns:1.1fr 1fr;
-      gap:28px;
-      margin-top:44px;
-      text-align:left;
-      align-items:stretch;
+    .prompt-list {
+      display: grid;
+      gap: 12px;
     }
 
-    .split-card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:30px;
+    .prompt-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: var(--text);
     }
 
-    .split-card h3{
-      margin:0 0 12px;
-      font-size:28px;
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    .split-card p{
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.75;
-      margin:0 0 18px;
+    .pricing {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .bullet{
-      margin-top:16px;
-      color:#d7d7d7;
-      font-size:16px;
-      line-height:1.8;
+    .price-card {
+      background: linear-gradient(180deg, rgba(125,249,193,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(125,249,193,0.18);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .waitlist{
-      margin-top:40px;
-      background:linear-gradient(180deg, rgba(34,255,136,0.06), rgba(255,255,255,0.015));
-      border:1px solid rgba(34,255,136,0.18);
-      border-radius:28px;
-      padding:34px 24px;
+    .price {
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin: 8px 0 8px;
+      letter-spacing: -0.04em;
     }
 
-    .waitlist p{
-      margin:10px auto 0;
-      max-width:700px;
-      color:var(--muted);
-      font-size:19px;
-      line-height:1.7;
+    .price-note {
+      color: var(--muted);
+      margin-bottom: 20px;
     }
 
-    .waitlist-form{
-      margin-top:28px;
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
+    .checklist {
+      margin: 0;
+      padding-left: 18px;
     }
 
-    .waitlist input{
-      width:min(420px, 90%);
-      background:#111;
-      border:1px solid #2a2a2a;
-      color:#fff;
-      border-radius:14px;
-      padding:16px 18px;
-      font-size:16px;
-      outline:none;
+    .cta {
+      padding: 52px 0 74px;
     }
 
-    .mini-proof{
-      margin-top:16px;
-      color:#8f8f8f;
-      font-size:14px;
+    .cta-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: var(--shadow);
     }
 
-    .footer{
-      padding:90px 0 50px;
-      color:#777;
-      font-size:14px;
+    .waitlist-form {
+      display: grid;
+      gap: 12px;
     }
 
-    @media (max-width: 900px){
-      .demo-grid,
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      font: inherit;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #8fa0b4;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(138,180,255,0.14);
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 22px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .pricing,
+      .cta-box,
+      .grid-4,
       .grid-3,
-      .steps,
-      .split{
-        grid-template-columns:1fr;
+      .grid-2 {
+        grid-template-columns: 1fr;
       }
 
-      .hero{
-        padding-top:24px;
+      .nav-links {
+        display: none;
       }
 
-      .section{
-        padding-top:74px;
-      }
-
-      .nav{
-        padding-top:18px;
-      }
-
-      .nav-right{
-        display:none;
-      }
-
-      .hero-card{
-        padding:16px;
-      }
-
-      .demo-window{
-        padding:16px;
+      .hero {
+        padding-top: 60px;
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <div class="nav">
-      <div class="brand">Zyqerion</div>
-      <div class="nav-right">
-        <a class="nav-link" href="#product">Product</a>
-        <a class="nav-link" href="#problem">Why now</a>
-        <a class="nav-link" href="#waitlist">Waitlist</a>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand">Zyqerion</a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#prompts">Examples</a>
+        <a href="#reports">Reports</a>
+        <a href="#waitlist">Waitlist</a>
       </div>
+      <a class="btn btn-secondary" href="/demo.html">Try the Demo</a>
     </div>
-  </div>
+  </nav>
 
-  <div class="container hero">
-    <div class="eyebrow">AI knowledge platform for modern companies</div>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">AI research for founders and builders</div>
+        <h1>Understand markets, competitors, and opportunities faster.</h1>
+        <p>
+          Zyqerion helps you turn a simple prompt into structured research.
+          Explore startup markets, discover risks, and uncover opportunities
+          without spending hours searching manually.
+        </p>
 
-    <h1>
-      Turn company knowledge into an AI your team can ask anything
-    </h1>
-
-    <p class="hero-sub">
-      Zyqerion helps businesses turn documents, internal guides, Notion pages and scattered knowledge into a fast, searchable AI assistant.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#waitlist" class="btn btn-primary">Join Early Access</a>
-      <a href="/demo.html" class="btn btn-secondary">Try the Demo</a>
-    </div>
-
-    <div class="proof">
-      Built for teams tired of searching through PDFs, Slack and Google Docs.
-    </div>
-
-    <div class="hero-card" id="demo">
-      <div class="demo-window">
-        <div class="demo-top">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/demo.html">Try the Demo</a>
+          <a class="btn btn-secondary" href="#waitlist">Join the Waitlist</a>
         </div>
 
-        <div class="demo-grid">
-          <div class="mini-panel">
-            <div class="mini-title">Connected Knowledge</div>
-            <div class="doc-item">Employee Handbook.pdf</div>
-            <div class="doc-item">Onboarding Process.docx</div>
-            <div class="doc-item">Customer Support Policy.pdf</div>
-            <div class="doc-item">Pricing Notes.txt</div>
-          </div>
+        <div class="social-proof">
+          Early access for founders, solo builders, and startup researchers.
+        </div>
+      </div>
 
-          <div class="mini-panel">
-            <div class="mini-title">Ask Zyqerion</div>
-            <div class="chat-bubble chat-user">
-              How does onboarding work for new employees?
-            </div>
-            <div class="chat-bubble chat-ai">
-              According to your uploaded onboarding guide, the process starts with account setup, internal documentation access, a 30-day training path, and a manager review at the end of week one.
-            </div>
-            <div class="chat-bubble chat-user">
-              What does our support policy say about response times?
-            </div>
-          </div>
+      <div class="hero-card">
+        <div class="terminal-bar">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+        <div class="prompt-box">
+          <div class="label">Prompt</div>
+          <div class="prompt">Analyze the AI startup market in Europe</div>
+        </div>
+
+        <div class="output-box">
+          <div class="label">Report includes</div>
+          <ul class="output-list">
+            <li>Key market trends</li>
+            <li>Top funded startups</li>
+            <li>Competitive signals</li>
+            <li>Risks and opportunities</li>
+            <li>Practical next steps</li>
+          </ul>
+        </div>
+
+        <div class="small">
+          Built for faster startup research and clearer decision-making.
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="container section" id="product">
-    <h2>How Zyqerion works</h2>
-    <p class="lead">
-      A simple workflow that turns internal business knowledge into an AI assistant people actually use.
-    </p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Upload documents</h3>
-        <p>Import company handbooks, policies, SOPs, proposals and internal files.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Train your AI</h3>
-        <p>Zyqerion organizes and understands your knowledge so answers are grounded in your data.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Ask anything</h3>
-        <p>Your team gets instant answers instead of wasting time searching across disconnected tools.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container section" id="problem">
-    <h2>The problem is not lack of information</h2>
-    <p class="lead">
-      Companies already have the knowledge they need. The problem is that it lives everywhere — PDFs, Slack messages, Notion pages, internal docs and old folders nobody wants to dig through.
-    </p>
-
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-icon">01</div>
-        <h3>Knowledge is scattered</h3>
-        <p>Teams store critical information in too many places, making it hard to find what matters when needed.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">02</div>
-        <h3>People ask the same questions</h3>
-        <p>Internal questions get repeated constantly because answers are buried in documents or only live in someone’s head.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">03</div>
-        <h3>Time gets lost</h3>
-        <p>Employees waste hours every week searching, asking around, or waiting for someone to point them to the right source.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container section">
-    <h2>The solution: your business AI</h2>
-    <p class="lead">
-      Zyqerion turns internal company knowledge into a searchable AI assistant your team can rely on for fast, useful answers.
-    </p>
-
-    <div class="split">
-      <div class="split-card">
-        <h3>What you get</h3>
+  <section id="problem">
+    <div class="container">
+      <div class="section-head">
+        <h2>Research takes too long.</h2>
         <p>
-          A simple AI layer on top of your company knowledge that helps employees find answers quickly and consistently.
+          Founders spend too much time collecting information, comparing competitors,
+          summarizing sources, and trying to turn scattered notes into useful insight.
         </p>
-        <div class="bullet">• Ask questions about onboarding, policy, support, pricing and internal processes</div>
-        <div class="bullet">• Reduce time spent searching across tools and files</div>
-        <div class="bullet">• Give small teams access to an always-available knowledge assistant</div>
       </div>
 
-      <div class="split-card">
-        <h3>Best first use cases</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Too many tabs</h3>
+          <p>Important information is spread across articles, databases, and random notes.</p>
+        </div>
+        <div class="card">
+          <h3>Slow decision-making</h3>
+          <p>Manual research delays product choices, market validation, and strategy work.</p>
+        </div>
+        <div class="card">
+          <h3>Messy output</h3>
+          <p>Even after hours of work, you often end up with incomplete conclusions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution">
+    <div class="container">
+      <div class="section-head">
+        <h2>Meet your AI research agent.</h2>
         <p>
-          Zyqerion is especially strong for consulting firms, startups, agencies, operations teams and small businesses with lots of internal documentation.
+          Zyqerion is built to help you go from question to structured analysis faster.
+          Ask a topic. Get a clearer research-style result.
         </p>
-        <div class="bullet">• Internal knowledge assistant</div>
-        <div class="bullet">• Employee onboarding assistant</div>
-        <div class="bullet">• Support documentation AI</div>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <h3>1. Ask a question</h3>
+          <p>Start with a market, startup idea, competitor set, or industry trend.</p>
+        </div>
+        <div class="card">
+          <h3>2. Analyze faster</h3>
+          <p>Turn raw research direction into usable structure and key themes.</p>
+        </div>
+        <div class="card">
+          <h3>3. See what matters</h3>
+          <p>Focus on risks, opportunities, signals, and practical next actions.</p>
+        </div>
+        <div class="card">
+          <h3>4. Build with clarity</h3>
+          <p>Use research to support product direction, positioning, and decisions.</p>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="container section" id="waitlist">
-    <div class="waitlist">
-      <h2>Join the early waitlist</h2>
-      <p>
-        We’re looking for a few companies interested in testing an early version of Zyqerion and shaping the product with feedback.
-      </p>
+  <section id="prompts">
+    <div class="container">
+      <div class="section-head">
+        <h2>Example research prompts</h2>
+        <p>
+          These are the kinds of questions Zyqerion is designed to help explore.
+        </p>
+      </div>
 
-      <form class="waitlist-form" action="https://formspree.io/f/mreyaezq" method="POST">
-
-<input type="email" name="email" placeholder="Enter your work email" required>
-
-<input type="hidden" name="_subject" value="New Zyqerion waitlist signup">
-<input type="hidden" name="source" value="zyqerion.ai">
-
-<button class="btn btn-primary" type="submit">
-Request Early Access
-</button>
-
-</form>
-        
-        
-  
-
-      <div class="mini-proof">
-        Early access for small teams, startups and knowledge-heavy businesses.
+      <div class="prompt-list">
+        <div class="prompt-item">Analyze the AI startup market in Europe</div>
+        <div class="prompt-item">Identify opportunities in AI tools for small businesses</div>
+        <div class="prompt-item">Compare top competitors in the productivity SaaS market</div>
+        <div class="prompt-item">Research trends in fintech startups for the next 3 years</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="container footer">
-    © Zyqerion
-  </div>
+  <section id="reports">
+    <div class="container">
+      <div class="pricing">
+        <div class="price-card">
+          <div class="label">Optional early monetization</div>
+          <h2 style="margin:0 0 10px;">Custom AI research reports</h2>
+          <p class="price">$19</p>
+          <div class="price-note">Per report. Delivered manually at first to avoid platform costs.</div>
+          <ul class="checklist">
+            <li>Market overview</li>
+            <li>Competitor breakdown</li>
+            <li>Opportunity insights</li>
+            <li>Strategic recommendations</li>
+          </ul>
+        </div>
 
+        <div class="card">
+          <h3>Why this is budget-friendly</h3>
+          <p>
+            You do <span class="highlight">not</span> need to automate this immediately.
+            You can collect requests through the waitlist form and deliver the first reports manually.
+          </p>
+          <p style="margin-top:12px;">
+            That means you can test demand and potentially generate income before taking on API costs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="waitlist">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-head" style="margin-bottom:12px;">
+            <h2>Join early access</h2>
+            <p>
+              Get updates, test future releases, and be among the first users shaping Zyqerion.
+            </p>
+          </div>
+          <p class="small">
+            You can also use this form to request a custom research report.
+          </p>
+        </div>
+
+        <form
+          class="waitlist-form"
+          action="https://formspree.io/f/your-form-id"
+          method="POST"
+        >
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="What would you like to research, or why do you want early access?"
+          ></textarea>
+          <button class="btn btn-primary" type="submit">Join the Waitlist</button>
+          <div class="small">No spam. Early access updates only.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© Zyqerion</div>
+      <div>AI research for founders and builders</div>
+    </div>
+  </footer>
 </body>
 </html>
