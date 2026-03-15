@@ -3,26 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zyqerion Demo — Startup Idea Validator</title>
+  <title>Zyqerion Demo — Founder Decision Engine</title>
   <meta
     name="description"
-    content="Try the Zyqerion startup idea validator demo. Explore market demand, competitors, opportunities, risks, and startup potential."
+    content="Test your startup idea with Zyqerion. Explore why it could work, why it could fail, and whether it is worth building."
   />
   <style>
     :root {
       --bg: #06101d;
-      --bg2: #0a1830;
-      --card: rgba(255,255,255,0.06);
       --border: rgba(255,255,255,0.12);
       --text: #f5f7fb;
       --muted: #aab6c7;
-      --primary: #b4cbff;
       --primary-text: #08111f;
-      --soft: rgba(255,255,255,0.04);
       --glow: 0 0 40px rgba(169,196,255,0.18);
-      --radius: 22px;
-      --max: 1120px;
       --success: #9fe6bf;
+      --max: 1120px;
     }
 
     * { box-sizing: border-box; }
@@ -119,7 +114,7 @@
 
     h1 {
       margin: 0 auto 14px;
-      max-width: 900px;
+      max-width: 920px;
       font-size: clamp(2.4rem, 5vw, 4.8rem);
       line-height: 1;
       letter-spacing: -0.05em;
@@ -380,10 +375,10 @@
 
   <section class="hero">
     <div class="container">
-      <div class="eyebrow">Interactive product preview</div>
-      <h1>Validate your startup idea.</h1>
+      <div class="eyebrow">Founder decision engine</div>
+      <h1>Should you build this?</h1>
       <p>
-        Explore market demand, competitors, opportunity gaps, risks, and startup potential in one simple demo.
+        Test your startup idea and see why it could work, why it could fail, and what to do next.
       </p>
     </div>
   </section>
@@ -394,7 +389,7 @@
         <div class="card">
           <div class="label">Startup idea</div>
           <h3>Describe your idea</h3>
-          <p>Tell Zyqerion what you want to validate.</p>
+          <p>Tell Zyqerion what you want to evaluate.</p>
 
           <textarea
             id="ideaInput"
@@ -402,7 +397,7 @@
           >AI tool that helps freelancers manage invoices</textarea>
 
           <div class="actions">
-            <button class="btn btn-primary" id="runDemoBtn" type="button">Validate idea</button>
+            <button class="btn btn-primary" id="runDemoBtn" type="button">Evaluate idea</button>
             <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
           </div>
 
@@ -415,7 +410,7 @@
             <button class="prompt-chip" type="button">AI tool that helps freelancers manage invoices</button>
             <button class="prompt-chip" type="button">AI legal assistant for small businesses</button>
             <button class="prompt-chip" type="button">AI app that helps restaurants forecast inventory</button>
-            <button class="prompt-chip" type="button">AI platform for startup idea validation</button>
+            <button class="prompt-chip" type="button">AI platform for startup validation</button>
           </div>
         </div>
 
@@ -426,24 +421,28 @@
           </div>
 
           <div class="report-card">
-            <div class="label">Validation plan</div>
+            <div class="label">Evaluation plan</div>
             <h4 id="planTitle">Waiting for idea</h4>
             <ol class="steps" id="planSteps">
-              <li>Your validation plan will appear here.</li>
+              <li>Your founder decision plan will appear here.</li>
             </ol>
           </div>
 
           <div class="report-card">
-            <div class="label">Validation report</div>
-            <h4 id="reportTitle">No report yet</h4>
-            <div class="report-content" id="reportContent">Run the demo to see a startup idea validation preview.</div>
+            <div class="label">Founder decision</div>
+            <h4 id="reportTitle">No evaluation yet</h4>
+            <div class="report-content" id="reportContent">Run the demo to see a founder-style evaluation preview.</div>
 
             <div class="score-grid" id="scoreGrid"></div>
 
             <div class="overall-score" id="overallScore" style="display:none;">
-              <div class="small">Startup Potential</div>
+              <div class="small">Worth Building Score</div>
               <div class="big" id="overallScoreValue">0 / 10</div>
             </div>
+
+            <button class="btn btn-secondary" id="shareScoreBtn" type="button" style="margin-top:14px;">
+              Share my startup score
+            </button>
           </div>
         </div>
       </div>
@@ -455,22 +454,22 @@
       <div class="section-head">
         <h2>What Zyqerion is built for</h2>
         <p>
-          A founder-style validation flow, not a generic chat experience.
+          Founder-style decisions, not generic AI chat.
         </p>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <h3>Market demand</h3>
-          <p>Estimate whether the idea solves a real and repeated pain point.</p>
+          <h3>Should you build this?</h3>
+          <p>Get a clear direction instead of a vague research dump.</p>
         </div>
         <div class="card">
-          <h3>Competitive pressure</h3>
-          <p>See whether the space is wide open or already crowded.</p>
+          <h3>Why this could work</h3>
+          <p>See the strongest reasons your idea could gain traction.</p>
         </div>
         <div class="card">
-          <h3>Next-step clarity</h3>
-          <p>Get practical direction before you spend months building the wrong thing.</p>
+          <h3>What to do next</h3>
+          <p>Leave with practical next steps, not just theory.</p>
         </div>
       </div>
     </div>
@@ -479,7 +478,7 @@
   <footer>
     <div class="container footer-inner">
       <div>© Zyqerion</div>
-      <div>Startup idea validation demo</div>
+      <div>Founder decision engine</div>
     </div>
   </footer>
 
@@ -497,40 +496,37 @@
     const scoreGrid = document.getElementById("scoreGrid");
     const overallScore = document.getElementById("overallScore");
     const overallScoreValue = document.getElementById("overallScoreValue");
+    const shareScoreBtn = document.getElementById("shareScoreBtn");
 
     const demoOutputs = {
       "ai tool that helps freelancers manage invoices": {
-        planTitle: "Freelancer invoicing tool validation",
+        planTitle: "Freelancer invoicing idea evaluation",
         steps: [
-          "Estimate how painful invoicing and payment tracking are for freelancers.",
-          "Review the main competitors already serving this workflow.",
-          "Identify differentiation opportunities, risks, and practical next steps."
+          "Estimate whether freelancers have a repeated invoicing pain point.",
+          "Review the strongest existing competitors in this workflow.",
+          "Evaluate whether there is a meaningful angle for differentiation."
         ],
-        reportTitle: "Startup Idea Validation",
+        reportTitle: "Founder Evaluation",
         report: `Idea
 AI tool that helps freelancers manage invoices
 
-Market demand
-Freelancers often deal with manual invoicing, overdue payments, and scattered admin work. A tool that reduces this friction can be relevant, especially for solo operators who want to save time.
+Should you build this?
+Possibly — there seems to be real demand, but the space already has established tools. The idea becomes stronger if you solve one very specific invoicing pain much better than general-purpose products.
 
-Competitors
-• FreshBooks
-• Wave
-• Bonsai
+Why this could work
+• Clear pain point for freelancers
+• Time-saving admin automation is valuable
+• Easy to explain the product benefit
 
-Opportunity gaps
-• AI invoice categorization
-• smart payment reminders
-• simple tax estimation
-• clearer freelancer-specific workflows
+Why this could fail
+• Strong existing competitors already serve this category
+• Users may be locked into current tools
+• Differentiation may be difficult without a sharp angle
 
-Risks
-This category already has established competitors. The product would need sharper positioning or a simpler experience to stand out.
-
-Suggested next steps
-• Interview 10 freelancers
-• Validate which invoicing pain hurts most
-• Build a narrow prototype around one workflow`,
+What to do next
+• Talk to 10 freelancers
+• Find the single most painful invoicing workflow
+• Build a narrow prototype around that workflow`,
         scores: {
           "Market Demand": "8 / 10",
           "Competition": "6 / 10",
@@ -540,36 +536,33 @@ Suggested next steps
         overall: "7.1 / 10"
       },
       "ai legal assistant for small businesses": {
-        planTitle: "AI legal assistant validation",
+        planTitle: "AI legal assistant evaluation",
         steps: [
-          "Evaluate the legal pain points small businesses face most often.",
-          "Map the likely competitor landscape and trust barriers.",
-          "Score market demand, risk, and practical opportunity."
+          "Check whether small businesses need lightweight legal help often enough.",
+          "Review trust barriers and existing legal platforms.",
+          "Evaluate whether a narrow AI assistant angle could stand out."
         ],
-        reportTitle: "Startup Idea Validation",
+        reportTitle: "Founder Evaluation",
         report: `Idea
 AI legal assistant for small businesses
 
-Market demand
-Small businesses often need help understanding contracts, policies, and basic legal documents without hiring expensive legal support for every small task.
+Should you build this?
+Maybe — the pain appears real, but trust is a major challenge. This becomes more attractive if you focus on a narrow legal workflow instead of broad legal help.
 
-Competitors
-• LegalZoom
-• Rocket Lawyer
-• various contract and document AI tools
+Why this could work
+• Small businesses often need affordable legal support
+• Plain-language summaries can be useful
+• Niche legal workflows could create a strong wedge
 
-Opportunity gaps
-• simpler guidance for non-experts
-• plain-language contract summaries
-• niche workflows for small business owners
+Why this could fail
+• Legal trust barriers are high
+• Users may fear incorrect guidance
+• The market already includes well-known players
 
-Risks
-Legal trust is a major barrier. Users may hesitate unless the product is clearly framed as an assistant rather than a substitute for legal advice.
-
-Suggested next steps
-• Pick one narrow legal workflow
-• Test whether owners trust AI assistance here
-• Validate willingness to pay for time saved`,
+What to do next
+• Pick one legal use case
+• Validate trust with real users
+• Frame the product as support, not legal replacement`,
         scores: {
           "Market Demand": "7 / 10",
           "Competition": "5 / 10",
@@ -579,37 +572,33 @@ Suggested next steps
         overall: "6.5 / 10"
       },
       "ai app that helps restaurants forecast inventory": {
-        planTitle: "Restaurant inventory forecasting validation",
+        planTitle: "Restaurant inventory forecasting evaluation",
         steps: [
-          "Assess how strong the inventory forecasting pain is in restaurants.",
-          "Check operational alternatives and existing software competition.",
-          "Summarize opportunity, risk, and adoption difficulty."
+          "Estimate whether inventory waste is painful enough to buy a solution.",
+          "Check what existing restaurant systems already offer.",
+          "Evaluate fit for small operators versus larger chains."
         ],
-        reportTitle: "Startup Idea Validation",
+        reportTitle: "Founder Evaluation",
         report: `Idea
 AI app that helps restaurants forecast inventory
 
-Market demand
-Restaurants frequently lose money through over-ordering, spoilage, and inconsistent forecasting. Better forecasting can create real operational value.
+Should you build this?
+This looks promising. The pain point appears operational and expensive, which is a good sign. The challenge is making the product simple enough for busy restaurant owners.
 
-Competitors
-• restaurant POS ecosystems
-• inventory platforms
-• forecasting and operations tools
+Why this could work
+• Inventory mistakes cost real money
+• Restaurants need better forecasting and waste reduction
+• A focused workflow can create immediate value
 
-Opportunity gaps
-• simpler forecasting for small restaurants
-• clearer reorder suggestions
-• waste-reduction insights
-• tighter integration with daily workflows
+Why this could fail
+• Integrations may become complex
+• Restaurant owners may resist switching tools
+• Sales cycles can be slower than expected
 
-Risks
-Sales cycles can be slower in hospitality, and integration with existing tools may become a challenge.
-
-Suggested next steps
-• Validate the strongest pain with restaurant owners
-• Focus on small operators first
-• Prototype one forecasting workflow`,
+What to do next
+• Speak with restaurant owners
+• Find the strongest inventory pain
+• Prototype one simple forecasting workflow`,
         scores: {
           "Market Demand": "8 / 10",
           "Competition": "5 / 10",
@@ -618,39 +607,34 @@ Suggested next steps
         },
         overall: "7.3 / 10"
       },
-      "ai platform for startup idea validation": {
-        planTitle: "Startup validation platform validation",
+      "ai platform for startup validation": {
+        planTitle: "Startup validation platform evaluation",
         steps: [
-          "Estimate how common startup validation pain is among early founders.",
-          "Compare broad AI tools with more focused validation experiences.",
-          "Score differentiation potential and execution risk."
+          "Check whether founders feel strong uncertainty before building.",
+          "Compare broad AI research tools with focused validation experiences.",
+          "Evaluate whether the product feels distinct enough from generic AI."
         ],
-        reportTitle: "Startup Idea Validation",
+        reportTitle: "Founder Evaluation",
         report: `Idea
-AI platform for startup idea validation
+AI platform for startup validation
 
-Market demand
-Many founders struggle to decide whether an idea is worth pursuing before they invest time into building. A product that gives fast clarity can be compelling.
+Should you build this?
+Yes, but only if the product stays sharply focused. The demand seems real because many founders struggle to decide whether an idea is worth pursuing. The biggest risk is sounding too similar to generic AI tools.
 
-Competitors
-• general AI chat tools
-• research tools
-• founder validation frameworks
-• startup education platforms
+Why this could work
+• Clear founder pain: uncertainty before building
+• Easy to understand product promise
+• Strong opportunity for focused workflows and scoring
 
-Opportunity gaps
-• focused validation workflows
-• startup scoring
-• clearer market and competitor framing
-• faster founder-specific guidance
+Why this could fail
+• Messaging can become too broad
+• Founders may default to general AI tools
+• Differentiation must be obvious immediately
 
-Risks
-The concept is attractive, but messaging must be very clear. Broad positioning could make the product feel like just another AI tool.
-
-Suggested next steps
+What to do next
 • Narrow the promise to one founder problem
 • Make the output highly structured
-• Differentiate with scoring and validation workflows`,
+• Lead with “Should you build this?” instead of generic research`,
         scores: {
           "Market Demand": "8 / 10",
           "Competition": "7 / 10",
@@ -665,12 +649,27 @@ Suggested next steps
       return value.trim().toLowerCase();
     }
 
+    function typeText(element, text, speed = 10) {
+      let i = 0;
+      element.textContent = "";
+
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+
+      typing();
+    }
+
     function setLoadingState() {
-      statusText.textContent = "Validating...";
-      planTitle.textContent = "Building validation plan";
-      planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style validation flow.</li>";
-      reportTitle.textContent = "Generating report";
-      reportContent.textContent = "Zyqerion is simulating a startup validation result...";
+      statusText.textContent = "Evaluating idea...";
+      planTitle.textContent = "Building founder decision plan";
+      planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style evaluation flow.</li>";
+      reportTitle.textContent = "Generating founder decision";
+      reportContent.textContent = "Zyqerion is simulating a founder-style evaluation...";
       scoreGrid.innerHTML = "";
       overallScore.style.display = "none";
     }
@@ -690,43 +689,43 @@ Suggested next steps
     }
 
     function showOutput(data) {
-      statusText.textContent = "Complete";
+      statusText.textContent = "Evaluation complete";
       planTitle.textContent = data.planTitle;
       planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
       reportTitle.textContent = data.reportTitle;
-      reportContent.textContent = data.report;
+      typeText(reportContent, data.report, 8);
       renderScores(data.scores, data.overall);
     }
 
     function buildFallbackOutput(idea) {
       return {
-        planTitle: "Custom validation preview",
+        planTitle: "Custom founder evaluation",
         steps: [
-          "Clarify the target user and problem being solved.",
+          "Clarify the user, problem, and product angle.",
           "Estimate demand, competition, and opportunity gaps.",
-          "Return a simple founder-style validation summary."
+          "Return a founder-style decision summary."
         ],
-        reportTitle: "Startup Idea Validation",
+        reportTitle: "Founder Evaluation",
         report: `Idea
 ${idea}
 
-Market demand
-This static demo is designed to show how Zyqerion could validate a startup idea before you build it.
+Should you build this?
+This static demo suggests there may be value in testing the idea, but the real answer depends on how specific the user problem is and how crowded the category becomes.
 
-Competitors
-A real version would compare existing tools, alternatives, and market density.
+Why this could work
+• The idea may solve a meaningful pain point
+• A narrow target user could improve clarity
+• Founder-focused positioning can create traction
 
-Opportunity gaps
-The strongest opportunities usually come from narrow pain points, clearer positioning, or simpler execution.
+Why this could fail
+• Broad ideas often feel generic
+• Competition may already exist
+• The user pain may be weaker than expected
 
-Risks
-This current page is a simulated demo and does not run live AI analysis yet.
-
-Suggested next steps
-• Clarify who the idea is for
-• Define the core pain point
-• Compare the top alternatives
-• Test demand with real users`,
+What to do next
+• Clarify who this is for
+• Compare the strongest alternatives
+• Test the idea with real users before building`,
         scores: {
           "Market Demand": "7 / 10",
           "Competition": "6 / 10",
@@ -744,8 +743,8 @@ Suggested next steps
         statusText.textContent = "Waiting for idea";
         planTitle.textContent = "No idea entered";
         planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
-        reportTitle.textContent = "No report yet";
-        reportContent.textContent = "Enter an idea to see a startup validation preview.";
+        reportTitle.textContent = "No evaluation yet";
+        reportContent.textContent = "Enter an idea to see a founder-style evaluation preview.";
         scoreGrid.innerHTML = "";
         overallScore.style.display = "none";
         return;
@@ -760,15 +759,51 @@ Suggested next steps
       }, 1200);
     }
 
+    function shareScore() {
+      const idea = ideaInput.value.trim() || "my startup idea";
+      const score = overallScoreValue.textContent || "7.0 / 10";
+
+      const text =
+`I tested my startup idea with Zyqerion.
+
+Idea: ${idea}
+Worth Building Score: ${score}
+
+Try it yourself:
+https://zyqerion.ai`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => {
+            alert("Result copied. Paste it on X, LinkedIn, or anywhere you want.");
+          })
+          .catch(() => {
+            alert(text);
+          });
+      } else {
+        alert(text);
+      }
+    }
+
+    function fillIdeaFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const urlIdea = params.get("idea");
+
+      if (urlIdea && ideaInput) {
+        ideaInput.value = urlIdea;
+        runDemo();
+      }
+    }
+
     runDemoBtn.addEventListener("click", runDemo);
 
     clearBtn.addEventListener("click", () => {
       ideaInput.value = "";
       statusText.textContent = "Ready";
       planTitle.textContent = "Waiting for idea";
-      planSteps.innerHTML = "<li>Your validation plan will appear here.</li>";
-      reportTitle.textContent = "No report yet";
-      reportContent.textContent = "Run the demo to see a startup idea validation preview.";
+      planSteps.innerHTML = "<li>Your founder decision plan will appear here.</li>";
+      reportTitle.textContent = "No evaluation yet";
+      reportContent.textContent = "Run the demo to see a founder-style evaluation preview.";
       scoreGrid.innerHTML = "";
       overallScore.style.display = "none";
     });
@@ -779,6 +814,12 @@ Suggested next steps
         runDemo();
       });
     });
+
+    if (shareScoreBtn) {
+      shareScoreBtn.addEventListener("click", shareScore);
+    }
+
+    window.addEventListener("load", fillIdeaFromUrl);
   </script>
 </body>
 </html>
