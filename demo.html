@@ -3,46 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zyqerion Demo — AI Research Agent</title>
+  <title>Zyqerion Demo — Startup Idea Validator</title>
   <meta
     name="description"
-    content="Try the Zyqerion demo and see how AI-powered research can help founders and builders analyze markets, startups, and opportunities faster."
+    content="Try the Zyqerion startup idea validator demo. Explore market demand, competitors, opportunities, risks, and startup potential."
   />
   <style>
     :root {
-      --bg: #07111f;
-      --bg-soft: #0d1b2e;
+      --bg: #06101d;
+      --bg2: #0a1830;
       --card: rgba(255,255,255,0.06);
-      --card-border: rgba(255,255,255,0.12);
-      --text: #f4f7fb;
-      --muted: #a9b7c8;
-      --primary: #8ab4ff;
-      --primary-strong: #c7d9ff;
-      --accent: #7df9c1;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 18px;
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f7fb;
+      --muted: #aab6c7;
+      --primary: #b4cbff;
+      --primary-text: #08111f;
+      --soft: rgba(255,255,255,0.04);
+      --glow: 0 0 40px rgba(169,196,255,0.18);
+      --radius: 22px;
       --max: 1120px;
-      --danger: #ffb4b4;
-      --success: #b7ffd8;
+      --success: #9fe6bf;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(122, 162, 255, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(125, 249, 193, 0.10), transparent 25%),
-        linear-gradient(180deg, #06101d 0%, #081523 100%);
       color: var(--text);
-      line-height: 1.6;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(116,170,255,0.18), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(94,214,180,0.10), transparent 24%),
+        linear-gradient(180deg, var(--bg) 0%, #081426 100%);
+      line-height: 1.55;
     }
 
     a {
@@ -58,45 +52,32 @@
     .nav {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 30;
+      background: rgba(6,16,29,0.72);
       backdrop-filter: blur(12px);
-      background: rgba(7, 17, 31, 0.72);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
     .nav-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 16px 0;
       gap: 16px;
     }
 
     .brand {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: 0.2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       padding: 12px 18px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid transparent;
       font-weight: 600;
       transition: 0.2s ease;
@@ -104,103 +85,83 @@
       font: inherit;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-      color: #07111f;
-      box-shadow: 0 10px 30px rgba(138, 180, 255, 0.28);
+    .btn:hover {
+      transform: translateY(-1px);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.04);
+    .btn-primary {
+      background: linear-gradient(135deg, #b4cbff, #d3e0ff);
+      color: var(--primary-text);
+      box-shadow: 0 10px 35px rgba(169,196,255,0.26);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
       color: var(--text);
-      border-color: rgba(255,255,255,0.12);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.08);
     }
 
     .hero {
-      padding: 72px 0 26px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
+      padding: 72px 0 28px;
+      text-align: center;
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--primary-strong);
-      padding: 8px 12px;
+      display: inline-block;
+      padding: 9px 14px;
       border-radius: 999px;
-      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #d5e2ff;
+      font-size: 0.92rem;
       margin-bottom: 18px;
     }
 
     h1 {
-      font-size: clamp(2.2rem, 4vw, 4rem);
-      line-height: 1.06;
-      margin: 0 0 14px;
-      letter-spacing: -0.04em;
+      margin: 0 auto 14px;
       max-width: 900px;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
     }
 
     .hero p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 820px;
-      margin: 0;
-    }
-
-    section {
-      padding: 26px 0;
-    }
-
-    .section-head {
+      margin: 0 auto;
       max-width: 760px;
-      margin-bottom: 22px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      margin: 0 0 10px;
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 0;
       color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .demo-section {
+      padding: 26px 0 42px;
     }
 
     .demo-layout {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
-      gap: 20px;
+      gap: 18px;
       align-items: start;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--border);
+      border-radius: 22px;
       padding: 22px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--glow);
+    }
+
+    .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin-bottom: 10px;
     }
 
     .card h3 {
       margin: 0 0 10px;
-      font-size: 1.06rem;
+      font-size: 1.08rem;
     }
 
     .card p {
@@ -208,34 +169,27 @@
       color: var(--muted);
     }
 
-    .label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
     textarea {
       width: 100%;
       min-height: 180px;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.05);
       color: var(--text);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
+      border-radius: 16px;
       font: inherit;
       outline: none;
       resize: vertical;
+      margin-top: 14px;
     }
 
     textarea::placeholder {
-      color: #8fa0b4;
+      color: #91a1b7;
     }
 
     textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(138,180,255,0.14);
+      border-color: #aac5ff;
+      box-shadow: 0 0 0 3px rgba(169,196,255,0.14);
     }
 
     .actions {
@@ -254,7 +208,7 @@
     .prompt-grid {
       display: grid;
       gap: 10px;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .prompt-chip {
@@ -262,7 +216,7 @@
       text-align: left;
       padding: 12px 14px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.10);
       color: var(--text);
       border-radius: 12px;
       cursor: pointer;
@@ -290,20 +244,20 @@
       font-size: 0.9rem;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      color: var(--primary-strong);
+      color: #d5e2ff;
     }
 
     .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(125, 249, 193, 0.6);
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(159,230,191,0.6);
     }
 
     .report-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(2,10,22,0.42);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
       padding: 18px;
     }
@@ -313,45 +267,10 @@
       font-size: 1rem;
     }
 
-    .report-card p,
-    .report-card li {
-      color: var(--text);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .typing {
-      display: inline-block;
-      min-width: 24px;
-    }
-
-    .typing span {
-      animation: blink 1.2s infinite;
-      opacity: 0.3;
-    }
-
-    .typing span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .typing span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.25; }
-      40% { opacity: 1; }
-    }
-
     .steps {
       margin: 0;
-      padding-left: 18px;
+      padding-left: 20px;
+      line-height: 1.8;
     }
 
     .report-content {
@@ -361,38 +280,92 @@
       font-size: 0.98rem;
     }
 
+    .score-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .overall-score {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(180,203,255,0.08);
+      border: 1px solid rgba(180,203,255,0.18);
+    }
+
+    .overall-score .small {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+
+    .overall-score .big {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .section {
+      padding: 18px 0 34px;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0 auto;
+      max-width: 700px;
+      color: var(--muted);
+    }
+
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
     footer {
-      padding: 26px 0 42px;
+      padding: 20px 0 36px;
       color: var(--muted);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    @media (max-width: 950px) {
+    @media (max-width: 940px) {
       .demo-layout,
       .grid-3 {
         grid-template-columns: 1fr;
       }
 
-      .nav-links {
-        display: none;
-      }
-
       .hero {
-        padding-top: 56px;
+        padding-top: 60px;
       }
     }
   </style>
@@ -401,134 +374,103 @@
   <nav class="nav">
     <div class="container nav-inner">
       <a href="/" class="brand">Zyqerion</a>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="#demo">Demo</a>
-        <a href="#examples">Examples</a>
-        <a href="#how-it-works">How it works</a>
-      </div>
-      <a class="btn btn-secondary" href="/">Back to site</a>
+      <a href="/" class="btn btn-secondary">Back to site</a>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Interactive product preview</div>
-        <h1>Try the Zyqerion research demo.</h1>
-        <p>
-          This preview shows how Zyqerion can turn a simple question into a more structured
-          research-style output for founders and builders. It is a simulated demo, so it does
-          not call a paid AI API yet.
-        </p>
-      </div>
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">Interactive product preview</div>
+      <h1>Validate your startup idea.</h1>
+      <p>
+        Explore market demand, competitors, opportunity gaps, risks, and startup potential in one simple demo.
+      </p>
     </div>
-  </header>
+  </section>
 
-  <section id="demo">
+  <section class="demo-section">
     <div class="container">
       <div class="demo-layout">
         <div class="card">
-          <div class="label">Research prompt</div>
-          <h3>What do you want to explore?</h3>
-          <p style="margin-bottom:14px;">
-            Write a startup, market, or competitor research question below.
-          </p>
+          <div class="label">Startup idea</div>
+          <h3>Describe your idea</h3>
+          <p>Tell Zyqerion what you want to validate.</p>
 
           <textarea
-            id="promptInput"
-            placeholder="Analyze the AI startup market in Europe"
-          >Analyze the AI startup market in Europe</textarea>
+            id="ideaInput"
+            placeholder="AI tool that helps freelancers manage invoices"
+          >AI tool that helps freelancers manage invoices</textarea>
 
           <div class="actions">
-            <button class="btn btn-primary" id="runDemoBtn">Run Demo</button>
+            <button class="btn btn-primary" id="runDemoBtn" type="button">Validate idea</button>
             <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
           </div>
 
           <div class="helper-text">
-            Budget-safe mode: this demo is static and does not generate API costs.
+            Static demo preview. No paid AI API is running here yet.
           </div>
 
           <div class="label" style="margin-top:22px;">Try an example</div>
           <div class="prompt-grid">
-            <button class="prompt-chip" type="button">Analyze the AI startup market in Europe</button>
-            <button class="prompt-chip" type="button">Compare competitors in the productivity SaaS market</button>
-            <button class="prompt-chip" type="button">Identify opportunities in AI tools for small businesses</button>
-            <button class="prompt-chip" type="button">Research fintech startup trends for the next 3 years</button>
+            <button class="prompt-chip" type="button">AI tool that helps freelancers manage invoices</button>
+            <button class="prompt-chip" type="button">AI legal assistant for small businesses</button>
+            <button class="prompt-chip" type="button">AI app that helps restaurants forecast inventory</button>
+            <button class="prompt-chip" type="button">AI platform for startup idea validation</button>
           </div>
         </div>
 
         <div class="output-shell">
-          <div class="status" id="statusPill">
+          <div class="status">
             <span class="status-dot"></span>
             <span id="statusText">Ready</span>
           </div>
 
           <div class="report-card">
-            <div class="label">Research plan</div>
-            <h4 id="planTitle">Waiting for prompt</h4>
+            <div class="label">Validation plan</div>
+            <h4 id="planTitle">Waiting for idea</h4>
             <ol class="steps" id="planSteps">
-              <li class="muted">Your research plan will appear here.</li>
+              <li>Your validation plan will appear here.</li>
             </ol>
           </div>
 
           <div class="report-card">
-            <div class="label">Generated report</div>
+            <div class="label">Validation report</div>
             <h4 id="reportTitle">No report yet</h4>
-            <div class="report-content" id="reportContent">Run the demo to see a sample Zyqerion report.</div>
+            <div class="report-content" id="reportContent">Run the demo to see a startup idea validation preview.</div>
+
+            <div class="score-grid" id="scoreGrid"></div>
+
+            <div class="overall-score" id="overallScore" style="display:none;">
+              <div class="small">Startup Potential</div>
+              <div class="big" id="overallScoreValue">0 / 10</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="examples">
+  <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2>What this demo is designed to show</h2>
+        <h2>What Zyqerion is built for</h2>
         <p>
-          Zyqerion is meant to feel more like a research assistant than a plain chat box.
+          A founder-style validation flow, not a generic chat experience.
         </p>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <h3>Structured planning</h3>
-          <p>The system breaks a question into a research direction instead of giving a loose answer.</p>
+          <h3>Market demand</h3>
+          <p>Estimate whether the idea solves a real and repeated pain point.</p>
         </div>
         <div class="card">
-          <h3>Founder-focused output</h3>
-          <p>Reports highlight opportunities, risks, competitors, and practical next steps.</p>
+          <h3>Competitive pressure</h3>
+          <p>See whether the space is wide open or already crowded.</p>
         </div>
         <div class="card">
-          <h3>Budget-aware build path</h3>
-          <p>You can show the product concept before turning on expensive live AI infrastructure.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-works">
-    <div class="container">
-      <div class="section-head">
-        <h2>How the real product can work later</h2>
-        <p>
-          This demo is static for now, but the actual product path is already clear.
-        </p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>1. User prompt</h3>
-          <p>User asks a market, startup, or competitor question.</p>
-        </div>
-        <div class="card">
-          <h3>2. AI research flow</h3>
-          <p>The system plans, researches, analyzes, and builds a concise report.</p>
-        </div>
-        <div class="card">
-          <h3>3. Saved output</h3>
-          <p>Reports can later be stored in accounts, dashboards, and searchable history.</p>
+          <h3>Next-step clarity</h3>
+          <p>Get practical direction before you spend months building the wrong thing.</p>
         </div>
       </div>
     </div>
@@ -537,12 +479,12 @@
   <footer>
     <div class="container footer-inner">
       <div>© Zyqerion</div>
-      <div>Static demo preview — no live AI costs</div>
+      <div>Startup idea validation demo</div>
     </div>
   </footer>
 
   <script>
-    const promptInput = document.getElementById("promptInput");
+    const ideaInput = document.getElementById("ideaInput");
     const runDemoBtn = document.getElementById("runDemoBtn");
     const clearBtn = document.getElementById("clearBtn");
     const promptChips = document.querySelectorAll(".prompt-chip");
@@ -552,132 +494,199 @@
     const planSteps = document.getElementById("planSteps");
     const reportTitle = document.getElementById("reportTitle");
     const reportContent = document.getElementById("reportContent");
+    const scoreGrid = document.getElementById("scoreGrid");
+    const overallScore = document.getElementById("overallScore");
+    const overallScoreValue = document.getElementById("overallScoreValue");
 
     const demoOutputs = {
-      "analyze the ai startup market in europe": {
-        planTitle: "AI startup market in Europe",
+      "ai tool that helps freelancers manage invoices": {
+        planTitle: "Freelancer invoicing tool validation",
         steps: [
-          "Map the current market focus and growth themes.",
-          "Identify leading startup segments and funding signals.",
-          "Highlight opportunities, risks, and strategic takeaways."
+          "Estimate how painful invoicing and payment tracking are for freelancers.",
+          "Review the main competitors already serving this workflow.",
+          "Identify differentiation opportunities, risks, and practical next steps."
         ],
-        reportTitle: "European AI Startup Market Overview",
-        report: `Summary
-The European AI startup market appears active and broad, with momentum around enterprise tools, developer infrastructure, automation, and industry-specific applications. Interest remains strong where AI can reduce labor, speed up workflows, or improve decision-making.
+        reportTitle: "Startup Idea Validation",
+        report: `Idea
+AI tool that helps freelancers manage invoices
 
-Key insights
-• B2B AI tools appear easier to position than broad consumer AI products.
-• Vertical focus can be a major advantage, especially in finance, health, legal, and operations.
-• Buyers likely care more about ROI and workflow impact than model novelty.
-• Trust, privacy, and compliance can become differentiators in Europe.
+Market demand
+Freelancers often deal with manual invoicing, overdue payments, and scattered admin work. A tool that reduces this friction can be relevant, especially for solo operators who want to save time.
 
-Risks and uncertainties
-• Competition is intense and many products look similar on the surface.
-• API dependence can pressure margins for smaller startups.
-• Some markets may be crowded before clear monetization is proven.
+Competitors
+• FreshBooks
+• Wave
+• Bonsai
 
-Recommended next steps
-1. Pick one narrow customer type.
-2. Validate one painful, repeatable workflow.
-3. Build around faster outcomes, not general intelligence.
-4. Test positioning against 3 to 5 existing competitors.`
+Opportunity gaps
+• AI invoice categorization
+• smart payment reminders
+• simple tax estimation
+• clearer freelancer-specific workflows
+
+Risks
+This category already has established competitors. The product would need sharper positioning or a simpler experience to stand out.
+
+Suggested next steps
+• Interview 10 freelancers
+• Validate which invoicing pain hurts most
+• Build a narrow prototype around one workflow`,
+        scores: {
+          "Market Demand": "8 / 10",
+          "Competition": "6 / 10",
+          "Opportunity": "7 / 10",
+          "Execution Difficulty": "5 / 10"
+        },
+        overall: "7.1 / 10"
       },
-      "compare competitors in the productivity saas market": {
-        planTitle: "Productivity SaaS competitor comparison",
+      "ai legal assistant for small businesses": {
+        planTitle: "AI legal assistant validation",
         steps: [
-          "Define the main categories inside productivity SaaS.",
-          "Compare product positioning, feature patterns, and target users.",
-          "Summarize whitespace opportunities and crowded areas."
+          "Evaluate the legal pain points small businesses face most often.",
+          "Map the likely competitor landscape and trust barriers.",
+          "Score market demand, risk, and practical opportunity."
         ],
-        reportTitle: "Productivity SaaS Competitor Snapshot",
-        report: `Summary
-The productivity SaaS market is large but fragmented. Many competitors overlap on task management, collaboration, documentation, and workflow automation. Products often compete less on raw features and more on audience fit and ease of adoption.
+        reportTitle: "Startup Idea Validation",
+        report: `Idea
+AI legal assistant for small businesses
 
-Key insights
-• Simplicity can beat feature depth for small teams.
-• Workflow automation is becoming a stronger differentiator.
-• Clear positioning for one user type often outperforms generic “for everyone” messaging.
-• Teams adopt products faster when onboarding is short and collaboration feels natural.
+Market demand
+Small businesses often need help understanding contracts, policies, and basic legal documents without hiring expensive legal support for every small task.
 
-Risks and uncertainties
-• Entering a broad productivity category without a niche can make acquisition expensive.
-• Users may resist switching if migration is painful.
-• Feature parity alone is not enough to win.
+Competitors
+• LegalZoom
+• Rocket Lawyer
+• various contract and document AI tools
 
-Recommended next steps
-1. Choose one segment, such as founders, agencies, or remote teams.
-2. Compare onboarding flows from top competitors.
-3. Look for workflows competitors still handle poorly.
-4. Design messaging around one clear outcome.`
+Opportunity gaps
+• simpler guidance for non-experts
+• plain-language contract summaries
+• niche workflows for small business owners
+
+Risks
+Legal trust is a major barrier. Users may hesitate unless the product is clearly framed as an assistant rather than a substitute for legal advice.
+
+Suggested next steps
+• Pick one narrow legal workflow
+• Test whether owners trust AI assistance here
+• Validate willingness to pay for time saved`,
+        scores: {
+          "Market Demand": "7 / 10",
+          "Competition": "5 / 10",
+          "Opportunity": "7 / 10",
+          "Execution Difficulty": "4 / 10"
+        },
+        overall: "6.5 / 10"
       },
-      "identify opportunities in ai tools for small businesses": {
-        planTitle: "AI opportunities for small businesses",
+      "ai app that helps restaurants forecast inventory": {
+        planTitle: "Restaurant inventory forecasting validation",
         steps: [
-          "List common small-business workflow pain points.",
-          "Match those problems to simple AI-assisted product ideas.",
-          "Prioritize opportunities by urgency, ease of use, and willingness to pay."
+          "Assess how strong the inventory forecasting pain is in restaurants.",
+          "Check operational alternatives and existing software competition.",
+          "Summarize opportunity, risk, and adoption difficulty."
         ],
-        reportTitle: "AI Opportunities for Small Businesses",
-        report: `Summary
-Small businesses often need practical AI more than advanced AI. The best opportunities usually come from removing repetitive admin work, improving sales follow-up, and simplifying content or support tasks.
+        reportTitle: "Startup Idea Validation",
+        report: `Idea
+AI app that helps restaurants forecast inventory
 
-Key insights
-• Owners value time savings more than technical sophistication.
-• AI tools that plug into existing workflows may convert better.
-• Narrow use cases can outperform broad “all-in-one” products.
-• Reporting, communication, scheduling, and customer support look especially promising.
+Market demand
+Restaurants frequently lose money through over-ordering, spoilage, and inconsistent forecasting. Better forecasting can create real operational value.
 
-Risks and uncertainties
-• Many small businesses have limited budgets.
-• Complex setup reduces adoption.
-• Trust issues appear when outputs affect customers directly.
+Competitors
+• restaurant POS ecosystems
+• inventory platforms
+• forecasting and operations tools
 
-Recommended next steps
-1. Choose one workflow with obvious pain.
-2. Test willingness to pay before building deeply.
-3. Keep setup extremely simple.
-4. Show a fast before-and-after result in the product demo.`
+Opportunity gaps
+• simpler forecasting for small restaurants
+• clearer reorder suggestions
+• waste-reduction insights
+• tighter integration with daily workflows
+
+Risks
+Sales cycles can be slower in hospitality, and integration with existing tools may become a challenge.
+
+Suggested next steps
+• Validate the strongest pain with restaurant owners
+• Focus on small operators first
+• Prototype one forecasting workflow`,
+        scores: {
+          "Market Demand": "8 / 10",
+          "Competition": "5 / 10",
+          "Opportunity": "8 / 10",
+          "Execution Difficulty": "4 / 10"
+        },
+        overall: "7.3 / 10"
       },
-      "research fintech startup trends for the next 3 years": {
-        planTitle: "Fintech trend outlook",
+      "ai platform for startup idea validation": {
+        planTitle: "Startup validation platform validation",
         steps: [
-          "Scan likely trend categories shaping fintech startup demand.",
-          "Separate hype areas from operationally valuable ones.",
-          "Extract product opportunities and major market risks."
+          "Estimate how common startup validation pain is among early founders.",
+          "Compare broad AI tools with more focused validation experiences.",
+          "Score differentiation potential and execution risk."
         ],
-        reportTitle: "Fintech Startup Trend Outlook",
-        report: `Summary
-Fintech over the next few years is likely to keep shifting toward embedded finance, AI-assisted operations, infrastructure simplification, compliance tooling, and products that make financial workflows easier for businesses.
+        reportTitle: "Startup Idea Validation",
+        report: `Idea
+AI platform for startup idea validation
 
-Key insights
-• Infrastructure and compliance-related tools may remain strong because they solve recurring operational pain.
-• AI can be valuable in fraud monitoring, support workflows, risk review, and internal operations.
-• B2B fintech often has clearer monetization than consumer-first concepts.
-• Products that reduce complexity can gain attention even in mature categories.
+Market demand
+Many founders struggle to decide whether an idea is worth pursuing before they invest time into building. A product that gives fast clarity can be compelling.
 
-Risks and uncertainties
-• Regulation can slow adoption.
-• Trust barriers are high in anything involving money.
-• Some segments may already be crowded or expensive to enter.
+Competitors
+• general AI chat tools
+• research tools
+• founder validation frameworks
+• startup education platforms
 
-Recommended next steps
-1. Focus on one regulated workflow or pain point.
-2. Build credibility into the product from day one.
-3. Validate buyer urgency with interviews before writing heavy code.
-4. Compare infrastructure-first versus end-user-facing business models.`
+Opportunity gaps
+• focused validation workflows
+• startup scoring
+• clearer market and competitor framing
+• faster founder-specific guidance
+
+Risks
+The concept is attractive, but messaging must be very clear. Broad positioning could make the product feel like just another AI tool.
+
+Suggested next steps
+• Narrow the promise to one founder problem
+• Make the output highly structured
+• Differentiate with scoring and validation workflows`,
+        scores: {
+          "Market Demand": "8 / 10",
+          "Competition": "7 / 10",
+          "Opportunity": "8 / 10",
+          "Execution Difficulty": "6 / 10"
+        },
+        overall: "7.4 / 10"
       }
     };
 
-    function normalizePrompt(value) {
+    function normalizeText(value) {
       return value.trim().toLowerCase();
     }
 
-    function createTypingState() {
-      statusText.innerHTML = 'Analyzing <span class="typing"><span>.</span><span>.</span><span>.</span></span>';
-      planTitle.textContent = "Building research plan";
-      planSteps.innerHTML = "<li class='muted'>Reviewing prompt and creating a sample analysis flow.</li>";
+    function setLoadingState() {
+      statusText.textContent = "Validating...";
+      planTitle.textContent = "Building validation plan";
+      planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style validation flow.</li>";
       reportTitle.textContent = "Generating report";
-      reportContent.textContent = "Zyqerion is simulating a structured research output...";
+      reportContent.textContent = "Zyqerion is simulating a startup validation result...";
+      scoreGrid.innerHTML = "";
+      overallScore.style.display = "none";
+    }
+
+    function renderScores(scores, overall) {
+      scoreGrid.innerHTML = Object.entries(scores).map(([label, value]) => {
+        return `
+          <div class="score-row">
+            <span>${label}</span>
+            <strong>${value}</strong>
+          </div>
+        `;
+      }).join("");
+
+      overallScoreValue.textContent = overall;
+      overallScore.style.display = "block";
     }
 
     function showOutput(data) {
@@ -686,73 +695,87 @@ Recommended next steps
       planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
       reportTitle.textContent = data.reportTitle;
       reportContent.textContent = data.report;
+      renderScores(data.scores, data.overall);
     }
 
-    function buildFallbackOutput(prompt) {
+    function buildFallbackOutput(idea) {
       return {
-        planTitle: "Custom research preview",
+        planTitle: "Custom validation preview",
         steps: [
-          "Interpret the user's research goal.",
-          "Group the topic into trends, competitors, opportunities, and risks.",
-          "Return a concise founder-focused summary."
+          "Clarify the target user and problem being solved.",
+          "Estimate demand, competition, and opportunity gaps.",
+          "Return a simple founder-style validation summary."
         ],
-        reportTitle: "Sample Zyqerion Research Output",
-        report: `Summary
-This is a simulated preview for: "${prompt}"
+        reportTitle: "Startup Idea Validation",
+        report: `Idea
+${idea}
 
-Zyqerion would normally turn this topic into a structured report with clearer sections and practical startup takeaways.
+Market demand
+This static demo is designed to show how Zyqerion could validate a startup idea before you build it.
 
-Key insights
-• A good research question should point to a market, competitor set, or business opportunity.
-• The strongest outputs are usually narrow and decision-oriented.
-• Founder-grade analysis should focus on what matters next, not just background information.
+Competitors
+A real version would compare existing tools, alternatives, and market density.
 
-Risks and uncertainties
-• This current page is a static demo.
-• No live web research or API-backed analysis is running yet.
+Opportunity gaps
+The strongest opportunities usually come from narrow pain points, clearer positioning, or simpler execution.
 
-Recommended next steps
-1. Refine the question into one concrete decision.
-2. Compare 3 to 5 relevant competitors or segments.
-3. Turn the best prompts into reusable report templates.`
+Risks
+This current page is a simulated demo and does not run live AI analysis yet.
+
+Suggested next steps
+• Clarify who the idea is for
+• Define the core pain point
+• Compare the top alternatives
+• Test demand with real users`,
+        scores: {
+          "Market Demand": "7 / 10",
+          "Competition": "6 / 10",
+          "Opportunity": "7 / 10",
+          "Execution Difficulty": "5 / 10"
+        },
+        overall: "6.8 / 10"
       };
     }
 
     function runDemo() {
-      const prompt = promptInput.value.trim();
+      const idea = ideaInput.value.trim();
 
-      if (!prompt) {
-        statusText.textContent = "Waiting for prompt";
-        planTitle.textContent = "No prompt entered";
-        planSteps.innerHTML = "<li class='muted'>Add a research topic to continue.</li>";
+      if (!idea) {
+        statusText.textContent = "Waiting for idea";
+        planTitle.textContent = "No idea entered";
+        planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
         reportTitle.textContent = "No report yet";
-        reportContent.textContent = "Enter a question to see a simulated Zyqerion report.";
+        reportContent.textContent = "Enter an idea to see a startup validation preview.";
+        scoreGrid.innerHTML = "";
+        overallScore.style.display = "none";
         return;
       }
 
-      createTypingState();
+      setLoadingState();
 
       setTimeout(() => {
-        const key = normalizePrompt(prompt);
-        const output = demoOutputs[key] || buildFallbackOutput(prompt);
+        const key = normalizeText(idea);
+        const output = demoOutputs[key] || buildFallbackOutput(idea);
         showOutput(output);
-      }, 1400);
+      }, 1200);
     }
 
     runDemoBtn.addEventListener("click", runDemo);
 
     clearBtn.addEventListener("click", () => {
-      promptInput.value = "";
+      ideaInput.value = "";
       statusText.textContent = "Ready";
-      planTitle.textContent = "Waiting for prompt";
-      planSteps.innerHTML = "<li class='muted'>Your research plan will appear here.</li>";
+      planTitle.textContent = "Waiting for idea";
+      planSteps.innerHTML = "<li>Your validation plan will appear here.</li>";
       reportTitle.textContent = "No report yet";
-      reportContent.textContent = "Run the demo to see a sample Zyqerion report.";
+      reportContent.textContent = "Run the demo to see a startup idea validation preview.";
+      scoreGrid.innerHTML = "";
+      overallScore.style.display = "none";
     });
 
     promptChips.forEach((chip) => {
       chip.addEventListener("click", () => {
-        promptInput.value = chip.textContent.trim();
+        ideaInput.value = chip.textContent.trim();
         runDemo();
       });
     });
