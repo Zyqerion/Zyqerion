@@ -786,5 +786,293 @@ body::after {
       });
     });
   </script>
+<script>
+(function () {
+  // Prevent duplicate initialization
+  if (window.__zyqerionAnalyticsInitialized) return;
+  window.__zyqerionAnalyticsInitialized = true;
+
+  // ----------------------------
+  // Config
+  // ----------------------------
+  const CONFIG = {
+    demoPathMatch: '/demo', // change if your demo page uses another path
+    debug: true
+  };
+
+  // ----------------------------
+  // Helpers
+  // ----------------------------
+  function log() {
+    if (CONFIG.debug) console.log('[Zyqerion Analytics]', ...arguments);
+  }
+
+  function trackEvent(eventName, params = {}) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, {
+        page_location: window.location.href,
+        page_title: document.title,
+        ...params
+      });
+      log('Tracked:', eventName, params);
+    } else {
+      console.warn('[Zyqerion Analytics] gtag is not available:', eventName, params);
+    }
+  }
+
+  function getEl(id) {
+    return document.getElementById(id);
+  }
+
+  function safeTextLength(el) {
+    if (!el || typeof el.value !== 'string') return 0;
+    return el.value.trim().length;
+  }
+
+  function getIdeaInput() {
+    return (
+      getEl('idea-input') ||
+      document.querySelector('textarea[name="idea"]') ||
+      document.querySelector('textarea') ||
+      document.querySelector('input[name="idea"]') ||
+      document.querySelector('input[type="text"]')
+    );
+  }
+
+  function getIdeaForm() {
+    return (
+      getEl('idea-form') ||
+      document.querySelector('form')
+    );
+  }
+
+  function getEvaluationContainer() {
+    return (
+      getEl('evaluation-result') ||
+      document.querySelector('[data-evaluation-result]') ||
+      document.querySelector('.evaluation-result') ||
+      document.querySelector('#result')
+    );
+  }
+
+  function parseScoreFromText(text) {
+    if (!text) return null;
+
+    // Match patterns like "63/100" or "Score: 63"
+    let match = text.match(/(\d{1,3})\s*\/\s*100/);
+    if (match) return Number(match[1]);
+
+    match = text.match(/score[:\s]+(\d{1,3})/i);
+    if (match) return Number(match[1]);
+
+    return null;
+  }
+
+  function markOnce(key) {
+    const k = '__zyqerion_' + key;
+    if (window[k]) return false;
+    window[k] = true;
+    return true;
+  }
+
+  // ----------------------------
+  // State
+  // ----------------------------
+  let usedExampleIdea = false;
+  let demoStarted = false;
+  let evaluationObserved = false;
+
+  // ----------------------------
+  // CTA Tracking
+  // ----------------------------
+  const heroCta = getEl('hero-cta');
+  if (heroCta) {
+    heroCta.addEventListener('click', function () {
+      trackEvent('cta_clicked', {
+        cta_name: 'hero_try_demo',
+        cta_location: 'hero'
+      });
+    });
+    log('Hooked #hero-cta');
+  }
+
+  const openDemo = getEl('open-demo');
+  if (openDemo) {
+    openDemo.addEventListener('click', function () {
+      if (!demoStarted) {
+        demoStarted = true;
+        trackEvent('demo_started', {
+          start_method: 'button_click'
+        });
+      }
+    });
+    log('Hooked #open-demo');
+  }
+
+  const tryExample = getEl('try-example');
+  if (tryExample) {
+    tryExample.addEventListener('click', function () {
+      usedExampleIdea = true;
+      trackEvent('cta_clicked', {
+        cta_name: 'try_example',
+        cta_location: 'demo'
+      });
+    });
+    log('Hooked #try-example');
+  }
+
+  // ----------------------------
+  // Auto-track demo page load
+  // ----------------------------
+  window.addEventListener('load', function () {
+    if (window.location.pathname.includes(CONFIG.demoPathMatch) && markOnce('demo_started_page')) {
+      demoStarted = true;
+      trackEvent('demo_started', {
+        start_method: 'page_load'
+      });
+    }
+  });
+
+  // ----------------------------
+  // Track first interaction with idea field
+  // ----------------------------
+  const ideaInput = getIdeaInput();
+  if (ideaInput) {
+    ideaInput.addEventListener('focus', function () {
+      if (markOnce('idea_input_focused')) {
+        trackEvent('demo_input_focused', {
+          field_name: ideaInput.name || ideaInput.id || 'idea_input'
+        });
+      }
+    }, { once: true });
+
+    log('Hooked idea input');
+  }
+
+  // ----------------------------
+  // Track form submit
+  // ----------------------------
+  const ideaForm = getIdeaForm();
+  if (ideaForm) {
+    ideaForm.addEventListener('submit', function () {
+      const input = getIdeaInput();
+      const ideaLength = safeTextLength(input);
+
+      if (!demoStarted && markOnce('demo_started_submit_fallback')) {
+        demoStarted = true;
+        trackEvent('demo_started', {
+          start_method: 'form_submit'
+        });
+      }
+
+      trackEvent('idea_submitted', {
+        idea_length: ideaLength,
+        has_example_idea: usedExampleIdea ? 'yes' : 'no'
+      });
+    });
+
+    log('Hooked form submit');
+  }
+
+  // ----------------------------
+  // Track evaluation shown
+  // ----------------------------
+  function trackEvaluationCompletedFromContainer(container) {
+    if (!container || evaluationObserved) return;
+
+    const text = (container.innerText || container.textContent || '').trim();
+    if (!text || text.length < 20) return;
+
+    evaluationObserved = true;
+
+    const score = parseScoreFromText(text);
+
+    trackEvent('evaluation_completed', {
+      evaluation_score: score,
+      result_visible: 'yes'
+    });
+  }
+
+  function observeEvaluationContainer() {
+    const container = getEvaluationContainer();
+    if (!container) {
+      log('No evaluation container found');
+      return;
+    }
+
+    // Initial check
+    trackEvaluationCompletedFromContainer(container);
+
+    const observer = new MutationObserver(function () {
+      trackEvaluationCompletedFromContainer(container);
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    log('Observing evaluation container');
+  }
+
+  // Delay a bit so app content can render
+  window.addEventListener('load', function () {
+    setTimeout(observeEvaluationContainer, 500);
+    setTimeout(observeEvaluationContainer, 1500);
+  });
+
+  // ----------------------------
+  // Track feedback buttons
+  // ----------------------------
+  const feedbackYes = getEl('feedback-yes');
+  if (feedbackYes) {
+    feedbackYes.addEventListener('click', function () {
+      trackEvent('feedback_submitted', {
+        useful: 'yes'
+      });
+    });
+    log('Hooked #feedback-yes');
+  }
+
+  const feedbackNo = getEl('feedback-no');
+  if (feedbackNo) {
+    feedbackNo.addEventListener('click', function () {
+      trackEvent('feedback_submitted', {
+        useful: 'no'
+      });
+    });
+    log('Hooked #feedback-no');
+  }
+
+  // ----------------------------
+  // Optional manual API for your app code
+  // ----------------------------
+  window.ZyqerionAnalytics = {
+    trackEvent: trackEvent,
+    trackEvaluationCompleted: function (result) {
+      const score =
+        result && typeof result.score === 'number'
+          ? result.score
+          : null;
+
+      if (!evaluationObserved) {
+        evaluationObserved = true;
+        trackEvent('evaluation_completed', {
+          evaluation_score: score,
+          result_visible: 'yes'
+        });
+      }
+    },
+    trackEvaluationFailed: function (reason) {
+      trackEvent('evaluation_failed', {
+        error_type: reason || 'unknown'
+      });
+    }
+  };
+
+  log('Initialized successfully');
+})();
+</script>
 </body>
 </html>
