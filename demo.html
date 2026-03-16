@@ -529,31 +529,94 @@
   </footer>
 
   <script>
-    const ideaInput = document.getElementById("ideaInput");
-    const runDemoBtn = document.getElementById("runDemoBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const promptChips = document.querySelectorAll(".prompt-chip");
+  const ideaInput = document.getElementById("ideaInput");
+  const runDemoBtn = document.getElementById("runDemoBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const promptChips = document.querySelectorAll(".prompt-chip");
 
-    const statusText = document.getElementById("statusText");
-    const planTitle = document.getElementById("planTitle");
-    const planSteps = document.getElementById("planSteps");
-    const reportTitle = document.getElementById("reportTitle");
-    const reportContent = document.getElementById("reportContent");
-    const scoreGrid = document.getElementById("scoreGrid");
-    const overallScore = document.getElementById("overallScore");
-    const overallScoreValue = document.getElementById("overallScoreValue");
-    const shareScoreBtn = document.getElementById("shareScoreBtn");
+  const statusText = document.getElementById("statusText");
+  const planTitle = document.getElementById("planTitle");
+  const planSteps = document.getElementById("planSteps");
+  const reportTitle = document.getElementById("reportTitle");
+  const reportContent = document.getElementById("reportContent");
+  const scoreGrid = document.getElementById("scoreGrid");
+  const overallScore = document.getElementById("overallScore");
+  const overallScoreValue = document.getElementById("overallScoreValue");
+  const shareScoreBtn = document.getElementById("shareScoreBtn");
 
-    const demoOutputs = {
-      "ai tool that helps freelancers manage invoices": {
-        planTitle: "Freelancer invoicing idea evaluation",
-        steps: [
-          "Estimate whether freelancers have a repeated invoicing pain point.",
-          "Review the strongest existing competitors in this workflow.",
-          "Evaluate whether there is a meaningful angle for differentiation."
-        ],
-        reportTitle: "Founder Evaluation",
-        report: `Idea
+  // -----------------------------
+  // Analytics helpers
+  // -----------------------------
+  let demoStartedTracked = false;
+  let inputFocusedTracked = false;
+  let usedExampleIdea = false;
+  let lastSubmissionSource = "manual";
+  let evaluationCompletedTimeout = null;
+
+  function trackEvent(eventName, params = {}) {
+    if (typeof gtag === "function") {
+      gtag("event", eventName, {
+        page_location: window.location.href,
+        page_title: document.title,
+        ...params
+      });
+      console.log("[GA4]", eventName, params);
+    } else {
+      console.warn("[GA4] gtag not available:", eventName, params);
+    }
+  }
+
+  function trackDemoStarted(method = "unknown") {
+    if (!demoStartedTracked) {
+      demoStartedTracked = true;
+      trackEvent("demo_started", {
+        start_method: method
+      });
+    }
+  }
+
+  function parseNumericScore(scoreText) {
+    if (!scoreText) return null;
+    const match = String(scoreText).match(/(\d+(\.\d+)?)/);
+    return match ? Number(match[1]) : null;
+  }
+
+  function resetEvaluationTracking() {
+    if (evaluationCompletedTimeout) {
+      clearTimeout(evaluationCompletedTimeout);
+      evaluationCompletedTimeout = null;
+    }
+  }
+
+  function scheduleEvaluationCompleted(data) {
+    resetEvaluationTracking();
+
+    evaluationCompletedTimeout = setTimeout(() => {
+      const numericScore = parseNumericScore(data.overall);
+
+      trackEvent("evaluation_completed", {
+        submission_source: lastSubmissionSource,
+        used_example_idea: usedExampleIdea ? "yes" : "no",
+        idea_length: ideaInput.value.trim().length,
+        overall_score: numericScore,
+        score_visible: overallScore.style.display === "block" ? "yes" : "no"
+      });
+    }, 1400);
+  }
+
+  // -----------------------------
+  // Demo content
+  // -----------------------------
+  const demoOutputs = {
+    "ai tool that helps freelancers manage invoices": {
+      planTitle: "Freelancer invoicing idea evaluation",
+      steps: [
+        "Estimate whether freelancers have a repeated invoicing pain point.",
+        "Review the strongest existing competitors in this workflow.",
+        "Evaluate whether there is a meaningful angle for differentiation."
+      ],
+      reportTitle: "Founder Evaluation",
+      report: `Idea
 AI tool that helps freelancers manage invoices
 
 Should you build this?
@@ -573,23 +636,23 @@ What to do next
 • Talk to 10 freelancers
 • Find the single most painful invoicing workflow
 • Build a narrow prototype around that workflow`,
-        scores: {
-          "Market Demand": "8 / 10",
-          "Competition": "6 / 10",
-          "Opportunity": "7 / 10",
-          "Execution Difficulty": "5 / 10"
-        },
-        overall: "7.1 / 10"
+      scores: {
+        "Market Demand": "8 / 10",
+        "Competition": "6 / 10",
+        "Opportunity": "7 / 10",
+        "Execution Difficulty": "5 / 10"
       },
-      "ai legal assistant for small businesses": {
-        planTitle: "AI legal assistant evaluation",
-        steps: [
-          "Check whether small businesses need lightweight legal help often enough.",
-          "Review trust barriers and existing legal platforms.",
-          "Evaluate whether a narrow AI assistant angle could stand out."
-        ],
-        reportTitle: "Founder Evaluation",
-        report: `Idea
+      overall: "7.1 / 10"
+    },
+    "ai legal assistant for small businesses": {
+      planTitle: "AI legal assistant evaluation",
+      steps: [
+        "Check whether small businesses need lightweight legal help often enough.",
+        "Review trust barriers and existing legal platforms.",
+        "Evaluate whether a narrow AI assistant angle could stand out."
+      ],
+      reportTitle: "Founder Evaluation",
+      report: `Idea
 AI legal assistant for small businesses
 
 Should you build this?
@@ -609,23 +672,23 @@ What to do next
 • Pick one legal use case
 • Validate trust with real users
 • Frame the product as support, not legal replacement`,
-        scores: {
-          "Market Demand": "7 / 10",
-          "Competition": "5 / 10",
-          "Opportunity": "7 / 10",
-          "Execution Difficulty": "4 / 10"
-        },
-        overall: "6.5 / 10"
+      scores: {
+        "Market Demand": "7 / 10",
+        "Competition": "5 / 10",
+        "Opportunity": "7 / 10",
+        "Execution Difficulty": "4 / 10"
       },
-      "ai app that helps restaurants forecast inventory": {
-        planTitle: "Restaurant inventory forecasting evaluation",
-        steps: [
-          "Estimate whether inventory waste is painful enough to buy a solution.",
-          "Check what existing restaurant systems already offer.",
-          "Evaluate fit for small operators versus larger chains."
-        ],
-        reportTitle: "Founder Evaluation",
-        report: `Idea
+      overall: "6.5 / 10"
+    },
+    "ai app that helps restaurants forecast inventory": {
+      planTitle: "Restaurant inventory forecasting evaluation",
+      steps: [
+        "Estimate whether inventory waste is painful enough to buy a solution.",
+        "Check what existing restaurant systems already offer.",
+        "Evaluate fit for small operators versus larger chains."
+      ],
+      reportTitle: "Founder Evaluation",
+      report: `Idea
 AI app that helps restaurants forecast inventory
 
 Should you build this?
@@ -645,23 +708,23 @@ What to do next
 • Speak with restaurant owners
 • Find the strongest inventory pain
 • Prototype one simple forecasting workflow`,
-        scores: {
-          "Market Demand": "8 / 10",
-          "Competition": "5 / 10",
-          "Opportunity": "8 / 10",
-          "Execution Difficulty": "4 / 10"
-        },
-        overall: "7.3 / 10"
+      scores: {
+        "Market Demand": "8 / 10",
+        "Competition": "5 / 10",
+        "Opportunity": "8 / 10",
+        "Execution Difficulty": "4 / 10"
       },
-      "ai platform for startup validation": {
-        planTitle: "Startup validation platform evaluation",
-        steps: [
-          "Check whether founders feel strong uncertainty before building.",
-          "Compare broad AI research tools with focused validation experiences.",
-          "Evaluate whether the product feels distinct enough from generic AI."
-        ],
-        reportTitle: "Founder Evaluation",
-        report: `Idea
+      overall: "7.3 / 10"
+    },
+    "ai platform for startup validation": {
+      planTitle: "Startup validation platform evaluation",
+      steps: [
+        "Check whether founders feel strong uncertainty before building.",
+        "Compare broad AI research tools with focused validation experiences.",
+        "Evaluate whether the product feels distinct enough from generic AI."
+      ],
+      reportTitle: "Founder Evaluation",
+      report: `Idea
 AI platform for startup validation
 
 Should you build this?
@@ -681,78 +744,80 @@ What to do next
 • Narrow the promise to one founder problem
 • Make the output highly structured
 • Lead with “Should you build this?” instead of generic research`,
-        scores: {
-          "Market Demand": "8 / 10",
-          "Competition": "7 / 10",
-          "Opportunity": "8 / 10",
-          "Execution Difficulty": "6 / 10"
-        },
-        overall: "7.4 / 10"
+      scores: {
+        "Market Demand": "8 / 10",
+        "Competition": "7 / 10",
+        "Opportunity": "8 / 10",
+        "Execution Difficulty": "6 / 10"
+      },
+      overall: "7.4 / 10"
+    }
+  };
+
+  function normalizeText(value) {
+    return value.trim().toLowerCase();
+  }
+
+  function typeText(element, text, speed = 8) {
+    let i = 0;
+    element.textContent = "";
+
+    function typing() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
       }
-    };
-
-    function normalizeText(value) {
-      return value.trim().toLowerCase();
     }
 
-    function typeText(element, text, speed = 8) {
-      let i = 0;
-      element.textContent = "";
+    typing();
+  }
 
-      function typing() {
-        if (i < text.length) {
-          element.textContent += text.charAt(i);
-          i++;
-          setTimeout(typing, speed);
-        }
-      }
+  function setLoadingState() {
+    statusText.textContent = "Evaluating idea...";
+    planTitle.textContent = "Building founder decision plan";
+    planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style evaluation flow.</li>";
+    reportTitle.textContent = "Generating founder decision";
+    reportContent.textContent = "Zyqerion is simulating a founder-style evaluation...";
+    scoreGrid.innerHTML = "";
+    overallScore.style.display = "none";
+  }
 
-      typing();
-    }
+  function renderScores(scores, overall) {
+    scoreGrid.innerHTML = Object.entries(scores).map(([label, value]) => {
+      return `
+        <div class="score-row">
+          <span>${label}</span>
+          <strong>${value}</strong>
+        </div>
+      `;
+    }).join("");
 
-    function setLoadingState() {
-      statusText.textContent = "Evaluating idea...";
-      planTitle.textContent = "Building founder decision plan";
-      planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style evaluation flow.</li>";
-      reportTitle.textContent = "Generating founder decision";
-      reportContent.textContent = "Zyqerion is simulating a founder-style evaluation...";
-      scoreGrid.innerHTML = "";
-      overallScore.style.display = "none";
-    }
+    overallScoreValue.textContent = overall;
+    overallScore.style.display = "block";
+  }
 
-    function renderScores(scores, overall) {
-      scoreGrid.innerHTML = Object.entries(scores).map(([label, value]) => {
-        return `
-          <div class="score-row">
-            <span>${label}</span>
-            <strong>${value}</strong>
-          </div>
-        `;
-      }).join("");
+  function showOutput(data) {
+    statusText.textContent = "Evaluation complete";
+    planTitle.textContent = data.planTitle;
+    planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
+    reportTitle.textContent = data.reportTitle;
+    typeText(reportContent, data.report, 8);
+    renderScores(data.scores, data.overall);
 
-      overallScoreValue.textContent = overall;
-      overallScore.style.display = "block";
-    }
+    scheduleEvaluationCompleted(data);
+  }
 
-    function showOutput(data) {
-      statusText.textContent = "Evaluation complete";
-      planTitle.textContent = data.planTitle;
-      planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
-      reportTitle.textContent = data.reportTitle;
-      typeText(reportContent, data.report, 8);
-      renderScores(data.scores, data.overall);
-    }
-
-    function buildFallbackOutput(idea) {
-      return {
-        planTitle: "Custom founder evaluation",
-        steps: [
-          "Clarify the user, problem, and product angle.",
-          "Estimate demand, competition, and opportunity gaps.",
-          "Return a founder-style decision summary."
-        ],
-        reportTitle: "Founder Evaluation",
-        report: `Idea
+  function buildFallbackOutput(idea) {
+    return {
+      planTitle: "Custom founder evaluation",
+      steps: [
+        "Clarify the user, problem, and product angle.",
+        "Estimate demand, competition, and opportunity gaps.",
+        "Return a founder-style decision summary."
+      ],
+      reportTitle: "Founder Evaluation",
+      report: `Idea
 ${idea}
 
 Should you build this?
@@ -772,44 +837,59 @@ What to do next
 • Clarify who this is for
 • Compare the strongest alternatives
 • Test the idea with real users before building`,
-        scores: {
-          "Market Demand": "7 / 10",
-          "Competition": "6 / 10",
-          "Opportunity": "7 / 10",
-          "Execution Difficulty": "5 / 10"
-        },
-        overall: "6.8 / 10"
-      };
+      scores: {
+        "Market Demand": "7 / 10",
+        "Competition": "6 / 10",
+        "Opportunity": "7 / 10",
+        "Execution Difficulty": "5 / 10"
+      },
+      overall: "6.8 / 10"
+    };
+  }
+
+  function runDemo(source = "manual") {
+    const idea = ideaInput.value.trim();
+
+    trackDemoStarted(source);
+    lastSubmissionSource = source;
+
+    if (!idea) {
+      statusText.textContent = "Waiting for idea";
+      planTitle.textContent = "No idea entered";
+      planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
+      reportTitle.textContent = "No evaluation yet";
+      reportContent.textContent = "Enter an idea to see a founder-style evaluation preview.";
+      scoreGrid.innerHTML = "";
+      overallScore.style.display = "none";
+      resetEvaluationTracking();
+      return;
     }
 
-    function runDemo() {
-      const idea = ideaInput.value.trim();
+    trackEvent("idea_submitted", {
+      submission_source: source,
+      idea_length: idea.length,
+      used_example_idea: usedExampleIdea ? "yes" : "no"
+    });
 
-      if (!idea) {
-        statusText.textContent = "Waiting for idea";
-        planTitle.textContent = "No idea entered";
-        planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
-        reportTitle.textContent = "No evaluation yet";
-        reportContent.textContent = "Enter an idea to see a founder-style evaluation preview.";
-        scoreGrid.innerHTML = "";
-        overallScore.style.display = "none";
-        return;
-      }
+    setLoadingState();
 
-      setLoadingState();
+    setTimeout(() => {
+      const key = normalizeText(idea);
+      const output = demoOutputs[key] || buildFallbackOutput(idea);
+      showOutput(output);
+    }, 1200);
+  }
 
-      setTimeout(() => {
-        const key = normalizeText(idea);
-        const output = demoOutputs[key] || buildFallbackOutput(idea);
-        showOutput(output);
-      }, 1200);
-    }
+  function shareScore() {
+    const idea = ideaInput.value.trim() || "my startup idea";
+    const score = overallScoreValue.textContent || "7.0 / 10";
 
-    function shareScore() {
-      const idea = ideaInput.value.trim() || "my startup idea";
-      const score = overallScoreValue.textContent || "7.0 / 10";
+    trackEvent("share_score_clicked", {
+      has_score: overallScore.style.display === "block" ? "yes" : "no",
+      score_value: parseNumericScore(score)
+    });
 
-      const text =
+    const text =
 `I tested my startup idea with Zyqerion.
 
 Idea: ${idea}
@@ -818,54 +898,88 @@ Worth Building Score: ${score}
 Try it yourself:
 https://zyqerion.ai`;
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-          .then(() => {
-            alert("Result copied. Paste it on X, LinkedIn, or anywhere you want.");
-          })
-          .catch(() => {
-            alert(text);
-          });
-      } else {
-        alert(text);
-      }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          alert("Result copied. Paste it on X, LinkedIn, or anywhere you want.");
+        })
+        .catch(() => {
+          alert(text);
+        });
+    } else {
+      alert(text);
     }
+  }
 
-    function fillIdeaFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      const urlIdea = params.get("idea");
+  function fillIdeaFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const urlIdea = params.get("idea");
 
-      if (urlIdea && ideaInput) {
-        ideaInput.value = urlIdea;
-        runDemo();
-      }
+    if (urlIdea && ideaInput) {
+      ideaInput.value = urlIdea;
+      usedExampleIdea = false;
+      runDemo("url_param");
     }
+  }
 
-    runDemoBtn.addEventListener("click", runDemo);
+  // -----------------------------
+  // Event listeners
+  // -----------------------------
+  if (ideaInput) {
+    ideaInput.addEventListener("focus", () => {
+      trackDemoStarted("input_focus");
 
-    clearBtn.addEventListener("click", () => {
-      ideaInput.value = "";
-      statusText.textContent = "Ready";
-      planTitle.textContent = "Waiting for idea";
-      planSteps.innerHTML = "<li>Your founder decision plan will appear here.</li>";
-      reportTitle.textContent = "No evaluation yet";
-      reportContent.textContent = "Run the demo to see a founder-style evaluation preview.";
-      scoreGrid.innerHTML = "";
-      overallScore.style.display = "none";
+      if (!inputFocusedTracked) {
+        inputFocusedTracked = true;
+        trackEvent("idea_input_focused", {
+          field_id: "ideaInput"
+        });
+      }
+    }, { once: true });
+  }
+
+  runDemoBtn.addEventListener("click", () => runDemo("run_button"));
+
+  clearBtn.addEventListener("click", () => {
+    ideaInput.value = "";
+    usedExampleIdea = false;
+    lastSubmissionSource = "manual";
+    resetEvaluationTracking();
+
+    trackEvent("idea_cleared", {
+      previous_score_visible: overallScore.style.display === "block" ? "yes" : "no"
     });
 
-    promptChips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        ideaInput.value = chip.textContent.trim();
-        runDemo();
+    statusText.textContent = "Ready";
+    planTitle.textContent = "Waiting for idea";
+    planSteps.innerHTML = "<li>Your founder decision plan will appear here.</li>";
+    reportTitle.textContent = "No evaluation yet";
+    reportContent.textContent = "Run the demo to see a founder-style evaluation preview.";
+    scoreGrid.innerHTML = "";
+    overallScore.style.display = "none";
+  });
+
+  promptChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      ideaInput.value = chip.textContent.trim();
+      usedExampleIdea = true;
+
+      trackEvent("example_idea_used", {
+        example_name: normalizeText(chip.textContent.trim()).slice(0, 60)
       });
+
+      runDemo("example_chip");
     });
+  });
 
-    if (shareScoreBtn) {
-      shareScoreBtn.addEventListener("click", shareScore);
-    }
+  if (shareScoreBtn) {
+    shareScoreBtn.addEventListener("click", shareScore);
+  }
 
-    window.addEventListener("load", fillIdeaFromUrl);
-  </script>
+  window.addEventListener("load", () => {
+    trackDemoStarted("page_load");
+    fillIdeaFromUrl();
+  });
+</script> 
 </body>
 </html>
