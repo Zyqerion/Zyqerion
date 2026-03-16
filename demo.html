@@ -802,7 +802,7 @@ What to do next
     planTitle.textContent = data.planTitle;
     planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
     reportTitle.textContent = data.reportTitle;
-    typeText(reportContent, data.report, 8);
+    
     renderScores(data.scores, data.overall);
 
     scheduleEvaluationCompleted(data);
