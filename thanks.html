@@ -6,10 +6,10 @@
   <title>Thanks — Zyqerion</title>
   <style>
     :root {
-      --bg: #06101d;
+      --bg: #020503;
       --text: #f5f7fb;
-      --muted: #aab6c7;
-      --border: rgba(255,255,255,0.12);
+      --muted: #a8b3ab;
+      --border: rgba(86,255,120,0.14);
     }
 
     * { box-sizing: border-box; }
@@ -19,8 +19,9 @@
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(116,170,255,0.18), transparent 30%),
-        linear-gradient(180deg, var(--bg) 0%, #081426 100%);
+        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.12), transparent 26%),
+        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 22%),
+        linear-gradient(180deg, #010302 0%, #07110a 100%);
       min-height: 100vh;
       display: grid;
       place-items: center;
@@ -35,6 +36,7 @@
       background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
       text-align: center;
+      box-shadow: 0 0 40px rgba(57,255,92,0.12), 0 0 120px rgba(57,255,92,0.04);
     }
 
     h1 {
@@ -49,29 +51,51 @@
       line-height: 1.6;
     }
 
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       padding: 12px 18px;
       border-radius: 14px;
-      background: linear-gradient(135deg, #b4cbff, #d3e0ff);
-      color: #08111f;
       text-decoration: none;
       font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7dff96, #39ff5c);
+      color: #031006;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(86,255,120,0.14);
+      color: var(--text);
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Your idea has been submitted</h1>
+    <h1>Thanks — you're in</h1>
     <p>
-      Thanks for submitting your startup idea to Zyqerion.
+      Your submission has been received by Zyqerion.
     </p>
     <p>
-      A founder-style evaluation will review the opportunity, competition, and next steps for your concept.
+      If you joined early access, you’ll receive updates and priority access as Zyqerion evolves.
+      If you submitted a paid founder evaluation request, your manual evaluation will be delivered within 24 hours.
     </p>
-    <a class="btn" href="/demo.html">Try another idea</a>
+
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/demo.html">Try the demo</a>
+      <a class="btn btn-secondary" href="/">Back to site</a>
+    </div>
   </div>
 </body>
 </html>
