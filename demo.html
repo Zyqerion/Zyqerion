@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TDGESJ2Z9C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDGESJ2Z9C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TDGESJ2Z9C');
+  </script>
 
-  gtag('config', 'G-TDGESJ2Z9C');
-</script>
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zyqerion Demo — Founder Decision Engine</title>
   <meta
     name="description"
-    content="Test your startup idea with Zyqerion. Explore why it could work, why it could fail, and whether it is worth building."
+    content="Preview your startup idea with Zyqerion. See your score, a short evaluation summary, and unlock the full founder evaluation."
   />
   <style>
     :root {
@@ -424,9 +423,9 @@
   <section class="hero">
     <div class="container">
       <div class="eyebrow">Founder decision engine</div>
-      <h1>Founder evaluation demo</h1>
+      <h1>Get a preview of your founder evaluation</h1>
       <p>
-        Test how Zyqerion analyzes startup ideas before you build them.
+        See how Zyqerion scores your idea — then unlock the full decision before you spend time building it.
       </p>
     </div>
   </section>
@@ -437,7 +436,7 @@
         <div class="card">
           <div class="label">Startup idea</div>
           <h3>Describe your idea</h3>
-          <p>Tell Zyqerion what you want to evaluate.</p>
+          <p>Get a quick preview before deciding whether to unlock the full evaluation.</p>
 
           <textarea
             id="ideaInput"
@@ -445,12 +444,12 @@
           >AI tool that helps freelancers manage invoices</textarea>
 
           <div class="actions">
-            <button class="btn btn-primary" id="runDemoBtn" type="button">Run evaluation</button>
+            <button class="btn btn-primary" id="runDemoBtn" type="button">Run preview</button>
             <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
           </div>
 
           <div class="helper-text">
-            Static demo preview. No paid AI API is running here yet.
+            Preview your idea instantly. Full founder evaluations are reviewed manually and delivered within 24 hours.
           </div>
 
           <div class="label" style="margin-top:22px;">Try an example</div>
@@ -477,9 +476,9 @@
           </div>
 
           <div class="report-card">
-            <div class="label">Founder decision</div>
-            <h4 id="reportTitle">No evaluation yet</h4>
-            <div class="report-content" id="reportContent">Run the demo to see a founder-style evaluation preview.</div>
+            <div class="label">Preview</div>
+            <h4 id="reportTitle">No preview yet</h4>
+            <div class="report-content" id="reportContent">Run the demo to preview your startup score and a short evaluation summary.</div>
 
             <div class="score-grid" id="scoreGrid"></div>
 
@@ -488,22 +487,25 @@
               <div class="big" id="overallScoreValue">0 / 10</div>
             </div>
 
-            <button class="btn btn-secondary" id="shareScoreBtn" type="button" style="margin-top:14px;">
+            <button class="btn btn-secondary" id="shareScoreBtn" type="button" style="margin-top:14px; display:none;">
               Share my startup score
             </button>
-            
+
             <div id="fullEvalCta" style="margin-top:14px; display:none;">
-  <a
-    id="fullEvalBtn"
-    href=https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00
-    class="btn btn-primary"
-    style="width:100%; text-align:center;"
-  >
-    Get Full Founder Evaluation — $9
-  </a>
-  <div style="margin-top:10px; color: var(--muted); font-size:0.92rem;">
-    Founder beta. Manual report delivered within 24 hours.
-  </div>
+              <a
+                id="fullEvalBtn"
+                href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
+                class="btn btn-primary"
+                style="width:100%; text-align:center;"
+              >
+                Unlock Full Founder Evaluation — $9
+              </a>
+              <div style="margin-top:10px; color: var(--muted); font-size:0.92rem;">
+                Personally reviewed. Full report delivered within 24 hours.
+              </div>
+              <div style="margin-top:6px; color: var(--muted); font-size:0.88rem;">
+                If it’s not useful, I’ll refund you.
+              </div>
             </div>
           </div>
         </div>
@@ -514,22 +516,22 @@
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2>What Zyqerion is built for</h2>
-        <p>Founder-style decisions, not generic AI chat.</p>
+        <h2>What the full evaluation gives you</h2>
+        <p>A real founder decision — not just a generic AI answer.</p>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <h3>Should you build this?</h3>
-          <p>Get a clear direction instead of a vague research dump.</p>
+          <h3>Build / test / avoid</h3>
+          <p>Get a clear decision instead of vague startup advice.</p>
         </div>
         <div class="card">
-          <h3>Why this could work</h3>
-          <p>See the strongest reasons your idea could gain traction.</p>
+          <h3>Biggest risks</h3>
+          <p>See what could kill the idea before you waste time on it.</p>
         </div>
         <div class="card">
-          <h3>What to do next</h3>
-          <p>Leave with practical next steps, not just theory.</p>
+          <h3>What I’d do next</h3>
+          <p>Get practical next steps if this were my own idea.</p>
         </div>
       </div>
     </div>
@@ -543,372 +545,332 @@
   </footer>
 
   <script>
-  const ideaInput = document.getElementById("ideaInput");
-  const runDemoBtn = document.getElementById("runDemoBtn");
-  const clearBtn = document.getElementById("clearBtn");
-  const promptChips = document.querySelectorAll(".prompt-chip");
+    const ideaInput = document.getElementById("ideaInput");
+    const runDemoBtn = document.getElementById("runDemoBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const promptChips = document.querySelectorAll(".prompt-chip");
 
-  const statusText = document.getElementById("statusText");
-  const planTitle = document.getElementById("planTitle");
-  const planSteps = document.getElementById("planSteps");
-  const reportTitle = document.getElementById("reportTitle");
-  const reportContent = document.getElementById("reportContent");
-  const scoreGrid = document.getElementById("scoreGrid");
-  const overallScore = document.getElementById("overallScore");
-  const overallScoreValue = document.getElementById("overallScoreValue");
-  const shareScoreBtn = document.getElementById("shareScoreBtn");
+    const statusText = document.getElementById("statusText");
+    const planTitle = document.getElementById("planTitle");
+    const planSteps = document.getElementById("planSteps");
+    const reportTitle = document.getElementById("reportTitle");
+    const reportContent = document.getElementById("reportContent");
+    const scoreGrid = document.getElementById("scoreGrid");
+    const overallScore = document.getElementById("overallScore");
+    const overallScoreValue = document.getElementById("overallScoreValue");
+    const shareScoreBtn = document.getElementById("shareScoreBtn");
 
-  // -----------------------------
-  // Analytics helpers
-  // -----------------------------
-  let demoStartedTracked = false;
-  let inputFocusedTracked = false;
-  let usedExampleIdea = false;
-  let lastSubmissionSource = "manual";
-  let evaluationCompletedTimeout = null;
+    let demoStartedTracked = false;
+    let inputFocusedTracked = false;
+    let usedExampleIdea = false;
+    let lastSubmissionSource = "manual";
+    let evaluationCompletedTimeout = null;
 
-  function trackEvent(eventName, params = {}) {
-    if (typeof gtag === "function") {
-      gtag("event", eventName, {
-        page_location: window.location.href,
-        page_title: document.title,
-        ...params
-      });
-      console.log("[GA4]", eventName, params);
-    } else {
-      console.warn("[GA4] gtag not available:", eventName, params);
-    }
-  }
-
-  function trackDemoStarted(method = "unknown") {
-    if (!demoStartedTracked) {
-      demoStartedTracked = true;
-      trackEvent("demo_started", {
-        start_method: method
-      });
-    }
-  }
-
-  function parseNumericScore(scoreText) {
-    if (!scoreText) return null;
-    const match = String(scoreText).match(/(\d+(\.\d+)?)/);
-    return match ? Number(match[1]) : null;
-  }
-
-  function resetEvaluationTracking() {
-    if (evaluationCompletedTimeout) {
-      clearTimeout(evaluationCompletedTimeout);
-      evaluationCompletedTimeout = null;
-    }
-  }
-
-  function scheduleEvaluationCompleted(data) {
-    resetEvaluationTracking();
-
-    evaluationCompletedTimeout = setTimeout(() => {
-      const numericScore = parseNumericScore(data.overall);
-
-      trackEvent("evaluation_completed", {
-        submission_source: lastSubmissionSource,
-        used_example_idea: usedExampleIdea ? "yes" : "no",
-        idea_length: ideaInput.value.trim().length,
-        overall_score: numericScore,
-        score_visible: overallScore.style.display === "block" ? "yes" : "no"
-      });
-    }, 1400);
-  }
-
-  // -----------------------------
-  // Demo content
-  // -----------------------------
-  const demoOutputs = {
-    "ai tool that helps freelancers manage invoices": {
-      planTitle: "Freelancer invoicing idea evaluation",
-      steps: [
-        "Estimate whether freelancers have a repeated invoicing pain point.",
-        "Review the strongest existing competitors in this workflow.",
-        "Evaluate whether there is a meaningful angle for differentiation."
-      ],
-      reportTitle: "Founder Evaluation",
-      report: `Idea
-AI tool that helps freelancers manage invoices
-
-Should you build this?
-Possibly — there seems to be real demand, but the space already has established tools. The idea becomes stronger if you solve one very specific invoicing pain much better than general-purpose products.
-
-Why this could work
-• Clear pain point for freelancers
-• Time-saving admin automation is valuable
-• Easy to explain the product benefit
-
-Why this could fail
-• Strong existing competitors already serve this category
-• Users may be locked into current tools
-• Differentiation may be difficult without a sharp angle
-
-What to do next
-• Talk to 10 freelancers
-• Find the single most painful invoicing workflow
-• Build a narrow prototype around that workflow`,
-      scores: {
-        "Market Demand": "8 / 10",
-        "Competition": "6 / 10",
-        "Opportunity": "7 / 10",
-        "Execution Difficulty": "5 / 10"
-      },
-      overall: "7.1 / 10"
-    },
-    "ai legal assistant for small businesses": {
-      planTitle: "AI legal assistant evaluation",
-      steps: [
-        "Check whether small businesses need lightweight legal help often enough.",
-        "Review trust barriers and existing legal platforms.",
-        "Evaluate whether a narrow AI assistant angle could stand out."
-      ],
-      reportTitle: "Founder Evaluation",
-      report: `Idea
-AI legal assistant for small businesses
-
-Should you build this?
-Maybe — the pain appears real, but trust is a major challenge. This becomes more attractive if you focus on a narrow legal workflow instead of broad legal help.
-
-Why this could work
-• Small businesses often need affordable legal support
-• Plain-language summaries can be useful
-• Niche legal workflows could create a strong wedge
-
-Why this could fail
-• Legal trust barriers are high
-• Users may fear incorrect guidance
-• The market already includes well-known players
-
-What to do next
-• Pick one legal use case
-• Validate trust with real users
-• Frame the product as support, not legal replacement`,
-      scores: {
-        "Market Demand": "7 / 10",
-        "Competition": "5 / 10",
-        "Opportunity": "7 / 10",
-        "Execution Difficulty": "4 / 10"
-      },
-      overall: "6.5 / 10"
-    },
-    "ai app that helps restaurants forecast inventory": {
-      planTitle: "Restaurant inventory forecasting evaluation",
-      steps: [
-        "Estimate whether inventory waste is painful enough to buy a solution.",
-        "Check what existing restaurant systems already offer.",
-        "Evaluate fit for small operators versus larger chains."
-      ],
-      reportTitle: "Founder Evaluation",
-      report: `Idea
-AI app that helps restaurants forecast inventory
-
-Should you build this?
-This looks promising. The pain point appears operational and expensive, which is a good sign. The challenge is making the product simple enough for busy restaurant owners.
-
-Why this could work
-• Inventory mistakes cost real money
-• Restaurants need better forecasting and waste reduction
-• A focused workflow can create immediate value
-
-Why this could fail
-• Integrations may become complex
-• Restaurant owners may resist switching tools
-• Sales cycles can be slower than expected
-
-What to do next
-• Speak with restaurant owners
-• Find the strongest inventory pain
-• Prototype one simple forecasting workflow`,
-      scores: {
-        "Market Demand": "8 / 10",
-        "Competition": "5 / 10",
-        "Opportunity": "8 / 10",
-        "Execution Difficulty": "4 / 10"
-      },
-      overall: "7.3 / 10"
-    },
-    "ai platform for startup validation": {
-      planTitle: "Startup validation platform evaluation",
-      steps: [
-        "Check whether founders feel strong uncertainty before building.",
-        "Compare generic AI tools with a dedicated founder decision engine.",
-        "Evaluate whether structured startup scoring helps founders make faster decisions."
-  ],
-  reportTitle: "Founder Evaluation",
-  report: `Idea
-AI platform for startup validation
-
-Should you build this?
-Yes, but only if the product stays sharply focused. The demand seems real because many founders struggle to decide whether an idea is worth pursuing. The biggest risk is sounding too similar to generic AI tools.
-
-Why this could work
-• Clear founder pain: uncertainty before building
-• Easy to understand product promise
-• Strong opportunity for focused workflows and scoring
-
-Why this could fail
-• Messaging can become too broad
-• Founders may default to general AI tools
-• Differentiation must be obvious immediately
-
-What to do next
-• Narrow the promise to one founder problem
-• Make the output highly structured
-• Lead with “Should you build this?” instead of generic research`,
-      scores: {
-        "Market Demand": "8 / 10",
-        "Competition": "7 / 10",
-        "Opportunity": "8 / 10",
-        "Execution Difficulty": "6 / 10"
-      },
-      overall: "7.4 / 10"
-    }
-  };
-
-  function normalizeText(value) {
-    return value.trim().toLowerCase();
-  }
-
-  function typeText(element, text, speed = 8) {
-    let i = 0;
-    element.textContent = "";
-
-    function typing() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(typing, speed);
+    function trackEvent(eventName, params = {}) {
+      if (typeof gtag === "function") {
+        gtag("event", eventName, {
+          page_location: window.location.href,
+          page_title: document.title,
+          ...params
+        });
+        console.log("[GA4]", eventName, params);
+      } else {
+        console.warn("[GA4] gtag not available:", eventName, params);
       }
     }
 
-    typing();
-  }
-
-  function setLoadingState() {
-    statusText.textContent = "Evaluating idea...";
-    planTitle.textContent = "Building founder decision plan";
-    planSteps.innerHTML = "<li>Reviewing the idea and simulating a founder-style evaluation flow.</li>";
-    reportTitle.textContent = "Generating founder decision";
-    reportContent.textContent = "Zyqerion is simulating a founder-style evaluation...";
-    scoreGrid.innerHTML = "";
-    overallScore.style.display = "none";
-  }
-
-  function renderScores(scores, overall) {
-    scoreGrid.innerHTML = Object.entries(scores).map(([label, value]) => {
-      return `
-        <div class="score-row">
-          <span>${label}</span>
-          <strong>${value}</strong>
-        </div>
-      `;
-    }).join("");
-
-    overallScoreValue.textContent = overall;
-    overallScore.style.display = "block";
-  }
-
-  function showOutput(data) {
-  statusText.textContent = "Evaluation complete";
-  planTitle.textContent = data.planTitle;
-  planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
-  reportTitle.textContent = data.reportTitle;
-  reportContent.textContent = data.report;
-  renderScores(data.scores, data.overall);
-
-  const fullEvalCta = document.getElementById("fullEvalCta");
-  if (fullEvalCta) {
-    fullEvalCta.style.display = "block";
-  }
-
-  scheduleEvaluationCompleted(data);
-  }
-
-  function buildFallbackOutput(idea) {
-    return {
-      planTitle: "Custom founder evaluation",
-      steps: [
-        "Clarify the user, problem, and product angle.",
-        "Estimate demand, competition, and opportunity gaps.",
-        "Return a founder-style decision summary."
-      ],
-      reportTitle: "Founder Evaluation",
-      report: `Idea
-${idea}
-
-Should you build this?
-This static demo suggests there may be value in testing the idea, but the real answer depends on how specific the user problem is and how crowded the category becomes.
-
-Why this could work
-• The idea may solve a meaningful pain point
-• A narrow target user could improve clarity
-• Founder-focused positioning can create traction
-
-Why this could fail
-• Broad ideas often feel generic
-• Competition may already exist
-• The user pain may be weaker than expected
-
-What to do next
-• Clarify who this is for
-• Compare the strongest alternatives
-• Test the idea with real users before building`,
-      scores: {
-        "Market Demand": "7 / 10",
-        "Competition": "6 / 10",
-        "Opportunity": "7 / 10",
-        "Execution Difficulty": "5 / 10"
-      },
-      overall: "6.8 / 10"
-    };
-  }
-
-  function runDemo(source = "manual") {
-    const idea = ideaInput.value.trim();
-
-    trackDemoStarted(source);
-    lastSubmissionSource = source;
-
-    if (!idea) {
-      statusText.textContent = "Waiting for idea";
-      planTitle.textContent = "No idea entered";
-      planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
-      reportTitle.textContent = "No evaluation yet";
-      reportContent.textContent = "Enter an idea to see a founder-style evaluation preview.";
-      scoreGrid.innerHTML = "";
-      overallScore.style.display = "none";
-      resetEvaluationTracking();
-      return;
+    function trackDemoStarted(method = "unknown") {
+      if (!demoStartedTracked) {
+        demoStartedTracked = true;
+        trackEvent("demo_started", {
+          start_method: method
+        });
+      }
     }
 
-    trackEvent("idea_submitted", {
-      submission_source: source,
-      idea_length: idea.length,
-      used_example_idea: usedExampleIdea ? "yes" : "no"
-    });
+    function parseNumericScore(scoreText) {
+      if (!scoreText) return null;
+      const match = String(scoreText).match(/(\d+(\.\d+)?)/);
+      return match ? Number(match[1]) : null;
+    }
 
-    setLoadingState();
+    function resetEvaluationTracking() {
+      if (evaluationCompletedTimeout) {
+        clearTimeout(evaluationCompletedTimeout);
+        evaluationCompletedTimeout = null;
+      }
+    }
 
-    setTimeout(() => {
-      const key = normalizeText(idea);
-      const output = demoOutputs[key] || buildFallbackOutput(idea);
-      showOutput(output);
-    }, 1200);
-  }
+    function scheduleEvaluationCompleted(data) {
+      resetEvaluationTracking();
 
-  function shareScore() {
-    const idea = ideaInput.value.trim() || "my startup idea";
-    const score = overallScoreValue.textContent || "7.0 / 10";
+      evaluationCompletedTimeout = setTimeout(() => {
+        const numericScore = parseNumericScore(data.overall);
 
-    trackEvent("share_score_clicked", {
-      has_score: overallScore.style.display === "block" ? "yes" : "no",
-      score_value: parseNumericScore(score)
-    });
+        trackEvent("evaluation_completed", {
+          submission_source: lastSubmissionSource,
+          used_example_idea: usedExampleIdea ? "yes" : "no",
+          idea_length: ideaInput.value.trim().length,
+          overall_score: numericScore,
+          score_visible: overallScore.style.display === "block" ? "yes" : "no"
+        });
+      }, 1400);
+    }
 
-    const text =
+    const demoOutputs = {
+      "ai tool that helps freelancers manage invoices": {
+        planTitle: "Freelancer invoicing idea preview",
+        steps: [
+          "Estimate whether invoicing is painful enough to pay for.",
+          "Check whether existing tools already solve the core workflow.",
+          "Look for a sharper niche angle."
+        ],
+        reportTitle: "Preview Evaluation",
+        report: `Idea
+AI tool that helps freelancers manage invoices
+
+Preview verdict
+There is likely real demand here, but this looks like a crowded category unless the product solves one very specific invoicing pain point.
+
+What stands out
+• The user problem is easy to understand
+• There may be willingness to pay
+• Differentiation is the main risk
+
+Unlock the full evaluation to see:
+• build / test / avoid recommendation
+• biggest risks
+• monetization breakdown
+• what I would do next`,
+        scores: {
+          "Demand Signal": "8 / 10",
+          "Crowding Risk": "6 / 10",
+          "Potential": "7 / 10"
+        },
+        overall: "7.1 / 10"
+      },
+      "ai legal assistant for small businesses": {
+        planTitle: "Legal assistant idea preview",
+        steps: [
+          "Check whether the need is frequent enough to pay for.",
+          "Evaluate trust barriers.",
+          "Look for a narrow wedge."
+        ],
+        reportTitle: "Preview Evaluation",
+        report: `Idea
+AI legal assistant for small businesses
+
+Preview verdict
+The pain may be real, but trust is likely the biggest challenge. This idea becomes stronger if it focuses on one specific workflow instead of broad legal help.
+
+What stands out
+• Real demand may exist
+• Trust and positioning matter a lot
+• A niche angle is probably required
+
+Unlock the full evaluation to see:
+• build / test / avoid recommendation
+• biggest risks
+• monetization breakdown
+• what I would do next`,
+        scores: {
+          "Demand Signal": "7 / 10",
+          "Trust Difficulty": "4 / 10",
+          "Potential": "6 / 10"
+        },
+        overall: "6.5 / 10"
+      },
+      "ai app that helps restaurants forecast inventory": {
+        planTitle: "Restaurant inventory idea preview",
+        steps: [
+          "Check whether inventory mistakes are expensive enough to solve.",
+          "Review operational complexity.",
+          "Evaluate usability for busy owners."
+        ],
+        reportTitle: "Preview Evaluation",
+        report: `Idea
+AI app that helps restaurants forecast inventory
+
+Preview verdict
+This looks more promising than most ideas because the problem appears operational and expensive. The biggest challenge is making it simple enough to adopt.
+
+What stands out
+• The problem may be painful enough to pay for
+• Operational value is clearer than in many AI ideas
+• Simplicity and adoption are key risks
+
+Unlock the full evaluation to see:
+• build / test / avoid recommendation
+• biggest risks
+• monetization breakdown
+• what I would do next`,
+        scores: {
+          "Demand Signal": "8 / 10",
+          "Adoption Risk": "5 / 10",
+          "Potential": "8 / 10"
+        },
+        overall: "7.3 / 10"
+      },
+      "ai platform for startup validation": {
+        planTitle: "Startup validation idea preview",
+        steps: [
+          "Check whether founder uncertainty is strong enough to monetize.",
+          "Compare against generic AI tools.",
+          "Evaluate clarity of positioning."
+        ],
+        reportTitle: "Preview Evaluation",
+        report: `Idea
+AI platform for startup validation
+
+Preview verdict
+There is likely demand here, but the positioning has to be extremely sharp. The biggest risk is sounding too similar to generic AI research tools.
+
+What stands out
+• The founder pain is real
+• Messaging will determine conversion
+• Structured output is a major advantage
+
+Unlock the full evaluation to see:
+• build / test / avoid recommendation
+• biggest risks
+• monetization breakdown
+• what I would do next`,
+        scores: {
+          "Demand Signal": "8 / 10",
+          "Positioning Risk": "7 / 10",
+          "Potential": "8 / 10"
+        },
+        overall: "7.4 / 10"
+      }
+    };
+
+    function normalizeText(value) {
+      return value.trim().toLowerCase();
+    }
+
+    function setLoadingState() {
+      statusText.textContent = "Evaluating idea...";
+      planTitle.textContent = "Building founder decision plan";
+      planSteps.innerHTML = "<li>Reviewing the idea and generating a short preview.</li>";
+      reportTitle.textContent = "Generating preview";
+      reportContent.textContent = "Zyqerion is generating a short founder-style preview...";
+      scoreGrid.innerHTML = "";
+      overallScore.style.display = "none";
+      shareScoreBtn.style.display = "none";
+    }
+
+    function renderScores(scores, overall) {
+      scoreGrid.innerHTML = Object.entries(scores).map(([label, value]) => {
+        return `
+          <div class="score-row">
+            <span>${label}</span>
+            <strong>${value}</strong>
+          </div>
+        `;
+      }).join("");
+
+      overallScoreValue.textContent = overall;
+      overallScore.style.display = "block";
+    }
+
+    function showOutput(data) {
+      statusText.textContent = "Preview ready";
+      planTitle.textContent = data.planTitle;
+      planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
+      reportTitle.textContent = data.reportTitle;
+      reportContent.textContent = data.report;
+      renderScores(data.scores, data.overall);
+
+      const fullEvalCta = document.getElementById("fullEvalCta");
+      if (fullEvalCta) {
+        fullEvalCta.style.display = "block";
+      }
+
+      if (shareScoreBtn) {
+        shareScoreBtn.style.display = "inline-flex";
+      }
+
+      scheduleEvaluationCompleted(data);
+    }
+
+    function buildFallbackOutput(idea) {
+      return {
+        planTitle: "Custom founder evaluation preview",
+        steps: [
+          "Clarify the user, problem, and product angle.",
+          "Estimate demand, competition, and positioning risk.",
+          "Return a short founder-style preview."
+        ],
+        reportTitle: "Preview Evaluation",
+        report: `Idea
+${idea}
+
+Preview verdict
+This idea may be worth exploring, but the real answer depends on how strong the user problem is and whether people would actually pay to solve it.
+
+What stands out
+• The idea needs sharper validation
+• The main risk is weak demand or unclear positioning
+• A narrower angle would likely help
+
+Unlock the full evaluation to see:
+• build / test / avoid recommendation
+• biggest risks
+• monetization breakdown
+• what I would do next`,
+        scores: {
+          "Demand Signal": "7 / 10",
+          "Positioning Risk": "6 / 10",
+          "Potential": "7 / 10"
+        },
+        overall: "6.8 / 10"
+      };
+    }
+
+    function runDemo(source = "manual") {
+      const idea = ideaInput.value.trim();
+
+      trackDemoStarted(source);
+      lastSubmissionSource = source;
+
+      if (!idea) {
+        statusText.textContent = "Waiting for idea";
+        planTitle.textContent = "No idea entered";
+        planSteps.innerHTML = "<li>Add a startup idea to continue.</li>";
+        reportTitle.textContent = "No preview yet";
+        reportContent.textContent = "Enter an idea to preview your startup score and short evaluation summary.";
+        scoreGrid.innerHTML = "";
+        overallScore.style.display = "none";
+        shareScoreBtn.style.display = "none";
+        resetEvaluationTracking();
+        return;
+      }
+
+      trackEvent("idea_submitted", {
+        submission_source: source,
+        idea_length: idea.length,
+        used_example_idea: usedExampleIdea ? "yes" : "no"
+      });
+
+      setLoadingState();
+
+      setTimeout(() => {
+        const key = normalizeText(idea);
+        const output = demoOutputs[key] || buildFallbackOutput(idea);
+        showOutput(output);
+      }, 1200);
+    }
+
+    function shareScore() {
+      const idea = ideaInput.value.trim() || "my startup idea";
+      const score = overallScoreValue.textContent || "7.0 / 10";
+
+      trackEvent("share_score_clicked", {
+        has_score: overallScore.style.display === "block" ? "yes" : "no",
+        score_value: parseNumericScore(score)
+      });
+
+      const text =
 `I tested my startup idea with Zyqerion.
 
 Idea: ${idea}
@@ -917,91 +879,93 @@ Worth Building Score: ${score}
 Try it yourself:
 https://zyqerion.ai`;
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text)
-        .then(() => {
-          alert("Result copied. Paste it on X, LinkedIn, or anywhere you want.");
-        })
-        .catch(() => {
-          alert(text);
-        });
-    } else {
-      alert(text);
-    }
-  }
-
-  function fillIdeaFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    const urlIdea = params.get("idea");
-
-    if (urlIdea && ideaInput) {
-      ideaInput.value = urlIdea;
-      usedExampleIdea = false;
-      runDemo("url_param");
-    }
-  }
-
-  // -----------------------------
-  // Event listeners
-  // -----------------------------
-  if (ideaInput) {
-    ideaInput.addEventListener("focus", () => {
-      trackDemoStarted("input_focus");
-
-      if (!inputFocusedTracked) {
-        inputFocusedTracked = true;
-        trackEvent("idea_input_focused", {
-          field_id: "ideaInput"
-        });
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => {
+            alert("Result copied. Paste it on X, LinkedIn, or anywhere you want.");
+          })
+          .catch(() => {
+            alert(text);
+          });
+      } else {
+        alert(text);
       }
-    }, { once: true });
-  }
-
-  runDemoBtn.addEventListener("click", () => runDemo("run_button"));
-
-  clearBtn.addEventListener("click", () => {
-    ideaInput.value = "";
-    usedExampleIdea = false;
-    lastSubmissionSource = "manual";
-    resetEvaluationTracking();
-
-    const fullEvalCta = document.getElementById("fullEvalCta");
-    if (fullEvalCta) {
-      fullEvalCta.style.display = "none";
     }
-    trackEvent("idea_cleared", {
-      previous_score_visible: overallScore.style.display === "block" ? "yes" : "no"
-    });
 
-    statusText.textContent = "Ready";
-    planTitle.textContent = "Waiting for idea";
-    planSteps.innerHTML = "<li>Your founder decision plan will appear here.</li>";
-    reportTitle.textContent = "No evaluation yet";
-    reportContent.textContent = "Run the demo to see a founder-style evaluation preview.";
-    scoreGrid.innerHTML = "";
-    overallScore.style.display = "none";
-  });
+    function fillIdeaFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const urlIdea = params.get("idea");
 
-  promptChips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      ideaInput.value = chip.textContent.trim();
-      usedExampleIdea = true;
+      if (urlIdea && ideaInput) {
+        ideaInput.value = urlIdea;
+        usedExampleIdea = false;
+        runDemo("url_param");
+      }
+    }
 
-      trackEvent("example_idea_used", {
-        example_name: normalizeText(chip.textContent.trim()).slice(0, 60)
+    if (ideaInput) {
+      ideaInput.addEventListener("focus", () => {
+        trackDemoStarted("input_focus");
+
+        if (!inputFocusedTracked) {
+          inputFocusedTracked = true;
+          trackEvent("idea_input_focused", {
+            field_id: "ideaInput"
+          });
+        }
+      }, { once: true });
+    }
+
+    runDemoBtn.addEventListener("click", () => runDemo("run_button"));
+
+    clearBtn.addEventListener("click", () => {
+      ideaInput.value = "";
+      usedExampleIdea = false;
+      lastSubmissionSource = "manual";
+      resetEvaluationTracking();
+
+      const fullEvalCta = document.getElementById("fullEvalCta");
+      if (fullEvalCta) {
+        fullEvalCta.style.display = "none";
+      }
+
+      if (shareScoreBtn) {
+        shareScoreBtn.style.display = "none";
+      }
+
+      trackEvent("idea_cleared", {
+        previous_score_visible: overallScore.style.display === "block" ? "yes" : "no"
       });
 
-      runDemo("example_chip");
+      statusText.textContent = "Ready";
+      planTitle.textContent = "Waiting for idea";
+      planSteps.innerHTML = "<li>Your founder decision plan will appear here.</li>";
+      reportTitle.textContent = "No preview yet";
+      reportContent.textContent = "Run the demo to preview your startup score and a short evaluation summary.";
+      scoreGrid.innerHTML = "";
+      overallScore.style.display = "none";
     });
-  });
 
-  if (shareScoreBtn) {
-    shareScoreBtn.addEventListener("click", shareScore);
-  }
+    promptChips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        ideaInput.value = chip.textContent.trim();
+        usedExampleIdea = true;
 
-  window.addEventListener("load", () => {
-    fillIdeaFromUrl();
-  });
-</script> 
+        trackEvent("example_idea_used", {
+          example_name: normalizeText(chip.textContent.trim()).slice(0, 60)
+        });
+
+        runDemo("example_chip");
+      });
+    });
+
+    if (shareScoreBtn) {
+      shareScoreBtn.addEventListener("click", shareScore);
+    }
+
+    window.addEventListener("load", () => {
+      fillIdeaFromUrl();
+    });
+  </script>
 </body>
 </html>
