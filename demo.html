@@ -444,13 +444,17 @@
           >AI tool that helps freelancers manage invoices</textarea>
 
           <div class="actions">
-            <button class="btn btn-primary" id="runDemoBtn" type="button">Run preview</button>
+            <button class="btn btn-primary" id="runDemoBtn" type="button">Run my idea  </button>
             <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
           </div>
 
           <div class="helper-text">
-            Preview your idea instantly. Full founder evaluations are reviewed manually and delivered within 24 hours.
-          </div>
+  Preview your idea instantly. Full founder evaluations are reviewed manually and delivered within 24 hours.
+</div>
+
+<div class="helper-text">
+  Get a quick signal before you waste months building the wrong thing.
+</div>
 
           <div class="label" style="margin-top:22px;">Try an example</div>
           <div class="prompt-grid">
@@ -498,7 +502,7 @@
                 class="btn btn-primary"
                 style="width:100%; text-align:center;"
               >
-                Unlock Full Founder Evaluation — $9
+                Get My Full Founder Evaluation — $9
               </a>
               <div style="margin-top:10px; color: var(--muted); font-size:0.92rem;">
                 Personally reviewed. Full report delivered within 24 hours.
@@ -749,7 +753,7 @@ Unlock the full evaluation to see:
     }
 
     function setLoadingState() {
-      statusText.textContent = "Evaluating idea...";
+      statusText.textContent = "Analyzing demand, risks, and viability...";
       planTitle.textContent = "Building founder decision plan";
       planSteps.innerHTML = "<li>Reviewing the idea and generating a short preview.</li>";
       reportTitle.textContent = "Generating preview";
@@ -774,7 +778,7 @@ Unlock the full evaluation to see:
     }
 
     function showOutput(data) {
-      statusText.textContent = "Preview ready";
+      statusText.textContent = "Preview complete";
       planTitle.textContent = data.planTitle;
       planSteps.innerHTML = data.steps.map(step => `<li>${step}</li>`).join("");
       reportTitle.textContent = data.reportTitle;
