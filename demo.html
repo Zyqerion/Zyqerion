@@ -133,7 +133,7 @@
     }
 
     .hero {
-      padding: 72px 0 28px;
+      padding: 72px 0 20px;
       text-align: center;
     }
 
@@ -166,8 +166,14 @@
       font-size: 1.05rem;
     }
 
+    .hero-microcopy {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #c8ffd2;
+    }
+
     .demo-section {
-      padding: 26px 0 42px;
+      padding: 18px 0 42px;
     }
 
     .demo-layout {
@@ -203,9 +209,101 @@
       color: var(--muted);
     }
 
+    .demo-start-summary {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(57,255,92,0.06);
+      border: 1px solid rgba(57,255,92,0.14);
+      color: #ddffe5;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .demo-start-summary strong {
+      color: #ffffff;
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .example-helper {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .prompt-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 0;
+    }
+
+    .prompt-chip {
+      width: 100%;
+      text-align: left;
+      padding: 13px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(86,255,120,0.12);
+      color: var(--text);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .prompt-chip:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(86,255,120,0.18);
+    }
+
+    .prompt-chip strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+
+    .prompt-chip span {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .input-wrap {
+      margin-top: 18px;
+    }
+
+    .input-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .input-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .input-hint {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
     textarea {
       width: 100%;
-      min-height: 180px;
+      min-height: 170px;
       padding: 14px 16px;
       background: rgba(255,255,255,0.045);
       color: var(--text);
@@ -214,7 +312,7 @@
       font: inherit;
       outline: none;
       resize: vertical;
-      margin-top: 14px;
+      margin-top: 0;
     }
 
     textarea::placeholder {
@@ -239,28 +337,9 @@
       font-size: 0.92rem;
     }
 
-    .prompt-grid {
-      display: grid;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .prompt-chip {
-      width: 100%;
-      text-align: left;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(86,255,120,0.12);
-      color: var(--text);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font: inherit;
-    }
-
-    .prompt-chip:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(86,255,120,0.18);
+    .helper-text strong {
+      color: #ffffff;
+      font-weight: 600;
     }
 
     .output-shell {
@@ -423,10 +502,13 @@
   <section class="hero">
     <div class="container">
       <div class="eyebrow">Founder decision engine</div>
-      <h1>Get a preview of your founder evaluation</h1>
+      <h1>Validate your startup idea before you spend months building it</h1>
       <p>
-        See how Zyqerion scores your idea — then unlock the full decision before you spend time building it.
+        Enter your idea and get a fast founder-style signal on demand, positioning risk, and whether it looks worth pursuing.
       </p>
+      <div class="hero-microcopy">
+        Best for early-stage ideas before you commit serious time.
+      </div>
     </div>
   </section>
 
@@ -435,33 +517,62 @@
       <div class="demo-layout">
         <div class="card">
           <div class="label">Startup idea</div>
-          <h3>Describe your idea</h3>
-          <p>Get a quick preview before deciding whether to unlock the full evaluation.</p>
+          <h3>Start with your idea or try an example</h3>
+          <p>
+            The goal is simple: help you decide whether this looks worth building before you go too far.
+          </p>
 
-          <textarea
-            id="ideaInput"
-            placeholder="AI tool that helps freelancers manage invoices"
-          >AI tool that helps freelancers manage invoices</textarea>
-
-          <div class="actions">
-            <button class="btn btn-primary" id="runDemoBtn" type="button">Run my idea →</button>
-            <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+          <div class="demo-start-summary">
+            <strong>You’ll get:</strong> a quick preview score, a short founder-style evaluation, and a clearer signal on whether the idea looks promising or risky.
           </div>
 
-          <div class="helper-text">
-  Preview your idea instantly. Full founder evaluations are reviewed manually and delivered within 24 hours.
-</div>
+          <div class="example-header">
+            <div class="label" style="margin:0;">Try an example</div>
+            <div class="example-helper">Fastest way to see how it works</div>
+          </div>
 
-<div class="helper-text">
-  Get a quick signal before you waste months building the wrong thing.
-</div>
-
-          <div class="label" style="margin-top:22px;">Try an example</div>
           <div class="prompt-grid">
-            <button class="prompt-chip" type="button">AI tool that helps freelancers manage invoices</button>
-            <button class="prompt-chip" type="button">AI legal assistant for small businesses</button>
-            <button class="prompt-chip" type="button">AI app that helps restaurants forecast inventory</button>
-            <button class="prompt-chip" type="button">AI platform for startup validation</button>
+            <button class="prompt-chip" type="button">
+              <strong>AI SaaS for freelancers</strong>
+              <span>Helps freelancers manage invoices and cash flow</span>
+            </button>
+            <button class="prompt-chip" type="button">
+              <strong>AI legal assistant</strong>
+              <span>Helps small businesses handle simple legal workflows</span>
+            </button>
+            <button class="prompt-chip" type="button">
+              <strong>Restaurant forecasting app</strong>
+              <span>Helps restaurants predict inventory demand</span>
+            </button>
+            <button class="prompt-chip" type="button">
+              <strong>Startup validation platform</strong>
+              <span>Helps founders test whether ideas are worth building</span>
+            </button>
+          </div>
+
+          <div class="input-wrap">
+            <div class="input-top-row">
+              <div class="input-title">Your idea</div>
+              <div class="input-hint">Be specific if you can</div>
+            </div>
+
+            <textarea
+              id="ideaInput"
+              placeholder="Example: AI SaaS that helps indie hackers validate startup ideas before building"
+            ></textarea>
+
+            <div class="actions">
+              <button class="btn btn-primary" id="runDemoBtn" type="button">Evaluate idea →</button>
+              <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+            </div>
+
+            <div class="helper-text">
+              <strong>Tip:</strong> mention who it’s for, what it does, and the problem it solves.
+            </div>
+
+            <div class="helper-text">
+              Preview your idea instantly. Full founder evaluations are reviewed manually and delivered within 24 hours.
+            </div>
           </div>
         </div>
 
@@ -492,28 +603,29 @@
             </div>
 
             <button class="btn btn-secondary" id="shareScoreBtn" type="button" style="margin-top:14px; display:none;">
-  Share my startup score
-</button>
+              Share my startup score
+            </button>
 
-<div id="fullEvalCta" style="margin-top:14px; display:none;">
-  <a
-    id="fullEvalBtn"
-    href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
-    class="btn btn-primary"
-    style="width:100%; text-align:center;"
-  >
-    Get My Full Founder Evaluation — $9
-  </a>
-  <div style="margin-top:10px; color: var(--muted); font-size:0.92rem;">
-    Personally reviewed. Full report delivered within 24 hours.
-  </div>
-  <div style="margin-top:6px; color: var(--muted); font-size:0.88rem;">
-    If it’s not useful, I’ll refund you.
-  </div>
-  <div style="margin-top:6px; color: var(--muted); font-size:0.88rem;">
-    Beta pricing — likely increasing soon.
-  </div>
-</div>
+            <div id="fullEvalCta" style="margin-top:14px; display:none;">
+              <a
+                id="fullEvalBtn"
+                href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
+                class="btn btn-primary"
+                style="width:100%; text-align:center;"
+              >
+                Get My Full Founder Evaluation — $9
+              </a>
+              <div style="margin-top:10px; color: var(--muted); font-size:0.92rem;">
+                Personally reviewed. Full report delivered within 24 hours.
+              </div>
+              <div style="margin-top:6px; color: var(--muted); font-size:0.88rem;">
+                If it’s not useful, I’ll refund you.
+              </div>
+              <div style="margin-top:6px; color: var(--muted); font-size:0.88rem;">
+                Beta pricing — likely increasing soon.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -571,6 +683,13 @@
     let usedExampleIdea = false;
     let lastSubmissionSource = "manual";
     let evaluationCompletedTimeout = null;
+
+    const exampleIdeaMap = {
+      "ai saas for freelancers": "AI tool that helps freelancers manage invoices",
+      "ai legal assistant": "AI legal assistant for small businesses",
+      "restaurant forecasting app": "AI app that helps restaurants forecast inventory",
+      "startup validation platform": "AI platform for startup validation"
+    };
 
     function trackEvent(eventName, params = {}) {
       if (typeof gtag === "function") {
@@ -763,6 +882,11 @@ Unlock the full evaluation to see:
       scoreGrid.innerHTML = "";
       overallScore.style.display = "none";
       shareScoreBtn.style.display = "none";
+
+      const fullEvalCta = document.getElementById("fullEvalCta");
+      if (fullEvalCta) {
+        fullEvalCta.style.display = "none";
+      }
     }
 
     function renderScores(scores, overall) {
@@ -849,6 +973,11 @@ Unlock the full evaluation to see:
         overallScore.style.display = "none";
         shareScoreBtn.style.display = "none";
         resetEvaluationTracking();
+
+        const fullEvalCta = document.getElementById("fullEvalCta");
+        if (fullEvalCta) {
+          fullEvalCta.style.display = "none";
+        }
         return;
       }
 
@@ -954,11 +1083,14 @@ https://zyqerion.ai`;
 
     promptChips.forEach((chip) => {
       chip.addEventListener("click", () => {
-        ideaInput.value = chip.textContent.trim();
+        const label = chip.querySelector("strong")?.textContent?.trim() || chip.textContent.trim();
+        const mappedIdea = exampleIdeaMap[normalizeText(label)] || chip.textContent.trim();
+
+        ideaInput.value = mappedIdea;
         usedExampleIdea = true;
 
         trackEvent("example_idea_used", {
-          example_name: normalizeText(chip.textContent.trim()).slice(0, 60)
+          example_name: normalizeText(label).slice(0, 60)
         });
 
         runDemo("example_chip");
