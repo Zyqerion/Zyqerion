@@ -951,7 +951,7 @@
           </p>
 
           <div class="demo-start-summary">
-            <strong>You’ll get:</strong> a verdict, a confidence level, what looks strongest, what could kill the idea, and the next best actions.
+            <strong>You’ll get:</strong> a verdict, a confidence level, what looks strongest, what could kill the idea, the next best actions, and distribution risk.
           </div>
 
           <div class="example-header">
@@ -1086,6 +1086,22 @@
 
           <div class="grid-2">
             <div class="mini-card">
+              <h4>Distribution risk</h4>
+              <ul id="distributionList" class="list">
+                <li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h4>Suggested first channels</h4>
+              <ul id="distributionChannelsList" class="list">
+                <li><strong>No channels yet</strong><span>Your likely first places to find users will appear here.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
               <h4>Best next moves</h4>
               <div id="bestMoves" class="steps">
                 <div class="step">
@@ -1116,7 +1132,7 @@
             <h4>Want the real founder decision, not just the teaser?</h4>
             <p>
               The demo gives you the signal. The full evaluation gives you the deeper call:
-              what’s weak, what evidence is missing, what to test first, and whether this deserves more of your time.
+              what’s weak, what evidence is missing, what to test first, whether distribution is realistic, and whether this deserves more of your time.
             </p>
 
             <div class="compare">
@@ -1125,6 +1141,7 @@
                 <ul>
                   <li>Fast proceed / refine / drop signal</li>
                   <li>Top risks surfaced</li>
+                  <li>Distribution risk snapshot</li>
                   <li>Short validation sprint</li>
                 </ul>
               </div>
@@ -1134,6 +1151,7 @@
                 <ul>
                   <li>Deeper demand + positioning breakdown</li>
                   <li>Sharper founder recommendation</li>
+                  <li>Distribution and first-user angle</li>
                   <li>What I’d test next if this were my idea</li>
                   <li>Personally reviewed report</li>
                 </ul>
@@ -1240,6 +1258,8 @@
     const scoreGrid = document.getElementById("scoreGrid");
     const strengthsList = document.getElementById("strengthsList");
     const risksList = document.getElementById("risksList");
+    const distributionList = document.getElementById("distributionList");
+    const distributionChannelsList = document.getElementById("distributionChannelsList");
     const bestMoves = document.getElementById("bestMoves");
     const validationSprint = document.getElementById("validationSprint");
     const shareScoreBtn = document.getElementById("shareScoreBtn");
@@ -1306,7 +1326,8 @@
           audience_length: audienceInput.value.trim().length,
           problem_length: problemInput.value.trim().length,
           overall_score: data.score,
-          verdict: data.verdict
+          verdict: data.verdict,
+          distribution_risk_level: data.distributionRisk.level
         });
       }, 1200);
     }
@@ -1361,13 +1382,13 @@
     }
 
     function showLoadingState() {
-      statusText.textContent = "Analyzing demand, positioning, and decision quality...";
+      statusText.textContent = "Analyzing demand, positioning, decision quality, and distribution...";
       decisionBadge.className = "badge warn";
       decisionBadge.textContent = "Analyzing...";
       confidenceBadge.className = "badge";
       confidenceBadge.textContent = "Confidence: calculating";
       decisionTitle.textContent = "Building your founder decision";
-      decisionCopy.textContent = "Zyqerion is scoring clarity, pain, urgency, and wedge strength.";
+      decisionCopy.textContent = "Zyqerion is scoring clarity, pain, urgency, wedge strength, and distribution risk.";
       overallScoreValue.textContent = "…";
       scoreQualifier.textContent = "Generating signal";
       meterFill.style.width = "0%";
@@ -1375,6 +1396,9 @@
 
       strengthsList.innerHTML = `<li><strong>Scanning your angle</strong><span>Looking for pain, urgency, and wedge clarity.</span></li>`;
       risksList.innerHTML = `<li><strong>Scanning risks</strong><span>Looking for weak demand, vague ICP, and weak differentiation.</span></li>`;
+      distributionList.innerHTML = `<li><strong>Scanning distribution</strong><span>Looking for how easy it may be to reach the first 10 users.</span></li>`;
+      distributionChannelsList.innerHTML = `<li><strong>Scanning channels</strong><span>Looking for where these people may already be concentrated.</span></li>`;
+
       bestMoves.innerHTML = `
         <div class="step">
           <div class="step-num">1</div>
@@ -1410,6 +1434,8 @@
       let score = 6.4;
       let strengths = [];
       let risks = [];
+      let distributionListItems = [];
+      let distributionChannelsItems = [];
       let bestMovesList = [];
       let sprint = [];
       let metrics = {
@@ -1421,6 +1447,13 @@
       let headline = "Interesting direction, but not strong enough to commit build time yet.";
       let summary = "The idea sounds plausible, but the signal is not sharp enough yet. The biggest question is whether the pain is strong and specific enough for people to act now.";
       let matchedTemplate = "fallback";
+      let distributionRisk = {
+        level: "MEDIUM",
+        score: 5,
+        summary: "Some routes to early users may exist, but they are not obvious enough yet.",
+        reasons: [],
+        channels: []
+      };
 
       const hasAi = /\bai\b|\bllm\b|\bagent\b|\bcopilot\b/.test(combined);
       const hasFounder = /founder|startup|indie hacker|indiehackers|saas founder/.test(combined);
@@ -1452,6 +1485,21 @@
           { title: "Data quality dependency", body: "Forecasting gets weaker fast if input data is messy or incomplete." },
           { title: "Competition from existing POS tools", body: "You need a sharper wedge than ‘AI forecasting’ alone." }
         ];
+        distributionRisk = {
+          level: "MEDIUM",
+          score: 5,
+          summary: "Restaurant owners are identifiable, but early distribution may require more direct outreach than self-serve channels.",
+          reasons: [
+            "Users are clear, but not always concentrated in one strong online channel",
+            "Many owners are busy and harder to reach reactively",
+            "Direct outreach or partnerships may work better than broad content"
+          ],
+          channels: [
+            "Restaurant owner communities",
+            "Industry associations",
+            "Direct outreach"
+          ]
+        };
         bestMovesList = [
           { title: "Narrow to one restaurant segment", body: "Pick one operator profile first, such as independent restaurants with tight margins." },
           { title: "Prove one concrete economic outcome", body: "Lead with waste reduction, fewer stockouts, or improved purchasing accuracy." },
@@ -1483,6 +1531,21 @@
           { title: "Positioning is too broad", body: "‘AI legal assistant’ sounds generic unless you narrow it hard." },
           { title: "Liability anxiety kills adoption", body: "Even useful output may not be used if people fear mistakes." }
         ];
+        distributionRisk = {
+          level: "MEDIUM",
+          score: 6,
+          summary: "Small businesses are reachable, but the audience is broad and fragmented, and trust-heavy categories make cold reach harder.",
+          reasons: [
+            "Audience is broad unless narrowed to one exact workflow",
+            "Trust-heavy categories reduce response rates",
+            "No single obvious gathering place for all buyers"
+          ],
+          channels: [
+            "LinkedIn outreach",
+            "Small business newsletters",
+            "Niche founder communities"
+          ]
+        };
         bestMovesList = [
           { title: "Choose one narrow workflow", body: "Start with a small, frequent, low-risk problem instead of general legal help." },
           { title: "Reduce perceived risk in messaging", body: "Position the product as support, review, or preparation rather than replacement." },
@@ -1514,6 +1577,21 @@
           { title: "Generic AI framing", body: "Adding AI does not automatically make the offer more compelling." },
           { title: "Weak wedge", body: "You need one painful, urgent workflow where current tools feel inadequate." }
         ];
+        distributionRisk = {
+          level: "LOW",
+          score: 3,
+          summary: "Freelancers are relatively easy to identify and reach, but the challenge is standing out in a crowded space.",
+          reasons: [
+            "Target user is clear and easy to describe",
+            "Freelancers gather in obvious online spaces",
+            "The problem is often discussed publicly"
+          ],
+          channels: [
+            "Freelancer communities",
+            "YouTube creators for freelancers",
+            "Search-driven content"
+          ]
+        };
         bestMovesList = [
           { title: "Pick one freelancer type first", body: "Writers, designers, consultants, and developers have different pain patterns." },
           { title: "Focus on a painful money moment", body: "Examples: late payments, follow-ups, forecasting gaps, or invoice disputes." },
@@ -1545,6 +1623,21 @@
           { title: "Trust depends on output quality", body: "Founders need to feel the engine says something sharper than what ChatGPT already gives them." },
           { title: "Retention depends on next-step pull", body: "Interesting output is not enough; the result must create a natural reason to continue." }
         ];
+        distributionRisk = {
+          level: "LOW",
+          score: 4,
+          summary: "Founders are highly visible online and gather in obvious places, so early distribution is relatively straightforward.",
+          reasons: [
+            "Target user is easy to identify",
+            "Founders gather in concentrated public communities",
+            "The problem is already openly discussed"
+          ],
+          channels: [
+            "Indie Hackers",
+            "X / startup Twitter",
+            "Founder communities"
+          ]
+        };
         bestMovesList = [
           { title: "Lean hard into decision clarity", body: "Sell proceed / refine / drop — not generic analysis." },
           { title: "Make the result feel more consequential", body: "Use stronger language about what the founder should do next." },
@@ -1596,6 +1689,62 @@
           { title: "Differentiation is unclear", body: "Users need a reason to care about this instead of existing tools or habits." }
         ];
 
+        const broadAudience = !audience || audience.length < 8 || /everyone|businesses|people|teams|companies/.test(audience);
+        const hiddenBuyer = /enterprise|small business|sme|teams|operators|owners/.test(combined);
+        const founderish = /founder|creator|developer|freelancer/.test(combined);
+
+        let distributionLevel = "MEDIUM";
+        let distributionScore = 5;
+        let distributionSummary = "This idea may have demand, but it is not yet obvious how easy it will be to find and reach the first 10 users.";
+        let distributionReasons = [
+          "Target audience may still be too broad",
+          "Distribution channels are not yet obvious",
+          "Would benefit from clearer user concentration"
+        ];
+        let distributionChannels = [
+          "Niche communities",
+          "Direct outreach",
+          "Problem-specific search content"
+        ];
+
+        if (founderish && !broadAudience) {
+          distributionLevel = "LOW";
+          distributionScore = 4;
+          distributionSummary = "The first users may be relatively easy to identify because the target user is visible and reachable online.";
+          distributionReasons = [
+            "Target user is reasonably specific",
+            "Likely online communities exist",
+            "Problem language is likely searchable"
+          ];
+          distributionChannels = [
+            "Reddit niche communities",
+            "X / creator ecosystem",
+            "Search-driven content"
+          ];
+        } else if (hiddenBuyer || broadAudience) {
+          distributionLevel = "HIGH";
+          distributionScore = 7;
+          distributionSummary = "Even if the problem is real, reaching the first users may be hard because the audience looks fragmented or not concentrated in one obvious place.";
+          distributionReasons = [
+            "Target users are broad or fragmented",
+            "No clear gathering place is implied",
+            "Early reach may depend on manual outbound"
+          ];
+          distributionChannels = [
+            "Manual outbound",
+            "LinkedIn niche search",
+            "Industry-specific communities"
+          ];
+        }
+
+        distributionRisk = {
+          level: distributionLevel,
+          score: distributionScore,
+          summary: distributionSummary,
+          reasons: distributionReasons,
+          channels: distributionChannels
+        };
+
         bestMovesList = [
           { title: "Define one exact user first", body: "Narrow the ICP before improving the product idea." },
           { title: "Name one painful job to be done", body: "The product should solve one frustrating moment, not a broad ambition." },
@@ -1609,6 +1758,22 @@
         ];
       }
 
+      distributionListItems = [
+        {
+          title: `${distributionRisk.level} distribution risk`,
+          body: distributionRisk.summary
+        },
+        ...distributionRisk.reasons.map(reason => ({
+          title: "Why this may be true",
+          body: reason
+        }))
+      ];
+
+      distributionChannelsList = distributionRisk.channels.map(channel => ({
+        title: channel,
+        body: "Potential early channel to find the first relevant users."
+      }));
+
       return {
         matchedTemplate,
         score,
@@ -1619,6 +1784,9 @@
         metrics,
         strengths,
         risks,
+        distributionRisk,
+        distributionListItems,
+        distributionChannelsList,
         bestMovesList,
         sprint
       };
@@ -1643,6 +1811,8 @@
       renderScoreGrid(data.metrics);
       renderList(strengthsList, data.strengths);
       renderList(risksList, data.risks);
+      renderList(distributionList, data.distributionListItems);
+      renderList(distributionChannelsList, data.distributionChannelsList);
       renderSteps(bestMoves, data.bestMovesList);
       renderSteps(validationSprint, data.sprint);
 
@@ -1672,6 +1842,10 @@
         scoreQualifier.textContent = "No score yet";
         meterFill.style.width = "0%";
         scoreGrid.innerHTML = "";
+        strengthsList.innerHTML = `<li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>`;
+        risksList.innerHTML = `<li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>`;
+        distributionList.innerHTML = `<li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>`;
+        distributionChannelsList.innerHTML = `<li><strong>No channels yet</strong><span>Your likely first places to find users will appear here.</span></li>`;
         fullEvalCta.style.display = "none";
         stickyCta.classList.remove("visible");
         resetEvaluationTracking();
@@ -1761,6 +1935,8 @@ https://zyqerion.ai/demo.html`;
 
       strengthsList.innerHTML = `<li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>`;
       risksList.innerHTML = `<li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>`;
+      distributionList.innerHTML = `<li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>`;
+      distributionChannelsList.innerHTML = `<li><strong>No channels yet</strong><span>Your likely first places to find users will appear here.</span></li>`;
       bestMoves.innerHTML = `
         <div class="step">
           <div class="step-num">1</div>
@@ -1852,4 +2028,4 @@ https://zyqerion.ai/demo.html`;
     });
   </script>
 </body>
-  </html>
+</html>
