@@ -115,15 +115,36 @@
       gap: 14px;
       padding: 10px 0;
     }
-
+    
     .brand {
       display: flex;
       align-items: center;
       min-width: 0;
+      gap: 4px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    
+     .brand:hover {
+      opacity: 0.85;
+    }
+
+    .back-icon {
+      margin-right: 6px;
+      font-size: 1.1rem;
+      color: var(--accent2);
+      opacity: 0.9;
+    }
+
+    .back-text {
+      margin-left: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 700;
     }
 
     .logo-img {
-      height: 54px;
+      height: 60px;
       width: auto;
       display: block;
       filter: drop-shadow(0 0 10px rgba(57,255,92,0.12));
@@ -865,6 +886,9 @@
     }
 
     @media (max-width: 720px) {
+      .back-text {
+        display: none:
+      }
       .container {
         width: min(var(--max), calc(100% - 24px));
       }
@@ -875,8 +899,8 @@
       }
 
       .logo-img {
-        height: 42px;
-        max-width: 150px;
+        height: 48px;
+        max-width: 170px;
         object-fit: contain;
       }
 
@@ -927,8 +951,8 @@
 
     @media (max-width: 420px) {
       .logo-img {
-        height: 36px;
-        max-width: 124px;
+        height: 42px;
+        max-width: 150px;
       }
 
       .nav-actions .btn {
@@ -951,8 +975,10 @@
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="/" class="brand" aria-label="Zyqerion home">
-        <img src="/zyqerion-logo.png" alt="Zyqerion logo" class="logo-img" />
+      <a href="/" class="brand" aria-label="Back to Zyqerion home">
+  <span class="back-icon">←</span>
+  <img src="/zyqerion-logo.png" alt="Zyqerion logo" class="logo-img" />
+  <span class="back-text">Back</span>
       </a>
 
       <div class="nav-actions">
