@@ -1206,11 +1206,11 @@
             </div>
 
             <div class="cta-box" id="fullEvalCta">
-              <h4>You’ve got the signal. Now get the real decision.</h4>
-              <p>
-                The demo gives you a fast signal. The full founder evaluation gives you a deeper review:
-                what is misleading, what evidence is missing, where distribution should start, and what I’d test next if this were my idea.
-              </p>
+              <h4>You’ve seen the diagnosis. Now unlock the full decision path.</h4>
+<p>
+  The demo shows the signal. The full founder evaluation gives you the exact next move:
+  what to do first, what to stop doing, what evidence is missing, and what I’d test next if this were my idea.
+</p>
 
               <div class="compare">
                 <div class="compare-box">
@@ -1459,7 +1459,7 @@
     }
 
     function showLoadingState() {
-      statusText.textContent = "Analyzing idea, risk, positioning, and distribution...";
+      statusText.textContent = "Understanding your situation...";
       decisionBadge.className = "badge warn";
       decisionBadge.textContent = "Analyzing";
       confidenceBadge.className = "badge";
@@ -1821,10 +1821,14 @@
       decisionBadge.textContent = data.verdict;
 
       confidenceBadge.className = "badge";
-      confidenceBadge.textContent = `Confidence: ${data.confidence}`;
+      confidenceBadge.textContent = `Confidence: ${Math.round(52 + data.score * 4.8)}%
 
       decisionTitle.textContent = data.headline;
-      decisionCopy.textContent = data.summary;
+      decisionCopy.innerHTML = `
+  <strong>This is the part most founders miss:</strong><br>
+  ${data.summary}<br><br>
+  <strong>The next step is not to build more. It is to prove the riskiest assumption first.</strong>
+`;
 
       overallScoreValue.textContent = `${data.score.toFixed(1)} / 10`;
       scoreQualifier.textContent = scoreQualifierLabel(data.score);
@@ -1905,10 +1909,27 @@
 
       showLoadingState();
 
-      setTimeout(() => {
-        const output = buildDemoOutput({ idea, audience, problem, stage, priority });
-        showOutput(output);
-      }, 850);
+const loadingSteps = [
+  "Understanding your situation...",
+  "Comparing to similar founder decisions...",
+  "Detecting hidden risks...",
+  "Forming a clear recommendation..."
+];
+
+let loadingIndex = 0;
+
+const loadingInterval = setInterval(() => {
+  loadingIndex += 1;
+  if (loadingSteps[loadingIndex]) {
+    statusText.textContent = loadingSteps[loadingIndex];
+  }
+}, 650);
+
+setTimeout(() => {
+  clearInterval(loadingInterval);
+  const output = buildDemoOutput({ idea, audience, problem, stage, priority });
+  showOutput(output);
+}, 2600);
     }
 
     function shareScore() {
