@@ -6,8 +6,8 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TDGESJ2Z9C');
+    gtag("js", new Date());
+    gtag("config", "G-TDGESJ2Z9C");
   </script>
 
   <meta charset="UTF-8" />
@@ -17,82 +17,65 @@
 
   <meta
     name="description"
-    content="Test your startup idea and get a fast founder decision: proceed, refine, or drop. Zyqerion helps founders avoid wasting months building the wrong thing."
+    content="Know if your startup idea is worth building before you waste weeks on the wrong one. Paste your idea and get a clear proceed, refine, or drop decision."
   />
 
   <meta property="og:title" content="Zyqerion — Founder Decision Engine" />
   <meta
     property="og:description"
-    content="Paste your idea and get a fast founder decision: proceed, refine, or drop."
+    content="Paste your startup idea and get a clear founder decision: proceed, refine, or drop."
   />
   <meta property="og:type" content="website" />
 
   <style>
     :root {
       --bg: #020503;
-      --bg-2: #07110a;
-      --card: rgba(255,255,255,0.05);
-      --soft: rgba(255,255,255,0.035);
-      --border: rgba(86,255,120,0.14);
-      --border-strong: rgba(86,255,120,0.22);
+      --bg2: #061408;
+      --card: rgba(255,255,255,0.055);
+      --card2: rgba(255,255,255,0.035);
+      --border: rgba(86,255,120,0.16);
+      --border2: rgba(86,255,120,0.26);
       --text: #f5f7fb;
       --muted: #a8b3ab;
-      --primary-text: #031006;
       --accent: #39ff5c;
-      --accent-soft: #7dff96;
-      --glow: 0 0 40px rgba(57,255,92,0.12);
-      --glow-strong: 0 0 60px rgba(57,255,92,0.14), 0 0 140px rgba(57,255,92,0.05);
-      --max: 1100px;
+      --accent2: #9dffb0;
+      --darkText: #031006;
+      --max: 1120px;
       --radius: 24px;
-      --radius-sm: 18px;
+      --shadow: 0 0 45px rgba(57,255,92,0.12), 0 0 120px rgba(57,255,92,0.04);
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.12), transparent 26%),
-        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 22%),
-        linear-gradient(180deg, #010302 0%, #07110a 100%);
+        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.14), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 24%),
+        linear-gradient(180deg, #010302 0%, #061408 100%);
       line-height: 1.55;
-      position: relative;
       overflow-x: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: -240px;
+      top: -260px;
       left: 50%;
       transform: translateX(-50%);
-      width: 950px;
-      height: 950px;
-      background: radial-gradient(
-        circle,
-        rgba(57,255,92,0.14) 0%,
-        rgba(57,255,92,0.06) 35%,
-        transparent 70%
-      );
+      width: 980px;
+      height: 980px;
+      background: radial-gradient(circle, rgba(57,255,92,0.14), transparent 65%);
       pointer-events: none;
       z-index: -1;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(57,255,92,0.18), transparent 60%);
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.9;
     }
 
     a {
@@ -100,7 +83,8 @@
       text-decoration: none;
     }
 
-    button, input {
+    button,
+    input {
       font: inherit;
     }
 
@@ -113,27 +97,27 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(2,5,3,0.82);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(86,255,120,0.10);
+      background: rgba(2,5,3,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(86,255,120,0.1);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
       gap: 16px;
+      padding: 12px 0;
     }
 
-    .brand-logo {
-      display: inline-flex;
+    .brand {
+      display: flex;
       align-items: center;
       min-width: 0;
     }
 
     .logo-img {
-      height: 68px;
+      height: 58px;
       width: auto;
       display: block;
       filter: drop-shadow(0 0 10px rgba(57,255,92,0.12));
@@ -141,26 +125,24 @@
 
     .nav-actions {
       display: flex;
-      gap: 12px;
       align-items: center;
+      gap: 10px;
       flex-shrink: 0;
-      flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      min-height: 48px;
       padding: 12px 18px;
       border-radius: 14px;
       border: 1px solid transparent;
-      font-weight: 700;
-      transition: 0.2s ease;
+      font-weight: 800;
       cursor: pointer;
-      min-height: 48px;
+      transition: 0.2s ease;
       white-space: nowrap;
+      text-align: center;
     }
 
     .btn:hover {
@@ -168,51 +150,52 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #7dff96, #39ff5c);
-      color: var(--primary-text);
+      background: linear-gradient(135deg, #9dffb0, #39ff5c);
+      color: var(--darkText);
       box-shadow: 0 10px 35px rgba(57,255,92,0.22);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.04);
-      border-color: rgba(86,255,120,0.14);
+      border-color: var(--border);
       color: var(--text);
     }
 
     .hero {
-      padding: 86px 0 30px;
+      padding: 82px 0 34px;
       text-align: center;
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 9px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(86,255,120,0.14);
-      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.035);
       color: #c8ffd2;
       font-size: 0.92rem;
+      font-weight: 800;
       margin-bottom: 20px;
-      box-shadow: 0 0 24px rgba(57,255,92,0.05);
-      font-weight: 700;
     }
 
     h1 {
-      margin: 0 auto 16px;
-      max-width: 980px;
-      font-size: clamp(2.5rem, 6vw, 5.3rem);
+      margin: 0 auto 18px;
+      max-width: 1000px;
+      font-size: clamp(2.55rem, 6vw, 5.35rem);
       line-height: 0.98;
-      letter-spacing: -0.05em;
-      background: linear-gradient(90deg, #ffffff, #b7ffc3, #7dff96);
+      letter-spacing: -0.055em;
+      background: linear-gradient(90deg, #ffffff, #c8ffd2, #7dff96);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
-      margin: 0 auto 24px;
-      max-width: 760px;
+    .hero-copy {
+      max-width: 780px;
+      margin: 0 auto 26px;
       color: var(--muted);
-      font-size: 1.08rem;
+      font-size: 1.12rem;
     }
 
     .hero-actions {
@@ -224,65 +207,63 @@
     }
 
     .subtext {
-      color: var(--muted);
-      font-size: 0.95rem;
       max-width: 760px;
       margin: 0 auto;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .quick-validate {
+    .quick {
       padding: 0 0 34px;
     }
 
-    .quick-box,
-    .demo-shell,
-    .example-card,
-    .report-card,
-    .waitlist-box {
-      max-width: 940px;
+    .box {
+      max-width: 960px;
       margin: 0 auto;
       padding: 24px;
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border: 1px solid rgba(86,255,120,0.14);
-      box-shadow: var(--glow);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
     }
 
     .label {
       font-size: 0.78rem;
-      letter-spacing: 0.10em;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
       color: var(--muted);
       margin-bottom: 10px;
+      font-weight: 800;
     }
 
-    .quick-box h2,
-    .section-head h2,
-    .waitlist-box h2 {
+    h2 {
       margin: 0 0 10px;
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
-      letter-spacing: -0.04em;
+      font-size: clamp(1.75rem, 4vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
     }
 
     .muted {
       color: var(--muted);
+      margin: 0;
     }
 
     .idea-row {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     input {
       width: 100%;
-      border: 1px solid rgba(86,255,120,0.14);
+      border: 1px solid var(--border);
       background: rgba(255,255,255,0.045);
-      color: #f5f7fb;
+      color: var(--text);
       border-radius: 16px;
       padding: 15px 16px;
       outline: none;
+      min-height: 52px;
     }
 
     input::placeholder {
@@ -290,132 +271,40 @@
     }
 
     input:focus {
-      border-color: #39ff5c;
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(57,255,92,0.14);
     }
 
-    .idea-examples {
+    .chips {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 14px;
     }
 
-    .idea-chip {
+    .chip {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(86,255,120,0.12);
-      color: #f5f7fb;
+      color: var(--text);
       padding: 9px 12px;
       border-radius: 999px;
       cursor: pointer;
-      font: inherit;
       transition: 0.2s ease;
     }
 
-    .idea-chip:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(86,255,120,0.18);
+    .chip:hover {
+      background: rgba(255,255,255,0.075);
+      border-color: var(--border2);
     }
 
-    .quick-helper {
+    .helper {
       margin-top: 12px;
       color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .demo-section {
-      padding: 8px 0 34px;
-    }
-
-    .demo-shell {
-      box-shadow: var(--glow-strong);
-    }
-
-    .terminal-top {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(57,255,92,0.35);
-      box-shadow: 0 0 10px rgba(57,255,92,0.25);
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .panel,
-    .prompt-card,
-    .report-mini {
-      background: rgba(2,10,22,0.38);
-      border: 1px solid rgba(86,255,120,0.10);
-      border-radius: var(--radius-sm);
-      padding: 18px;
-    }
-
-    .prompt-text {
-      font-size: 1.2rem;
-      line-height: 1.35;
-      font-weight: 700;
-    }
-
-    .typing {
-      display: inline-block;
-      margin-left: 6px;
-      color: var(--accent-soft);
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.35; }
-    }
-
-    .report-list,
-    .offer-list {
-      margin: 0;
-      padding-left: 20px;
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    .report-list li::marker,
-    .offer-list li::marker {
-      color: #b7ffc3;
-    }
-
-    .score-box {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(57,255,92,0.08);
-      border: 1px solid rgba(57,255,92,0.18);
-    }
-
-    .score-label {
-      color: var(--muted);
-      font-size: 0.84rem;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .score-value {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      color: #c8ffd2;
+      font-size: 0.93rem;
     }
 
     .section {
-      padding: 24px 0;
+      padding: 28px 0;
     }
 
     .section-head {
@@ -424,97 +313,121 @@
     }
 
     .section-head p {
+      max-width: 720px;
       margin: 0 auto;
-      max-width: 680px;
       color: var(--muted);
     }
 
-    .prompts {
+    .grid-2 {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      max-width: 940px;
-      margin: 0 auto;
-    }
-
-    .prompt-card {
-      font-size: 1rem;
-      color: #e9fff0;
-    }
-
-    .example-card h3 {
-      margin: 18px 0 8px;
-      font-size: 1rem;
-      color: #e8fff0;
-    }
-
-    .example-card h3:first-child {
-      margin-top: 0;
-    }
-
-    .example-card p {
-      color: var(--muted);
-    }
-
-    .example-cta {
-      margin-top: 18px;
-    }
-
-    .offer-section {
-      padding: 24px 0;
-    }
-
-    .report-card {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
-      align-items: start;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    .report-main,
-    .report-side {
-      background: rgba(2,10,22,0.28);
-      border: 1px solid rgba(86,255,120,0.10);
-      border-radius: var(--radius-sm);
-      padding: 20px;
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1040px;
+      margin: 0 auto;
     }
 
-    .report-main h3,
-    .report-side h3 {
-      margin: 0 0 10px;
-      color: #e8fff0;
+    .card {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
       font-size: 1.12rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
     }
 
-    .price-line {
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .list li {
+      margin-bottom: 8px;
+    }
+
+    .list li::marker {
+      color: var(--accent2);
+    }
+
+    .demo-preview {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
       margin-top: 16px;
+    }
+
+    .mini {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(2,10,22,0.32);
+      border: 1px solid rgba(86,255,120,0.1);
+    }
+
+    .score {
+      margin-top: 14px;
       padding: 14px 16px;
       border-radius: 16px;
       background: rgba(57,255,92,0.08);
       border: 1px solid rgba(57,255,92,0.18);
       color: #ddffe5;
-      font-weight: 700;
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: -0.04em;
     }
 
-    .waitlist {
-      padding: 34px 0 70px;
+    .offer {
+      padding: 34px 0 72px;
     }
 
-    .waitlist-box p {
-      margin: 0 0 14px;
+    .offer-box {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 26px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at top right, rgba(57,255,92,0.09), transparent 36%),
+        linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border2);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .offer-box p {
       color: var(--muted);
       max-width: 720px;
-    }
-
-    .waitlist-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 0.94rem;
+      margin: 0 auto 18px;
     }
 
     footer {
-      padding: 20px 0 36px;
+      padding: 22px 0 36px;
       color: var(--muted);
       border-top: 1px solid rgba(86,255,120,0.08);
     }
@@ -527,277 +440,262 @@
     }
 
     @media (max-width: 900px) {
-      .idea-row,
-      .demo-grid,
-      .prompts,
-      .report-card {
+      .grid-2,
+      .grid-3,
+      .preview-grid,
+      .idea-row {
         grid-template-columns: 1fr;
       }
 
       .hero {
-        padding-top: 70px;
+        padding-top: 62px;
       }
 
       .logo-img {
-        height: 56px;
+        height: 50px;
       }
     }
 
     @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
       .nav-inner {
-        padding: 12px 0;
-      }
-
-      .nav-actions {
-        gap: 10px;
-      }
-
-      .btn {
-        width: 100%;
+        align-items: center;
+        padding: 10px 0;
       }
 
       .nav-actions .btn {
-        width: auto;
+        padding: 10px 12px;
+        min-height: 44px;
+        font-size: 0.9rem;
+      }
+
+      .logo-img {
+        height: 44px;
+      }
+
+      .hero {
+        text-align: left;
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 13vw, 4.2rem);
+      }
+
+      .hero-copy,
+      .subtext {
+        margin-left: 0;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+
+      .hero-actions .btn,
+      .idea-row .btn,
+      .offer-box .btn {
+        width: 100%;
+      }
+
+      .box,
+      .demo-preview,
+      .offer-box,
+      .card {
+        padding: 20px;
       }
     }
   </style>
 </head>
+
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="/" class="brand-logo" aria-label="Zyqerion home">
+      <a href="/" class="brand" aria-label="Zyqerion home">
         <img src="/zyqerion-logo.png" alt="Zyqerion logo" class="logo-img" />
       </a>
 
       <div class="nav-actions">
-        <a href="/demo.html" class="btn btn-secondary" id="navDemoBtn">Try the founder demo</a>
+        <a href="/demo.html" class="btn btn-secondary" id="navDemoBtn">Try demo</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="container">
-      <div class="eyebrow">Startup idea evaluation</div>
-      <h1>Know if your startup idea is worth building — before you waste weeks on the wrong one.</h1>
-        <p>
-  Zyqerion helps founders evaluate startup ideas early — so they can decide whether to proceed, refine, or drop the idea before wasting time building.
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Founder decision engine</div>
+
+        <h1>Know if your startup idea is worth building — before you waste weeks on the wrong one.</h1>
+
+        <p class="hero-copy">
+          Paste your idea and get a clear decision on whether to proceed, refine, or drop it —
+          plus the biggest risks, weak points, and what to test next before you build.
         </p>
 
-      <div class="hero-actions">
-        <a href="/demo.html" class="btn btn-primary" id="heroPrimaryBtn">Evaluate your idea</a>
-        <a href="/demo.html#fullEvalCta" class="btn btn-secondary" id="heroSecondaryBtn">See example evaluation</a>
-      </div>
-
-      <div class="subtext">
-  Get a fast idea evaluation now — then go deeper only if the idea looks worth more of your time.
-      </div>
-    </div>
-  </section>
-
-  <section class="quick-validate">
-    <div class="container">
-      <div class="quick-box">
-        <div class="label">Try Zyqerion</div>
-        <h2>Get a fast idea evaluation before you build</h2>
-        <p class="muted">
-  Paste your idea and get a fast evaluation of whether to proceed, refine, or drop it before you spend more time building the wrong thing.
-        </p>
-
-        <div class="idea-row">
-          <input
-            id="homepageIdeaInput"
-            type="text"
-            placeholder="Describe your startup idea..."
-          />
-          <button class="btn btn-primary" id="homepageValidateBtn" type="button">
-            Evaluate idea →
-          </button>
+        <div class="hero-actions">
+          <a href="/demo.html" class="btn btn-primary" id="heroPrimaryBtn">Test your idea →</a>
+          <a href="#how" class="btn btn-secondary" id="heroSecondaryBtn">See how it works</a>
         </div>
 
-        <div class="idea-examples">
-          <button type="button" class="idea-chip">AI tool for freelancers</button>
-          <button type="button" class="idea-chip">AI legal assistant for small businesses</button>
-          <button type="button" class="idea-chip">AI app for restaurant inventory</button>
-          <button type="button" class="idea-chip">Startup idea evaluation tool for founders</button>
-        </div>
-
-        <div class="quick-helper">
-          No signup required for the demo.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="demo-section">
-    <div class="container">
-      <div class="demo-shell">
-        <div class="terminal-top">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-
-        <div class="demo-grid">
-          <div class="panel">
-            <div class="label">Example idea</div>
-            <div class="prompt-text">
-              AI tool that helps freelancers manage invoices
-              <span class="typing">...</span>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="label">What the demo gives you</div>
-            <ul class="report-list">
-              <li>Proceed / refine / drop verdict</li>
-              <li>Where the idea looks strongest</li>
-              <li>What could kill it early</li>
-              <li>How risky distribution looks</li>
-              <li>What to test next before building</li>
-            </ul>
-
-            <div class="score-box">
-              <div class="score-label">Idea score</div>
-              <div class="score-value">7.1 / 10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>What kinds of ideas this helps with</h2>
-        <p>
-          Use Zyqerion when you're deciding whether an idea deserves more time,
-          validation, or build effort.
+        <p class="subtext">
+          No signup required. Start with a quick founder-style decision, then go deeper only if the idea deserves more time.
         </p>
       </div>
+    </section>
 
-      <div class="prompts">
-        <div class="prompt-card">Should I build an AI invoicing tool for freelancers?</div>
-        <div class="prompt-card">Is an AI legal assistant for small businesses too risky?</div>
-        <div class="prompt-card">Is the restaurant inventory AI market too crowded?</div>
-        <div class="prompt-card">Could a startup validation product actually convert founders?</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>What the idea evaluation looks like</h2>
-        <p>
-          A fast example of how Zyqerion evaluates whether an idea looks worth pursuing before you go deeper.
-         </p>
-      </div>
-
-      <div class="example-card">
-        <h3>Idea</h3>
-        <p>AI tool that helps freelancers manage invoices</p>
-
-        <h3>idea evaluation</h3>
-        <p>
-          There appears to be real demand here, but the category is crowded.
-          The idea gets stronger if it focuses on one painful money moment rather
-          than generic invoicing automation.
-        </p>
-
-        <h3>What looks strongest</h3>
-        <ul class="offer-list">
-          <li>Clear pain around getting paid</li>
-          <li>Easy-to-understand user segment</li>
-          <li>Plausible willingness to pay</li>
-        </ul>
-
-        <h3>What could kill it</h3>
-        <ul class="offer-list">
-          <li>Weak differentiation from existing tools</li>
-          <li>Broad positioning that feels generic</li>
-        </ul>
-
-        <h3>idea score</h3>
-        <p><strong>7.1 / 10</strong></p>
-
-        <div class="example-cta">
-          <a href="/demo.html" class="btn btn-primary" id="exampleCtaBtn">Test your idea → get your decision</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="offer-section">
-    <div class="container">
-      <div class="report-card">
-        <div class="report-main">
-          <div class="label">Why founders pay</div>
-          <h3>The demo gives you signal. The full evaluation tells you whether the idea is actually worth pursuing.</h3>
+    <section class="quick">
+      <div class="container">
+        <div class="box">
+          <div class="label">Try Zyqerion</div>
+          <h2>Get a fast founder decision</h2>
           <p class="muted">
-            The free demo gives you a fast read. The full idea evaluation is for when you want a clearer answer on whether to keep going, what weakens the idea, and what to test next.
+            Enter your idea below. You’ll be sent to the demo with your idea already loaded.
           </p>
 
-          <ul class="offer-list">
-            <li>Clearer build / test / drop recommendation</li>
-            <li>Where the idea is weakest or misleading</li>
-            <li>What evidence is still missing</li>
-            <li>Distribution and first-user angle</li>
-            <li>What I’d test next if this were mine</li>
+          <div class="idea-row">
+            <input
+              id="homepageIdeaInput"
+              type="text"
+              placeholder="Example: AI tool that helps freelancers get paid faster"
+            />
+            <button class="btn btn-primary" id="homepageValidateBtn" type="button">
+              Get decision →
+            </button>
+          </div>
+
+          <div class="chips">
+            <button type="button" class="chip">AI tool for freelancers</button>
+            <button type="button" class="chip">AI legal assistant for small businesses</button>
+            <button type="button" class="chip">Restaurant inventory forecasting app</button>
+            <button type="button" class="chip">Founder decision engine for startup ideas</button>
+          </div>
+
+          <div class="helper">Tip: include the user, the problem, and what your product does.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <h2>What Zyqerion helps you decide</h2>
+          <p>
+            Most founders don’t need more motivation. They need a clearer answer on whether the idea deserves more time.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Proceed</h3>
+            <p>The idea has enough signal to justify deeper validation or early building.</p>
+          </div>
+
+          <div class="card">
+            <h3>Refine</h3>
+            <p>The idea may be useful, but the audience, pain, wedge, or positioning is still too fuzzy.</p>
+          </div>
+
+          <div class="card">
+            <h3>Drop</h3>
+            <p>The signal is too weak, too broad, or too hard to reach with the current framing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="demo-preview">
+          <div class="label">Example output</div>
+          <h2>A founder decision, not just a score</h2>
+          <p class="muted">
+            Zyqerion looks at pain clarity, urgency, differentiation, distribution risk, and what you should test next.
+          </p>
+
+          <div class="preview-grid">
+            <div class="mini">
+              <div class="label">Idea</div>
+              <h3>AI tool that helps freelancers manage invoices</h3>
+              <p class="muted">
+                A clear user and problem, but a crowded category where positioning matters.
+              </p>
+            </div>
+
+            <div class="mini">
+              <div class="label">Decision</div>
+              <h3>Refine before building</h3>
+              <p class="muted">
+                The strongest wedge is not “AI invoicing.” It is likely a painful money moment:
+                late payments, follow-ups, or cash-flow uncertainty.
+              </p>
+              <div class="score">7.0 / 10</div>
+            </div>
+          </div>
+
+          <ul class="list">
+            <li>What looks strongest</li>
+            <li>What could kill the idea</li>
+            <li>How risky distribution looks</li>
+            <li>What to test next before building</li>
           </ul>
-
-          <div class="price-line">
-            Personally reviewed within 24 hours.
-          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="report-side">
-          <div class="label">Best next step</div>
-          <h3>Start with the demo</h3>
-          <p class="muted">
-            Don’t buy blind. Run your idea through Zyqerion first, then decide
-            whether it’s worth going deeper.
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Use it before you build too much</h2>
+          <p>
+            Zyqerion is most useful when you are still deciding what deserves your time.
           </p>
+        </div>
 
-          <div style="margin-top:16px;">
-            <a href="/demo.html" class="btn btn-primary" id="reportCtaBtn">Run the demo now</a>
+        <div class="grid-2">
+          <div class="card">
+            <h3>When you have an idea</h3>
+            <p>
+              Use it to see if the idea sounds real, urgent, specific, and reachable enough to pursue.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>When you are already building</h3>
+            <p>
+              Use it to understand whether the current angle is strong enough, or if the real problem sits somewhere else.
+            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="waitlist" id="waitlist">
-    <div class="container">
-      <div class="waitlist-box">
-        <h2>Want updates as Zyqerion evolves?</h2>
-        <p>
-          Join early access to hear about major product updates, sharper founder
-          workflows, and new evaluation capabilities as they launch.
-        </p>
-
-        <div style="margin-top:18px;">
-          <a href="/demo.html" class="btn btn-primary" id="waitlistDemoBtn">Try the founder demo first</a>
-        </div>
-
-        <div class="waitlist-note">
-          The fastest way to understand Zyqerion is still to run your own idea through the demo.
+    <section class="offer">
+      <div class="container">
+        <div class="offer-box">
+          <div class="label">Start here</div>
+          <h2>Run your idea through the demo</h2>
+          <p>
+            Don’t buy blind. Try the demo first and only go deeper if the result feels useful.
+          </p>
+          <a href="/demo.html" class="btn btn-primary" id="offerCtaBtn">Try the founder demo →</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div class="container footer-inner">
       <div>© Zyqerion</div>
-      <div>Startup idea evaluation</div>
+      <div>Founder decision engine</div>
     </div>
   </footer>
 
   <script>
     const homepageIdeaInput = document.getElementById("homepageIdeaInput");
     const homepageValidateBtn = document.getElementById("homepageValidateBtn");
-    const ideaChips = document.querySelectorAll(".idea-chip");
+    const chips = document.querySelectorAll(".chip");
 
     function trackEvent(eventName, params = {}) {
       if (typeof gtag === "function") {
@@ -809,11 +707,12 @@
       }
     }
 
-    function goToDemoWithIdea(source = "unknown") {
+    function goToDemo(source) {
       const idea = homepageIdeaInput.value.trim();
 
       if (!idea) {
         trackEvent("homepage_demo_redirect_attempted_empty", { source });
+        homepageIdeaInput.focus();
         return;
       }
 
@@ -822,30 +721,25 @@
         idea_length: idea.length
       });
 
-      const encoded = encodeURIComponent(idea);
-      window.location.href = "/demo.html?idea=" + encoded;
+      window.location.href = "/demo.html?idea=" + encodeURIComponent(idea);
     }
 
     if (homepageValidateBtn && homepageIdeaInput) {
-      homepageValidateBtn.addEventListener("click", () => {
-        goToDemoWithIdea("homepage_validate_button");
+      homepageValidateBtn.addEventListener("click", () => goToDemo("homepage_button"));
+
+      homepageIdeaInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          goToDemo("homepage_enter");
+        }
       });
 
       homepageIdeaInput.addEventListener("focus", () => {
-        trackEvent("homepage_idea_input_focused", {
-          field_id: "homepageIdeaInput"
-        });
+        trackEvent("homepage_idea_input_focused");
       }, { once: true });
-
-      homepageIdeaInput.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          goToDemoWithIdea("homepage_input_enter");
-        }
-      });
     }
 
-    ideaChips.forEach((chip) => {
+    chips.forEach((chip) => {
       chip.addEventListener("click", () => {
         const value = chip.textContent.trim();
         homepageIdeaInput.value = value;
@@ -856,21 +750,12 @@
       });
     });
 
-    [
-      "navDemoBtn",
-      "heroPrimaryBtn",
-      "heroSecondaryBtn",
-      "exampleCtaBtn",
-      "reportCtaBtn",
-      "waitlistDemoBtn"
-    ].forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    ["navDemoBtn", "heroPrimaryBtn", "heroSecondaryBtn", "offerCtaBtn"].forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
 
-      el.addEventListener("click", () => {
-        trackEvent("homepage_cta_clicked", {
-          cta_id: id
-        });
+      element.addEventListener("click", () => {
+        trackEvent("homepage_cta_clicked", { cta_id: id });
       });
     });
   </script>
