@@ -2104,7 +2104,26 @@ https://zyqerion.ai/demo.html`;
     });
 
     shareScoreBtn.addEventListener("click", shareScore);
+    navCtaBtn?.addEventListener("click", () => {
+     if (ideaInput.value.trim().length === 0) {
+    document.getElementById("ideaSection")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    ideaInput.focus();
+    return;
+  }
 
+  if (!lastSubmissionSource) {
+    runDemoBtn.click();
+    return;
+  }
+
+  fullEvalCta?.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+});
     [navCtaBtn, fullEvalBtn, stickyCtaBtn].forEach((element) => {
       if (!element) return;
 
