@@ -6,78 +6,78 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TDGESJ2Z9C');
+    gtag("js", new Date());
+    gtag("config", "G-TDGESJ2Z9C");
   </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Zyqerion Demo — Founder Decision Engine</title>
+
   <meta
     name="description"
-    content="Paste your startup idea and get a fast founder decision: proceed, refine, or drop. Zyqerion helps founders avoid wasting months building ideas nobody wants."
+    content="Paste your startup idea and get a clear founder decision: proceed, refine, or drop. See risks, weak points, distribution difficulty, and what to test next."
   />
+
   <meta property="og:title" content="Zyqerion Demo — Founder Decision Engine" />
   <meta
     property="og:description"
-    content="Paste your idea. Get a founder-style verdict: proceed, refine, or drop."
+    content="Paste your idea. Get a founder-style decision: proceed, refine, or drop."
   />
   <meta property="og:type" content="website" />
 
   <style>
     :root {
       --bg: #020503;
-      --bg-2: #07110a;
-      --panel: rgba(255,255,255,0.04);
-      --panel-2: rgba(255,255,255,0.03);
+      --bg2: #061408;
+      --panel: rgba(255,255,255,0.055);
+      --panel2: rgba(255,255,255,0.035);
       --text: #f5f7fb;
       --muted: #a8b3ab;
-      --soft: #8b9b90;
-      --border: rgba(86,255,120,0.14);
-      --border-strong: rgba(86,255,120,0.22);
-      --primary: #39ff5c;
-      --primary-2: #9dffb0;
-      --primary-text: #031006;
+      --border: rgba(86,255,120,0.16);
+      --border2: rgba(86,255,120,0.26);
+      --accent: #39ff5c;
+      --accent2: #9dffb0;
+      --darkText: #031006;
       --danger: #ff8a8a;
       --warn: #ffd36b;
       --success: #9fe6bf;
-      --shadow: 0 0 40px rgba(57,255,92,0.12), 0 0 120px rgba(57,255,92,0.04);
       --max: 1160px;
-      --radius: 22px;
-      --radius-sm: 16px;
+      --radius: 24px;
+      --shadow: 0 0 45px rgba(57,255,92,0.12), 0 0 120px rgba(57,255,92,0.04);
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.12), transparent 26%),
-        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 22%),
-        linear-gradient(180deg, #010302 0%, #07110a 100%);
+        radial-gradient(circle at 20% 0%, rgba(57,255,92,0.14), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(57,255,92,0.08), transparent 24%),
+        linear-gradient(180deg, #010302 0%, #061408 100%);
       line-height: 1.55;
-      position: relative;
       overflow-x: hidden;
+      padding-bottom: 94px;
     }
 
     body::before {
       content: "";
       position: fixed;
-      top: -220px;
+      top: -240px;
       left: 50%;
       transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(
-        circle,
-        rgba(57,255,92,0.14) 0%,
-        rgba(57,255,92,0.06) 35%,
-        transparent 70%
-      );
+      width: 960px;
+      height: 960px;
+      background: radial-gradient(circle, rgba(57,255,92,0.14), transparent 65%);
       pointer-events: none;
       z-index: -1;
     }
@@ -87,7 +87,10 @@
       text-decoration: none;
     }
 
-    button, input, textarea, select {
+    button,
+    input,
+    textarea,
+    select {
       font: inherit;
     }
 
@@ -100,45 +103,55 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(2,5,3,0.82);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(86,255,120,0.10);
+      background: rgba(2,5,3,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(86,255,120,0.1);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
-      gap: 16px;
+      gap: 14px;
+      padding: 10px 0;
     }
 
-    .brand-logo {
-      display: inline-flex;
+    .brand {
+      display: flex;
       align-items: center;
       min-width: 0;
     }
 
     .logo-img {
-      height: 70px;
+      height: 54px;
       width: auto;
       display: block;
       filter: drop-shadow(0 0 10px rgba(57,255,92,0.12));
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
       min-height: 48px;
+      padding: 12px 18px;
       border-radius: 14px;
       border: 1px solid transparent;
-      font-weight: 700;
-      transition: 0.2s ease;
+      font-weight: 800;
       cursor: pointer;
-      white-space: nowrap;
+      transition: 0.2s ease;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.2;
     }
 
     .btn:hover {
@@ -146,65 +159,67 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #7dff96, #39ff5c);
-      color: #031006;
+      background: linear-gradient(135deg, #9dffb0, #39ff5c);
+      color: var(--darkText);
       box-shadow: 0 10px 35px rgba(57,255,92,0.22);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.04);
-      border-color: rgba(86,255,120,0.14);
+      border-color: var(--border);
       color: var(--text);
     }
 
-    .btn-ghost {
-      background: transparent;
+    .btn-muted {
+      background: rgba(255,255,255,0.035);
       border-color: rgba(255,255,255,0.1);
       color: var(--muted);
     }
 
     .hero {
-      padding: 66px 0 18px;
+      padding: 58px 0 20px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 24px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
       align-items: start;
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 9px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(86,255,120,0.14);
-      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.035);
       color: #c8ffd2;
       font-size: 0.92rem;
+      font-weight: 800;
       margin-bottom: 18px;
-      font-weight: 700;
     }
 
     h1 {
-      margin: 0 0 14px;
-      max-width: 12ch;
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-      background: linear-gradient(90deg, #ffffff, #b7ffc3, #7dff96);
+      margin: 0 0 16px;
+      max-width: 900px;
+      font-size: clamp(2.45rem, 5.6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      background: linear-gradient(90deg, #ffffff, #c8ffd2, #7dff96);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
       margin: 0;
-      max-width: 680px;
       color: var(--muted);
-      font-size: 1.05rem;
+      font-size: 1.06rem;
+      max-width: 720px;
     }
 
-    .hero-points {
+    .pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -215,34 +230,34 @@
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(86,255,120,0.12);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.035);
       color: #dfffe5;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    .hero-proof {
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border: 1px solid var(--border);
-      border-radius: 22px;
+    .proof {
       padding: 22px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
 
-    .proof-title {
+    .proof h2 {
       margin: 0 0 8px;
-      font-size: 1.08rem;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
     }
 
-    .proof-sub {
-      color: var(--muted);
+    .proof p {
       margin: 0;
       font-size: 0.96rem;
     }
 
     .proof-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 16px;
     }
@@ -250,14 +265,14 @@
     .stat {
       padding: 14px;
       border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(86,255,120,0.10);
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(86,255,120,0.1);
     }
 
     .stat strong {
       display: block;
-      font-size: 1.15rem;
       margin-bottom: 4px;
+      font-size: 1.05rem;
     }
 
     .stat span {
@@ -266,7 +281,7 @@
     }
 
     .demo-section {
-      padding: 18px 0 42px;
+      padding: 20px 0 38px;
     }
 
     .demo-layout {
@@ -277,25 +292,31 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border: 1px solid var(--border);
-      border-radius: 22px;
       padding: 22px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
 
     .label {
       font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.1em;
       color: var(--muted);
+      font-weight: 800;
       margin-bottom: 10px;
     }
 
-    .card h3 {
+    .card h3,
+    .mini-card h4,
+    .cta-box h4 {
       margin: 0 0 10px;
-      font-size: 1.08rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
+    }
+
+    .card h3 {
+      font-size: 1.22rem;
     }
 
     .card p {
@@ -303,19 +324,14 @@
       color: var(--muted);
     }
 
-    .demo-start-summary {
+    .summary-box {
       margin-top: 14px;
       padding: 14px 16px;
       border-radius: 16px;
-      background: rgba(57,255,92,0.06);
-      border: 1px solid rgba(57,255,92,0.14);
+      background: rgba(57,255,92,0.07);
+      border: 1px solid rgba(57,255,92,0.16);
       color: #ddffe5;
       font-size: 0.95rem;
-      line-height: 1.55;
-    }
-
-    .demo-start-summary strong {
-      color: #ffffff;
     }
 
     .example-header {
@@ -323,14 +339,14 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
       margin-top: 22px;
       margin-bottom: 10px;
-      flex-wrap: wrap;
     }
 
     .example-helper {
-      font-size: 0.88rem;
       color: var(--muted);
+      font-size: 0.88rem;
     }
 
     .prompt-grid {
@@ -342,62 +358,50 @@
       width: 100%;
       text-align: left;
       padding: 13px 14px;
-      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
       border: 1px solid rgba(86,255,120,0.12);
+      background: rgba(255,255,255,0.04);
       color: var(--text);
-      border-radius: 12px;
       cursor: pointer;
       transition: 0.2s ease;
     }
 
     .prompt-chip:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(86,255,120,0.18);
+      background: rgba(255,255,255,0.075);
+      border-color: var(--border2);
     }
 
     .prompt-chip strong {
       display: block;
-      font-size: 0.95rem;
-      color: #ffffff;
       margin-bottom: 3px;
     }
 
     .prompt-chip span {
       display: block;
-      font-size: 0.88rem;
       color: var(--muted);
-      line-height: 1.45;
+      font-size: 0.9rem;
     }
 
     .field-wrap {
       margin-top: 18px;
     }
 
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .input-top-row {
+    .input-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 12px;
-      margin-bottom: 8px;
+      align-items: center;
       flex-wrap: wrap;
+      margin-bottom: 8px;
     }
 
     .input-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-weight: 800;
     }
 
     .input-hint {
-      font-size: 0.88rem;
       color: var(--muted);
+      font-size: 0.88rem;
     }
 
     textarea,
@@ -407,13 +411,13 @@
       padding: 14px 16px;
       background: rgba(255,255,255,0.045);
       color: var(--text);
-      border: 1px solid rgba(86,255,120,0.14);
+      border: 1px solid var(--border);
       border-radius: 16px;
       outline: none;
     }
 
     textarea {
-      min-height: 160px;
+      min-height: 158px;
       resize: vertical;
     }
 
@@ -425,8 +429,17 @@
     textarea:focus,
     input:focus,
     select:focus {
-      border-color: #39ff5c;
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(57,255,92,0.14);
+    }
+
+    select {
+      color: var(--text);
+    }
+
+    option {
+      background: #061408;
+      color: var(--text);
     }
 
     .meta-note {
@@ -440,6 +453,13 @@
       font-size: 0.88rem;
     }
 
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
     .actions {
       display: flex;
       gap: 12px;
@@ -447,15 +467,14 @@
       margin-top: 14px;
     }
 
-    .helper-text {
+    .helper {
       margin-top: 12px;
       color: var(--muted);
       font-size: 0.92rem;
     }
 
-    .helper-text strong {
-      color: #ffffff;
-      font-weight: 600;
+    .helper strong {
+      color: #fff;
     }
 
     .output-shell {
@@ -470,10 +489,10 @@
       width: fit-content;
       padding: 8px 12px;
       border-radius: 999px;
-      font-size: 0.9rem;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(86,255,120,0.12);
       color: #d5ffe0;
+      font-size: 0.9rem;
     }
 
     .status-dot {
@@ -484,26 +503,26 @@
       box-shadow: 0 0 12px rgba(159,230,191,0.6);
     }
 
-    .report-card {
-      background: rgba(2,10,22,0.38);
-      border: 1px solid rgba(86,255,120,0.10);
-      border-radius: 18px;
+    .report {
       padding: 18px;
+      border-radius: 20px;
+      background: rgba(2,10,22,0.32);
+      border: 1px solid rgba(86,255,120,0.1);
     }
 
     .decision-banner {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.14fr 0.86fr;
       gap: 16px;
       padding: 18px;
       border-radius: 18px;
       border: 1px solid rgba(86,255,120,0.14);
       background:
-        radial-gradient(circle at top right, rgba(57,255,92,0.08), transparent 35%),
-        rgba(255,255,255,0.03);
+        radial-gradient(circle at top right, rgba(57,255,92,0.08), transparent 36%),
+        rgba(255,255,255,0.035);
     }
 
-    .decision-meta {
+    .badges {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -517,9 +536,10 @@
       padding: 0 12px;
       border-radius: 999px;
       font-size: 0.84rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      border: 1px solid transparent;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #dfffe5;
     }
 
     .badge.success {
@@ -542,35 +562,35 @@
 
     .decision-title {
       margin: 0;
-      font-size: clamp(1.4rem, 2vw, 2rem);
-      letter-spacing: -0.03em;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
     }
 
     .decision-copy {
       margin: 10px 0 0;
       color: var(--muted);
-      font-size: 0.98rem;
     }
 
     .score-box {
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(86,255,120,0.10);
       padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(86,255,120,0.1);
     }
 
     .score-top {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
       align-items: end;
+      gap: 12px;
     }
 
     .score-big {
       font-size: 2.3rem;
-      font-weight: 800;
-      letter-spacing: -0.05em;
+      font-weight: 900;
       line-height: 1;
+      letter-spacing: -0.05em;
       color: #ddffe5;
     }
 
@@ -580,9 +600,9 @@
     }
 
     .meter {
-      margin-top: 12px;
       width: 100%;
       height: 12px;
+      margin-top: 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.08);
       overflow: hidden;
@@ -592,7 +612,7 @@
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #7dff96, #39ff5c);
+      background: linear-gradient(90deg, #9dffb0, #39ff5c);
       transition: width 0.45s ease;
     }
 
@@ -609,7 +629,7 @@
       padding: 10px 12px;
       border-radius: 12px;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(86,255,120,0.10);
+      border: 1px solid rgba(86,255,120,0.08);
     }
 
     .grid-2 {
@@ -619,16 +639,14 @@
     }
 
     .mini-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(86,255,120,0.10);
-      border-radius: 16px;
       padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(86,255,120,0.1);
     }
 
     .mini-card h4 {
-      margin: 0 0 12px;
       font-size: 1rem;
-      letter-spacing: -0.02em;
     }
 
     .list {
@@ -642,14 +660,14 @@
     .list li {
       padding: 12px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.035);
       border: 1px solid rgba(86,255,120,0.08);
     }
 
     .list li strong {
       display: block;
       margin-bottom: 4px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .list li span {
@@ -658,11 +676,8 @@
     }
 
     .steps {
-      margin: 0;
-      padding: 0;
       display: grid;
       gap: 10px;
-      list-style: none;
     }
 
     .step {
@@ -671,25 +686,25 @@
       gap: 12px;
       padding: 12px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.035);
       border: 1px solid rgba(86,255,120,0.08);
     }
 
     .step-num {
       width: 34px;
       height: 34px;
-      border-radius: 12px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #7dff96, #39ff5c);
-      color: #031006;
-      font-weight: 800;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #9dffb0, #39ff5c);
+      color: var(--darkText);
+      font-weight: 900;
     }
 
     .step strong {
       display: block;
       margin-bottom: 4px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
     }
 
     .step p {
@@ -699,22 +714,21 @@
     }
 
     .cta-box {
+      display: none;
       padding: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(86,255,120,0.18);
+      border-radius: 20px;
+      border: 1px solid var(--border2);
       background:
-        radial-gradient(circle at top right, rgba(57,255,92,0.08), transparent 35%),
-        rgba(255,255,255,0.03);
+        radial-gradient(circle at top right, rgba(57,255,92,0.08), transparent 36%),
+        rgba(255,255,255,0.035);
     }
 
     .cta-box h4 {
-      margin: 0;
-      font-size: 1.18rem;
-      letter-spacing: -0.02em;
+      font-size: 1.2rem;
     }
 
     .cta-box p {
-      margin: 10px 0 0;
+      margin: 0;
       color: var(--muted);
     }
 
@@ -728,7 +742,7 @@
     .compare-box {
       padding: 14px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.035);
       border: 1px solid rgba(86,255,120,0.08);
     }
 
@@ -771,26 +785,27 @@
 
     .section-head h2 {
       margin: 0 0 10px;
-      font-size: clamp(1.7rem, 4vw, 2.8rem);
-      letter-spacing: -0.04em;
+      font-size: clamp(1.75rem, 4vw, 2.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.045em;
     }
 
     .section-head p {
       margin: 0 auto;
-      max-width: 700px;
+      max-width: 720px;
       color: var(--muted);
     }
 
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
     .sticky-cta {
       position: fixed;
       left: 50%;
-      bottom: 16px;
+      bottom: 14px;
       transform: translateX(-50%);
       width: min(760px, calc(100% - 20px));
       z-index: 45;
@@ -806,11 +821,11 @@
       justify-content: space-between;
       align-items: center;
       gap: 14px;
-      padding: 14px 16px;
+      padding: 14px;
       border-radius: 18px;
-      background: rgba(2,5,3,0.92);
-      border: 1px solid rgba(86,255,120,0.18);
-      backdrop-filter: blur(12px);
+      background: rgba(2,5,3,0.94);
+      border: 1px solid var(--border2);
+      backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
     }
 
@@ -825,7 +840,7 @@
     }
 
     footer {
-      padding: 20px 0 36px;
+      padding: 22px 0 36px;
       color: var(--muted);
       border-top: 1px solid rgba(86,255,120,0.08);
     }
@@ -843,28 +858,61 @@
       .decision-banner,
       .grid-2,
       .grid-3,
-      .compare {
+      .compare,
+      .proof-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 940px) {
-      .hero {
-        padding-top: 56px;
+    @media (max-width: 720px) {
+      .container {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .nav-inner {
+        align-items: center;
+        gap: 8px;
       }
 
       .logo-img {
-        height: 60px;
+        height: 42px;
+        max-width: 150px;
+        object-fit: contain;
       }
-    }
 
-    @media (max-width: 640px) {
-      .nav-inner {
-        padding: 10px 0;
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .nav-actions .btn {
+        min-height: 42px;
+        padding: 9px 10px;
+        font-size: 0.82rem;
+        max-width: 132px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      h1 {
+        font-size: clamp(2.25rem, 12vw, 4rem);
       }
 
       .field-row {
         grid-template-columns: 1fr;
+      }
+
+      .actions .btn,
+      .cta-actions .btn {
+        width: 100%;
+      }
+
+      .card,
+      .proof,
+      .report,
+      .cta-box {
+        padding: 18px;
       }
 
       .sticky-inner {
@@ -876,344 +924,376 @@
         width: 100%;
       }
     }
+
+    @media (max-width: 420px) {
+      .logo-img {
+        height: 36px;
+        max-width: 124px;
+      }
+
+      .nav-actions .btn {
+        font-size: 0.76rem;
+        padding: 8px 8px;
+        max-width: 118px;
+      }
+
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a href="/" class="brand-logo" aria-label="Zyqerion home">
+      <a href="/" class="brand" aria-label="Zyqerion home">
         <img src="/zyqerion-logo.png" alt="Zyqerion logo" class="logo-img" />
       </a>
 
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div class="nav-actions">
         <a href="/" class="btn btn-secondary">Back to site</a>
-        <a href="#fullEvalCta" class="btn btn-primary" id="navCtaBtn">Get the full idea evaluation</a>
+        <a href="#fullEvalCta" class="btn btn-primary" id="navCtaBtn">Full evaluation</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Founder decision engine</div>
-        <h1>Know if your startup idea is worth building — before you waste weeks on the wrong one.</h1>
-        <p>
-          Paste your idea and get a clear decision on whether to proceed, refine, or drop it — plus the biggest risks, weak points, and what to test next before you build.
-        </p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Founder decision engine</div>
 
-        <div class="hero-points">
-          <div class="pill">Decision in ~60 seconds</div>
-          <div class="pill">Proceed / refine / drop</div>
-          <div class="pill">Immediate risks surfaced</div>
-          <div class="pill">No signup required</div>
-        </div>
-      </div>
+          <h1>Know if your startup idea is worth building — before you waste weeks on the wrong one.</h1>
 
-      <aside class="hero-proof">
-        <h2 class="proof-title">What you get in the demo</h2>
-<p class="proof-sub">
-  A fast idea evaluation that shows whether this is worth pursuing, what weakens it, and what you should test before building further.
-</p>
-
-        <div class="proof-grid">
-          <div class="stat">
-            <strong>Clear verdict</strong>
-            <span>Proceed, refine, or drop</span>
-          </div>
-          <div class="stat">
-            <strong>Strongest signals</strong>
-            <span>What actually looks promising</span>
-          </div>
-          <div class="stat">
-            <strong>Biggest risks</strong>
-            <span>What could kill it early</span>
-          </div>
-          <div class="stat">
-            <strong>Next steps</strong>
-            <span>What to test before building</span>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section class="demo-section">
-    <div class="container">
-      <div class="demo-layout">
-        <div class="card">
-          <div class="label">Startup idea</div>
-          <h3>Evaluate your startup idea</h3>
-<p>
-  Keep it simple. You do not need perfect wording — just describe who it is for, what problem it solves, and what the product does.
-</p>
+          <p>
+            Paste your idea and get a clear decision on whether to proceed, refine, or drop it —
+            plus the biggest risks, weak points, distribution difficulty, and what to test next before you build.
           </p>
 
-          <div class="demo-start-summary">
-  <strong>You’ll get:</strong> a clear verdict, the main weaknesses in the idea, the strongest signals, and the next tests to run before you spend more time building.
-</div>
-
-          <div class="example-header">
-            <div class="label" style="margin:0;">Try an example</div>
-            <div class="example-helper">Fastest way to feel the product</div>
-          </div>
-
-          <div class="prompt-grid">
-            <button class="prompt-chip" type="button" data-example="AI tool for freelancers that handles invoicing, follow-ups, and cash-flow forecasting.">
-              <strong>AI SaaS for freelancers</strong>
-              <span>Helps freelancers manage invoices and cash flow</span>
-            </button>
-            <button class="prompt-chip" type="button" data-example="AI legal assistant for small businesses focused on basic contract review and legal workflow help.">
-              <strong>AI legal assistant</strong>
-              <span>Helps small businesses handle simple legal workflows</span>
-            </button>
-            <button class="prompt-chip" type="button" data-example="Inventory forecasting app for restaurants that predicts demand and reduces waste.">
-              <strong>Restaurant forecasting app</strong>
-              <span>Helps restaurants predict inventory demand</span>
-            </button>
-            <button class="prompt-chip" type="button" data-example="Founder decision engine that helps startup founders validate whether ideas are worth building.">
-              <strong>Startup validation platform</strong>
-              <span>Helps founders test whether ideas are worth building</span>
-            </button>
-          </div>
-
-          <div class="field-wrap">
-            <div class="input-top-row">
-              <div class="input-title">Your idea</div>
-              <div class="input-hint">Best results when you include user + problem + solution</div>
-            </div>
-
-            <textarea
-              id="ideaInput"
-              placeholder="Example: A tool for freelance designers that helps them recover late payments by automating follow-ups and showing which clients are most likely to delay."
-            ></textarea>
-
-            <div class="meta-note">
-              <span id="charCount">0 characters</span>
-              <span>No signup required for the demo</span>
-            </div>
-
-            <div class="field-row">
-              <input id="audienceInput" type="text" placeholder="Optional: Who is this for?" />
-              <input id="problemInput" type="text" placeholder="Optional: What painful problem does it solve?" />
-            </div>
-
-            <div class="field-row">
-              <select id="stageInput">
-                <option value="">Optional: Current stage</option>
-                <option value="idea">Just an idea</option>
-                <option value="research">Some customer research</option>
-                <option value="mvp">MVP built</option>
-                <option value="launched">Launched with early users</option>
-              </select>
-
-              <select id="priorityInput">
-                <option value="">Optional: What do you need most?</option>
-                <option value="clarity">Clarity on whether to continue</option>
-                <option value="positioning">Sharper positioning</option>
-                <option value="validation">Better validation plan</option>
-                <option value="conversion">Stronger conversion angle</option>
-              </select>
-            </div>
-
-            <div class="actions">
-              <button class="btn btn-primary" id="runDemoBtn" type="button">Evaluate my idea</button>
-              <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
-            </div>
-
-            <div class="helper-text">
-              <strong>Tip:</strong> weak ideas often sound broad, generic, or “nice to have.” Specific pain tends to score better.
-            </div>
+          <div class="pills">
+            <div class="pill">Decision in ~60 seconds</div>
+            <div class="pill">Proceed / refine / drop</div>
+            <div class="pill">No signup required</div>
+            <div class="pill">Built for founders</div>
           </div>
         </div>
 
-        <div class="output-shell">
-          <div class="status">
-            <span class="status-dot"></span>
-            <span id="statusText">Ready</span>
-          </div>
+        <aside class="proof">
+          <h2>What this demo gives you</h2>
+          <p>
+            Enough signal to decide whether the idea deserves more attention — without forcing a long funnel first.
+          </p>
 
-          <div class="report-card">
-            <div class="label">Idea evaluation</div>
+          <div class="proof-grid">
+            <div class="stat">
+              <strong>1 verdict</strong>
+              <span>Proceed, refine, or drop</span>
+            </div>
 
-            <div class="decision-banner">
-              <div>
-                <div class="decision-meta">
-                  <span id="decisionBadge" class="badge warn">Waiting for idea</span>
-                  <span id="confidenceBadge" class="badge">Confidence: —</span>
-                </div>
+            <div class="stat">
+              <strong>Top signals</strong>
+              <span>What looks promising</span>
+            </div>
 
-                <h4 id="decisionTitle" class="decision-title">No verdict yet</h4>
-                <p id="decisionCopy" class="decision-copy">
-                  Run the demo to get a sharper signal on whether this idea deserves more time.
-                </p>
-              </div>
+            <div class="stat">
+              <strong>Key risks</strong>
+              <span>What could kill it</span>
+            </div>
 
-              <div class="score-box">
-                <div class="score-top">
-                  <div>
-                    <div id="overallScoreValue" class="score-big">—</div>
-                    <div class="score-small">Idea score</div>
-                  </div>
-                  <div class="score-small" id="scoreQualifier">No score yet</div>
-                </div>
-
-                <div class="meter">
-                  <div class="meter-fill" id="meterFill"></div>
-                </div>
-
-                <div class="score-grid" id="scoreGrid"></div>
-              </div>
+            <div class="stat">
+              <strong>Next moves</strong>
+              <span>What to test before building</span>
             </div>
           </div>
+        </aside>
+      </div>
+    </section>
 
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>What looks strongest</h4>
-              <ul id="strengthsList" class="list">
-                <li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>
-              </ul>
+    <section class="demo-section">
+      <div class="container">
+        <div class="demo-layout">
+          <section class="card">
+            <div class="label">Startup idea</div>
+            <h3>Run your idea through Zyqerion</h3>
+            <p>
+              Keep it simple. Best results come from including who it is for, what problem it solves, and what the product does.
+            </p>
+
+            <div class="summary-box">
+              <strong>You’ll get:</strong> a verdict, score, strongest signals, biggest risks, distribution risk, and what to test next.
             </div>
 
-            <div class="mini-card">
-              <h4>What could kill this</h4>
-              <ul id="risksList" class="list">
-                <li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>Distribution risk</h4>
-              <ul id="distributionList" class="list">
-                <li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>
-              </ul>
+            <div class="example-header">
+              <div class="label" style="margin:0;">Try an example</div>
+              <div class="example-helper">Fastest way to feel the product</div>
             </div>
 
-            <div class="mini-card">
-              <h4>Suggested first channels</h4>
-              <ul id="distributionChannelsList" class="list">
-                <li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the paid founder evaluation.</span></li>
-              </ul>
-            </div>
-          </div>
+            <div class="prompt-grid">
+              <button class="prompt-chip" type="button" data-example="AI tool for freelancers that handles invoicing, payment follow-ups, and cash-flow forecasting.">
+                <strong>AI SaaS for freelancers</strong>
+                <span>Helps freelancers get paid faster and manage cash flow</span>
+              </button>
 
-          <div class="grid-2">
-            <div class="mini-card">
-              <h4>Best next moves</h4>
-              <div id="bestMoves" class="steps">
-                <div class="step">
-                  <div class="step-num">1</div>
-                  <div>
-                    <strong>Run the demo</strong>
-                    <p>Your next best actions will appear here.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <button class="prompt-chip" type="button" data-example="AI legal assistant for small businesses focused on basic contract review and simple legal workflow help.">
+                <strong>AI legal assistant</strong>
+                <span>Helps small businesses handle simple legal workflows</span>
+              </button>
 
-            <div class="mini-card">
-              <h4>Your 7-day validation sprint</h4>
-              <div id="validationSprint" class="steps">
-                <div class="step">
-                  <div class="step-num">1</div>
-                  <div>
-                    <strong>Locked for full evaluation</strong>
-                    <p>Your full 7-day validation sprint appears in the paid founder evaluation.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <button class="prompt-chip" type="button" data-example="Inventory forecasting app for restaurants that predicts demand and reduces waste.">
+                <strong>Restaurant forecasting app</strong>
+                <span>Helps restaurants avoid waste and stockouts</span>
+              </button>
 
-          <div class="cta-box" id="fullEvalCta" style="display:none;">
-            <h4>You’ve got the first signal. Now get the full evaluation.</h4>
-<p>
-  The demo gives you a fast read. The full evaluation goes deeper: whether this idea is actually worth pursuing, what weakens it most, what evidence is still missing, and what to test next before you commit more time.
-</p>
-
-            <div class="compare">
-              <div class="compare-box">
-                <h5>Demo</h5>
-                <ul>
-                  <li>Fast proceed / refine / drop signal</li>
-                  <li>Top risks surfaced</li>
-                  <li>Distribution risk snapshot</li>
-                  <li>Best next moves</li>
-                </ul>
-              </div>
-
-              <div class="compare-box">
-                <h5>Full founder evaluation</h5>
-                <ul>
-                  <li>Clearer build / test / drop recommendation</li>
-                  <li>What evidence is still missing</li>
-                  <li>Where the idea is most misleading</li>
-                  <li>Your best first-user channels</li>
-                  <li>What I’d test next if this were mine</li>
-                  <li>Personally reviewed within 24 hours</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="cta-actions">
-              <a
-                id="fullEvalBtn"
-                href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
-                class="btn btn-primary"
-                target="_blank"
-                rel="noopener"
-              >
-                Get My Full Idea Evaluation — $39
-              </a>
-
-              <button class="btn btn-secondary" id="shareScoreBtn" type="button">
-                Share my startup score
+              <button class="prompt-chip" type="button" data-example="Founder decision engine that helps startup founders validate whether ideas are worth building before they spend weeks building the wrong thing.">
+                <strong>Startup validation platform</strong>
+                <span>Helps founders decide whether to proceed, refine, or drop ideas</span>
               </button>
             </div>
 
-            <div class="price-note">
-              Personally reviewed. Delivered within 24 hours. If it’s not useful, I’ll refund you.
+            <div class="field-wrap">
+              <div class="input-top">
+                <div class="input-title">Your idea</div>
+                <div class="input-hint">User + problem + solution works best</div>
+              </div>
+
+              <textarea
+                id="ideaInput"
+                placeholder="Example: AI tool for indie founders that evaluates startup ideas, highlights fatal assumptions, and recommends whether to proceed, refine, or drop the idea before building."
+              ></textarea>
+
+              <div class="meta-note">
+                <span id="charCount">0 characters</span>
+                <span>No signup required for the demo</span>
+              </div>
+
+              <div class="field-row">
+                <input id="audienceInput" type="text" placeholder="Optional: Who is this for?" />
+                <input id="problemInput" type="text" placeholder="Optional: What painful problem does it solve?" />
+              </div>
+
+              <div class="field-row">
+                <select id="stageInput">
+                  <option value="">Optional: Current stage</option>
+                  <option value="idea">Just an idea</option>
+                  <option value="research">Some customer research</option>
+                  <option value="mvp">MVP built</option>
+                  <option value="launched">Launched with early users</option>
+                </select>
+
+                <select id="priorityInput">
+                  <option value="">Optional: What do you need most?</option>
+                  <option value="clarity">Clarity on whether to continue</option>
+                  <option value="positioning">Sharper positioning</option>
+                  <option value="validation">Better validation plan</option>
+                  <option value="conversion">Stronger conversion angle</option>
+                </select>
+              </div>
+
+              <div class="actions">
+                <button class="btn btn-primary" id="runDemoBtn" type="button">Get my founder decision</button>
+                <button class="btn btn-muted" id="clearBtn" type="button">Clear</button>
+              </div>
+
+              <div class="helper">
+                <strong>Tip:</strong> weak ideas often sound broad, generic, or “nice to have.” Specific painful moments score better.
+              </div>
             </div>
-            <div class="price-note">
-              This is for founders who want a real decision — not just an interesting score.
+          </section>
+
+          <section class="output-shell">
+            <div class="status">
+              <span class="status-dot"></span>
+              <span id="statusText">Ready</span>
             </div>
+
+            <div class="report">
+              <div class="label">Founder decision</div>
+
+              <div class="decision-banner">
+                <div>
+                  <div class="badges">
+                    <span id="decisionBadge" class="badge warn">Waiting for idea</span>
+                    <span id="confidenceBadge" class="badge">Confidence: —</span>
+                  </div>
+
+                  <h4 id="decisionTitle" class="decision-title">No verdict yet</h4>
+                  <p id="decisionCopy" class="decision-copy">
+                    Run the demo to get a sharper signal on whether this idea deserves more time.
+                  </p>
+                </div>
+
+                <div class="score-box">
+                  <div class="score-top">
+                    <div>
+                      <div id="overallScoreValue" class="score-big">—</div>
+                      <div class="score-small">Founder decision score</div>
+                    </div>
+                    <div class="score-small" id="scoreQualifier">No score yet</div>
+                  </div>
+
+                  <div class="meter">
+                    <div class="meter-fill" id="meterFill"></div>
+                  </div>
+
+                  <div class="score-grid" id="scoreGrid"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>What looks strongest</h4>
+                <ul id="strengthsList" class="list">
+                  <li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>
+                </ul>
+              </div>
+
+              <div class="mini-card">
+                <h4>What could kill this</h4>
+                <ul id="risksList" class="list">
+                  <li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Distribution risk</h4>
+                <ul id="distributionList" class="list">
+                  <li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach first users.</span></li>
+                </ul>
+              </div>
+
+              <div class="mini-card">
+                <h4>Suggested first channels</h4>
+                <ul id="distributionChannelsList" class="list">
+                  <li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the full founder evaluation.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Best next moves</h4>
+                <div id="bestMoves" class="steps">
+                  <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                      <strong>Run the demo</strong>
+                      <p>Your next best actions will appear here.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-card">
+                <h4>7-day validation sprint</h4>
+                <div id="validationSprint" class="steps">
+                  <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                      <strong>Locked for full evaluation</strong>
+                      <p>Your full 7-day validation sprint appears in the paid founder evaluation.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cta-box" id="fullEvalCta">
+              <h4>You’ve got the signal. Now get the real decision.</h4>
+              <p>
+                The demo gives you a fast signal. The full founder evaluation gives you a deeper review:
+                what is misleading, what evidence is missing, where distribution should start, and what I’d test next if this were my idea.
+              </p>
+
+              <div class="compare">
+                <div class="compare-box">
+                  <h5>Demo</h5>
+                  <ul>
+                    <li>Fast proceed / refine / drop signal</li>
+                    <li>Top risks surfaced</li>
+                    <li>Distribution risk snapshot</li>
+                    <li>Best next moves</li>
+                  </ul>
+                </div>
+
+                <div class="compare-box">
+                  <h5>Full founder evaluation</h5>
+                  <ul>
+                    <li>Clearer build / test / drop recommendation</li>
+                    <li>What evidence is still missing</li>
+                    <li>Where the idea is most misleading</li>
+                    <li>Your best first-user channels</li>
+                    <li>Personally reviewed within 24 hours</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="cta-actions">
+                <a
+                  id="fullEvalBtn"
+                  href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Get My Full Founder Evaluation — $39
+                </a>
+
+                <button class="btn btn-secondary" id="shareScoreBtn" type="button">
+                  Share my startup score
+                </button>
+              </div>
+
+              <div class="price-note">
+                Personally reviewed. Delivered within 24 hours. If it’s not useful, I’ll refund you.
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>What you’re actually buying</h2>
+          <p>Not more AI output. A sharper founder decision.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Should you keep going?</h3>
+            <p>Get a clearer answer on whether this idea deserves more time, testing, or energy.</p>
+          </div>
+
+          <div class="card">
+            <h3>Where it breaks</h3>
+            <p>See the assumptions, positioning gaps, or distribution issues most likely to kill it.</p>
+          </div>
+
+          <div class="card">
+            <h3>What to do next</h3>
+            <p>Get the next tests I’d run first if I were trying to avoid wasting weeks.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2>What you’re actually getting</h2>
-        <p>Not generic AI feedback - a clearer view of whether the idea is worth pursuing and what to do next.</p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Should you keep going?</h3>
-          <p>Get a clearer answer on whether this idea deserves more time, testing, or energy.</p>
-        </div>
-        <div class="card">
-          <h3>Where it breaks</h3>
-          <p>See the assumptions, positioning gaps, or distribution issues most likely to kill it.</p>
-        </div>
-        <div class="card">
-          <h3>What to do next</h3>
-          <p>Get the next tests I’d run first if I were trying to avoid wasting weeks.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <div class="sticky-cta" id="stickyCta">
     <div class="sticky-inner">
       <div class="sticky-copy">
         <strong>Your verdict is ready.</strong>
-        <span>Get the full decision, missing evidence, and what to test next.</span>
+        <span>Get the deeper review, missing evidence, and what to test next.</span>
       </div>
+
       <a
         href="https://buy.stripe.com/00w8wP7SjfK778b0Fq2wU00"
         class="btn btn-primary"
@@ -1221,7 +1301,7 @@
         target="_blank"
         rel="noopener"
       >
-        Get the full evaluation — $39
+        Full evaluation — $39
       </a>
     </div>
   </div>
@@ -1254,21 +1334,22 @@
     const overallScoreValue = document.getElementById("overallScoreValue");
     const meterFill = document.getElementById("meterFill");
     const scoreGrid = document.getElementById("scoreGrid");
+
     const strengthsList = document.getElementById("strengthsList");
     const risksList = document.getElementById("risksList");
     const distributionList = document.getElementById("distributionList");
     const distributionChannelsList = document.getElementById("distributionChannelsList");
     const bestMoves = document.getElementById("bestMoves");
     const validationSprint = document.getElementById("validationSprint");
-    const shareScoreBtn = document.getElementById("shareScoreBtn");
+
     const fullEvalCta = document.getElementById("fullEvalCta");
     const stickyCta = document.getElementById("stickyCta");
+    const shareScoreBtn = document.getElementById("shareScoreBtn");
     const navCtaBtn = document.getElementById("navCtaBtn");
     const fullEvalBtn = document.getElementById("fullEvalBtn");
     const stickyCtaBtn = document.getElementById("stickyCtaBtn");
 
     let demoStartedTracked = false;
-    let inputFocusedTracked = false;
     let usedExampleIdea = false;
     let lastSubmissionSource = "manual";
     let evaluationCompletedTimeout = null;
@@ -1283,19 +1364,11 @@
       }
     }
 
-    function trackDemoStarted(method = "unknown") {
+    function trackDemoStarted(method) {
       if (!demoStartedTracked) {
         demoStartedTracked = true;
-        trackEvent("demo_started", {
-          start_method: method
-        });
+        trackEvent("demo_started", { start_method: method });
       }
-    }
-
-    function parseNumericScore(scoreText) {
-      if (!scoreText) return null;
-      const match = String(scoreText).match(/(\d+(\.\d+)?)/);
-      return match ? Number(match[1]) : null;
     }
 
     function normalizeText(value) {
@@ -1304,6 +1377,12 @@
 
     function updateCharCount() {
       charCount.textContent = `${ideaInput.value.trim().length} characters`;
+    }
+
+    function parseNumericScore(scoreText) {
+      if (!scoreText) return null;
+      const match = String(scoreText).match(/(\d+(\.\d+)?)/);
+      return match ? Number(match[1]) : null;
     }
 
     function resetEvaluationTracking() {
@@ -1337,9 +1416,9 @@
     }
 
     function confidenceLabel(score) {
-      if (score >= 8) return "High confidence";
-      if (score >= 6.5) return "Medium confidence";
-      return "Low confidence";
+      if (score >= 8) return "High";
+      if (score >= 6.5) return "Medium";
+      return "Low";
     }
 
     function scoreQualifierLabel(score) {
@@ -1380,22 +1459,22 @@
     }
 
     function showLoadingState() {
-      statusText.textContent = "Analyzing demand, positioning, decision quality, and distribution...";
+      statusText.textContent = "Analyzing idea, risk, positioning, and distribution...";
       decisionBadge.className = "badge warn";
-      decisionBadge.textContent = "Analyzing...";
+      decisionBadge.textContent = "Analyzing";
       confidenceBadge.className = "badge";
       confidenceBadge.textContent = "Confidence: calculating";
       decisionTitle.textContent = "Building your founder decision";
-      decisionCopy.textContent = "Zyqerion is scoring clarity, pain, urgency, wedge strength, and distribution risk.";
+      decisionCopy.textContent = "Zyqerion is scoring pain clarity, urgency, wedge strength, and distribution risk.";
       overallScoreValue.textContent = "…";
       scoreQualifier.textContent = "Generating signal";
       meterFill.style.width = "0%";
       scoreGrid.innerHTML = "";
 
       strengthsList.innerHTML = `<li><strong>Scanning your angle</strong><span>Looking for pain, urgency, and wedge clarity.</span></li>`;
-      risksList.innerHTML = `<li><strong>Scanning risks</strong><span>Looking for weak demand, vague ICP, and weak differentiation.</span></li>`;
-      distributionList.innerHTML = `<li><strong>Scanning distribution</strong><span>Looking for how easy or hard it may be to reach the first 10 users.</span></li>`;
-      distributionChannelsList.innerHTML = `<li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the paid founder evaluation.</span></li>`;
+      risksList.innerHTML = `<li><strong>Scanning risks</strong><span>Looking for vague demand, weak ICP, and weak differentiation.</span></li>`;
+      distributionList.innerHTML = `<li><strong>Scanning distribution</strong><span>Looking for how easy or hard it may be to reach your first users.</span></li>`;
+      distributionChannelsList.innerHTML = `<li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the full founder evaluation.</span></li>`;
 
       bestMoves.innerHTML = `
         <div class="step">
@@ -1406,12 +1485,13 @@
           </div>
         </div>
       `;
+
       validationSprint.innerHTML = `
         <div class="step">
           <div class="step-num">1</div>
           <div>
             <strong>Locked for full evaluation</strong>
-            <p>Your full 7-day validation sprint is included in the paid founder evaluation.</p>
+            <p>Your full 7-day validation sprint is included in the full founder evaluation.</p>
           </div>
         </div>
       `;
@@ -1426,44 +1506,47 @@
       const problem = normalizeText(payload.problem);
       const stage = normalizeText(payload.stage);
       const priority = normalizeText(payload.priority);
-
       const combined = [idea, audience, problem].join(" ");
 
-      let score = 6.4;
-      let strengths = [];
-      let risks = [];
-      let distributionListItems = [];
-      let distributionChannelsItems = [];
-      let bestMovesList = [];
-      let sprint = [];
+      let score = 6.3;
+      let verdict = "Refine";
+      let headline = "Interesting direction, but not strong enough to commit build time yet.";
+      let summary = "The idea sounds plausible, but the signal is not sharp enough yet. The biggest question is whether the pain is specific and urgent enough for people to act now.";
       let metrics = {
         "Pain clarity": 6,
         "Buyer urgency": 6,
         "Wedge strength": 6
       };
-      let verdict = "Refine";
-      let headline = "Interesting direction, but not strong enough to commit build time yet.";
-      let summary = "The idea sounds plausible, but the signal is not sharp enough yet. The biggest question is whether the pain is strong and specific enough for people to act now.";
-      let matchedTemplate = "fallback";
+
+      let strengths = [];
+      let risks = [];
+      let bestMovesList = [];
+      let sprint = [];
       let distributionRisk = {
         level: "MEDIUM",
         score: 5,
         summary: "Some routes to early users may exist, but they are not obvious enough yet.",
-        reasons: [],
-        channels: []
+        reasons: [
+          "Target audience may still be broad",
+          "Distribution channels are not yet obvious",
+          "The first-user path needs sharper definition"
+        ],
+        channels: [
+          "Niche communities",
+          "Direct outreach",
+          "Problem-specific content"
+        ]
       };
 
       const hasAi = /\bai\b|\bllm\b|\bagent\b|\bcopilot\b/.test(combined);
-      const hasFounder = /founder|startup|indie hacker|indiehackers|saas founder/.test(combined);
-      const hasLegal = /legal|contract|compliance/.test(combined);
-      const hasRestaurant = /restaurant|inventory|forecast/.test(combined);
-      const hasFreelance = /freelancer|invoice|cash flow|invoic/.test(combined);
+      const hasFounder = /founder|startup|indie hacker|indiehackers|saas founder|startup idea|validate/.test(combined);
+      const hasLegal = /legal|contract|compliance|lawyer/.test(combined);
+      const hasRestaurant = /restaurant|inventory|forecast|stockout|waste/.test(combined);
+      const hasFreelance = /freelancer|invoice|cash flow|invoic|late payment/.test(combined);
       const hasMarketplace = /marketplace/.test(combined);
-      const hasBroadWords = /platform|tool|app|assistant|solution/.test(combined);
-      const hasSpecificProblem = problem.length > 18 || /no-show|waste|cash flow|inventory|legal workflow|validation|outbound|retention|demand/.test(combined);
+      const hasSpecificProblem = problem.length > 18 || /waste|cash flow|inventory|legal workflow|validation|outbound|retention|demand|late payment|stockout|contract/.test(combined);
 
       if (hasRestaurant) {
-        matchedTemplate = "restaurant";
         score = 7.7;
         verdict = "Proceed";
         headline = "This looks more promising than most early ideas.";
@@ -1481,14 +1564,14 @@
         risks = [
           { title: "Adoption friction", body: "Busy operators will reject anything that feels hard to set up or maintain." },
           { title: "Data quality dependency", body: "Forecasting gets weaker fast if input data is messy or incomplete." },
-          { title: "Competition from existing POS tools", body: "You need a sharper wedge than ‘AI forecasting’ alone." }
+          { title: "Competition from existing POS tools", body: "You need a sharper wedge than “AI forecasting” alone." }
         ];
         distributionRisk = {
           level: "MEDIUM",
           score: 5,
           summary: "Restaurant owners are identifiable, but early distribution may require more direct outreach than self-serve channels.",
           reasons: [
-            "Users are clear, but not always concentrated in one strong online channel",
+            "Users are clear but not always concentrated in one strong online channel",
             "Many owners are busy and harder to reach reactively",
             "Direct outreach or partnerships may work better than broad content"
           ],
@@ -1504,16 +1587,15 @@
           { title: "Validate workflow fit before advanced AI", body: "Make sure the product fits the real day-to-day process." }
         ];
         sprint = [
-          { title: "Interview 5 operators", body: "Ask how they currently forecast, where they guess, and what mistakes cost them." },
+          { title: "Interview 5 operators", body: "Ask how they forecast now, where they guess, and what mistakes cost them." },
           { title: "Map one painful inventory workflow", body: "Identify the exact point where wrong decisions happen today." },
           { title: "Prototype one simple recommendation screen", body: "Show predicted order suggestions instead of a generic dashboard." }
         ];
       } else if (hasLegal) {
-        matchedTemplate = "legal";
         score = 6.2;
         verdict = "Refine";
         headline = "The demand may be real, but trust is the main bottleneck.";
-        summary = "This can work if the wedge is narrow and the workflow is low-risk. Broad ‘AI legal assistant’ positioning will likely feel too risky and vague.";
+        summary = "This can work if the wedge is narrow and the workflow is low-risk. Broad “AI legal assistant” positioning will likely feel too risky and vague.";
         metrics = {
           "Pain clarity": 7,
           "Buyer urgency": 5,
@@ -1522,17 +1604,17 @@
         strengths = [
           { title: "The need is understandable", body: "Small businesses do run into recurring legal friction." },
           { title: "There may be willingness to pay", body: "If the workflow saves lawyer time or reduces uncertainty, value is plausible." },
-          { title: "Niche workflows can be compelling", body: "Contract review, policy generation, or simple document help are more believable than broad legal help." }
+          { title: "Niche workflows can be compelling", body: "Contract review, policy generation, or document preparation are more believable than broad legal help." }
         ];
         risks = [
-          { title: "Trust barrier is huge", body: "Users may hesitate to rely on an AI tool for anything that feels risky." },
-          { title: "Positioning is too broad", body: "‘AI legal assistant’ sounds generic unless you narrow it hard." },
+          { title: "Trust barrier is huge", body: "Users may hesitate to rely on AI for anything that feels legally risky." },
+          { title: "Positioning is too broad", body: "“AI legal assistant” sounds generic unless you narrow it hard." },
           { title: "Liability anxiety kills adoption", body: "Even useful output may not be used if people fear mistakes." }
         ];
         distributionRisk = {
           level: "MEDIUM",
           score: 6,
-          summary: "Small businesses are reachable, but the audience is broad and fragmented, and trust-heavy categories make cold reach harder.",
+          summary: "Small businesses are reachable, but the audience is broad and trust-heavy categories make cold reach harder.",
           reasons: [
             "Audience is broad unless narrowed to one exact workflow",
             "Trust-heavy categories reduce response rates",
@@ -1547,19 +1629,18 @@
         bestMovesList = [
           { title: "Choose one narrow workflow", body: "Start with a small, frequent, low-risk problem instead of general legal help." },
           { title: "Reduce perceived risk in messaging", body: "Position the product as support, review, or preparation rather than replacement." },
-          { title: "Test trust language early", body: "Your conversion will depend heavily on how safe and bounded the product feels." }
+          { title: "Test trust language early", body: "Conversion will depend heavily on how safe and bounded the product feels." }
         ];
         sprint = [
-          { title: "Interview 5–7 SMB owners", body: "Find out where simple legal work slows them down repeatedly." },
-          { title: "Test 2–3 narrow wedges", body: "Examples: contract prep, vendor agreements, policy review." },
-          { title: "Measure trust objections directly", body: "Ask what would stop them from using the tool even if the output looked useful." }
+          { title: "Interview 5 SMB owners", body: "Find where simple legal work slows them down repeatedly." },
+          { title: "Test 2 narrow wedges", body: "Examples: contract prep, vendor agreements, policy review." },
+          { title: "Measure trust objections", body: "Ask what would stop them from using the tool even if the output looked useful." }
         ];
       } else if (hasFreelance) {
-        matchedTemplate = "freelance";
         score = 7.0;
         verdict = "Refine";
         headline = "There is probably demand here, but it feels crowded unless the wedge gets sharper.";
-        summary = "The problem is understandable and monetizable, but invoicing alone is unlikely to feel differentiated. The angle needs to be more specific.";
+        summary = "The problem is understandable and monetizable, but invoicing alone is unlikely to feel differentiated. The angle needs to focus on a sharper money moment.";
         metrics = {
           "Pain clarity": 7,
           "Buyer urgency": 7,
@@ -1578,22 +1659,22 @@
         distributionRisk = {
           level: "LOW",
           score: 3,
-          summary: "Freelancers are relatively easy to identify and reach, but the challenge is standing out in a crowded space.",
+          summary: "Freelancers are relatively easy to identify and reach, but standing out in a crowded space is the challenge.",
           reasons: [
-            "Target user is clear and easy to describe",
+            "Target user is clear",
             "Freelancers gather in obvious online spaces",
             "The problem is often discussed publicly"
           ],
           channels: [
             "Freelancer communities",
-            "YouTube creators for freelancers",
+            "Creator newsletters",
             "Search-driven content"
           ]
         };
         bestMovesList = [
-          { title: "Pick one freelancer type first", body: "Writers, designers, consultants, and developers have different pain patterns." },
+          { title: "Pick one freelancer type first", body: "Writers, designers, consultants, and developers have different payment pain." },
           { title: "Focus on a painful money moment", body: "Examples: late payments, follow-ups, forecasting gaps, or invoice disputes." },
-          { title: "Lead with a better outcome, not AI", body: "Promise faster payment or calmer cash flow rather than generic automation." }
+          { title: "Lead with outcome, not AI", body: "Promise faster payment or calmer cash flow rather than generic automation." }
         ];
         sprint = [
           { title: "Interview 5 freelancers", body: "Ask what part of getting paid is most stressful and repetitive." },
@@ -1601,7 +1682,6 @@
           { title: "Test landing page messaging", body: "Compare general invoicing language vs one sharp pain-driven promise." }
         ];
       } else if (hasFounder) {
-        matchedTemplate = "founder";
         score = 7.4;
         verdict = "Proceed";
         headline = "There is likely real founder pain here, but positioning quality will decide conversion.";
@@ -1614,10 +1694,10 @@
         strengths = [
           { title: "Founder uncertainty is real", body: "Many founders need help deciding whether to build, test, or drop an idea." },
           { title: "Decision framing is stronger than generic advice", body: "A founder decision engine feels more concrete than broad startup guidance." },
-          { title: "Structured output can create perceived value fast", body: "Clear verdicts, risks, and next steps create stronger immediate payoff." }
+          { title: "Structured output can create value fast", body: "Clear verdicts, risks, and next steps create stronger immediate payoff." }
         ];
         risks = [
-          { title: "Messaging can sound too generic", body: "If it feels like ‘AI research for startup ideas,’ conversion will weaken." },
+          { title: "Messaging can sound too generic", body: "If it feels like “AI research for startup ideas,” conversion will weaken." },
           { title: "Trust depends on output quality", body: "Founders need to feel the engine says something sharper than what ChatGPT already gives them." },
           { title: "Retention depends on next-step pull", body: "Interesting output is not enough; the result must create a natural reason to continue." }
         ];
@@ -1627,7 +1707,7 @@
           summary: "Founders are highly visible online and gather in obvious places, so early distribution is relatively straightforward.",
           reasons: [
             "Target user is easy to identify",
-            "Founders gather in concentrated public communities",
+            "Founders gather in public communities",
             "The problem is already openly discussed"
           ],
           channels: [
@@ -1637,43 +1717,44 @@
           ]
         };
         bestMovesList = [
-          { title: "Lean hard into decision clarity", body: "Sell proceed / refine / drop — not generic analysis." },
-          { title: "Make the result feel more consequential", body: "Use stronger language about what the founder should do next." },
-          { title: "Increase the gap between demo and full eval", body: "The teaser should feel useful, but incomplete enough to unlock deeper review." }
+          { title: "Lean into decision clarity", body: "Sell proceed / refine / drop — not generic analysis." },
+          { title: "Make the result feel consequential", body: "Use stronger language about what the founder should do next." },
+          { title: "Increase demo-to-paid gap", body: "The demo should feel useful, but incomplete enough to unlock deeper review." }
         ];
         sprint = [
           { title: "Collect 10 founder reactions", body: "Ask whether the result changed what they would do next." },
-          { title: "Test stronger CTA language", body: "Compare ‘Get full evaluation’ vs ‘Get the real founder decision’." },
-          { title: "Track post-result behavior", body: "Measure which result states produce the highest full-eval click-through." }
+          { title: "Test stronger CTA language", body: "Compare “full evaluation” vs “real founder decision.”" },
+          { title: "Track post-result behavior", body: "Measure which verdicts produce the highest paid-evaluation interest." }
         ];
       } else {
-        if (hasSpecificProblem) score += 0.4;
+        if (hasSpecificProblem) score += 0.5;
         if (hasAi) score -= 0.1;
-        if (hasMarketplace) score -= 0.4;
-        if (!hasSpecificProblem && hasBroadWords) score -= 0.5;
+        if (hasMarketplace) score -= 0.5;
+        if (!hasSpecificProblem) score -= 0.4;
         if (stage === "launched") score += 0.2;
         if (priority === "clarity") score += 0.1;
 
-        score = Math.max(4.8, Math.min(7.3, Number(score.toFixed(1))));
-        metrics = {
-          "Pain clarity": Math.max(4, Math.min(8, Math.round(score + 0.2))),
-          "Buyer urgency": Math.max(4, Math.min(8, Math.round(score - 0.1))),
-          "Wedge strength": Math.max(3, Math.min(8, Math.round(score - 0.5)))
-        };
+        score = Math.max(4.7, Math.min(7.3, Number(score.toFixed(1))));
 
         if (score >= 7.1) {
           verdict = "Proceed";
           headline = "There may be enough signal here to justify deeper validation.";
-          summary = "The idea has some signs of real pain or urgency. The next question is whether the wedge is specific enough to win attention and action.";
+          summary = "The idea has signs of real pain or urgency. The next question is whether the wedge is specific enough to win attention and action.";
         } else if (score < 5.8) {
           verdict = "Drop";
           headline = "Right now this looks too weak or too vague to justify more build time.";
-          summary = "The current framing does not yet show strong pain, urgency, or differentiation. It likely needs a sharper problem or a narrower user before it deserves energy.";
+          summary = "The current framing does not show strong pain, urgency, or differentiation yet. It likely needs a sharper problem or narrower user before it deserves energy.";
         } else {
           verdict = "Refine";
           headline = "Interesting, but still too fuzzy to commit serious time.";
           summary = "There may be something here, but the idea needs a clearer pain point, user definition, or wedge before it feels compelling.";
         }
+
+        metrics = {
+          "Pain clarity": Math.max(4, Math.min(8, Math.round(score + 0.2))),
+          "Buyer urgency": Math.max(4, Math.min(8, Math.round(score - 0.1))),
+          "Wedge strength": Math.max(3, Math.min(8, Math.round(score - 0.5)))
+        };
 
         strengths = [
           { title: "There is at least a plausible problem", body: "The idea points at a possible pain point rather than pure novelty." },
@@ -1686,62 +1767,6 @@
           { title: "The offer may sound generic", body: "Broad startup ideas are easy to ignore unless the promise is sharp." },
           { title: "Differentiation is unclear", body: "Users need a reason to care about this instead of existing tools or habits." }
         ];
-
-        const broadAudience = !audience || audience.length < 8 || /everyone|businesses|people|teams|companies/.test(audience);
-        const hiddenBuyer = /enterprise|small business|sme|teams|operators|owners/.test(combined);
-        const founderish = /founder|creator|developer|freelancer/.test(combined);
-
-        let distributionLevel = "MEDIUM";
-        let distributionScore = 5;
-        let distributionSummary = "This idea may have demand, but it is not yet obvious how easy it will be to find and reach the first 10 users.";
-        let distributionReasons = [
-          "Target audience may still be too broad",
-          "Distribution channels are not yet obvious",
-          "Would benefit from clearer user concentration"
-        ];
-        let distributionChannels = [
-          "Niche communities",
-          "Direct outreach",
-          "Problem-specific search content"
-        ];
-
-        if (founderish && !broadAudience) {
-          distributionLevel = "LOW";
-          distributionScore = 4;
-          distributionSummary = "The first users may be relatively easy to identify because the target user is visible and reachable online.";
-          distributionReasons = [
-            "Target user is reasonably specific",
-            "Likely online communities exist",
-            "Problem language is likely searchable"
-          ];
-          distributionChannels = [
-            "Reddit niche communities",
-            "X / creator ecosystem",
-            "Search-driven content"
-          ];
-        } else if (hiddenBuyer || broadAudience) {
-          distributionLevel = "HIGH";
-          distributionScore = 7;
-          distributionSummary = "Even if the problem is real, reaching the first users may be hard because the audience looks fragmented or not concentrated in one obvious place.";
-          distributionReasons = [
-            "Target users are broad or fragmented",
-            "No clear gathering place is implied",
-            "Early reach may depend on manual outbound"
-          ];
-          distributionChannels = [
-            "Manual outbound",
-            "LinkedIn niche search",
-            "Industry-specific communities"
-          ];
-        }
-
-        distributionRisk = {
-          level: distributionLevel,
-          score: distributionScore,
-          summary: distributionSummary,
-          reasons: distributionReasons,
-          channels: distributionChannels
-        };
 
         bestMovesList = [
           { title: "Define one exact user first", body: "Narrow the ICP before improving the product idea." },
@@ -1756,7 +1781,7 @@
         ];
       }
 
-      distributionListItems = [
+      const distributionListItems = [
         {
           title: `${distributionRisk.level} distribution risk`,
           body: distributionRisk.summary
@@ -1767,13 +1792,12 @@
         }))
       ];
 
-      distributionChannelsItems = distributionRisk.channels.map(channel => ({
+      const distributionChannelsItems = distributionRisk.channels.map(channel => ({
         title: channel,
-        body: "Potential early channel to find the first relevant users."
+        body: "Potential early channel to find relevant first users."
       }));
 
       return {
-        matchedTemplate,
         score,
         verdict,
         confidence: confidenceLabel(score),
@@ -1836,6 +1860,23 @@
       scheduleEvaluationCompleted(data);
     }
 
+    function showNeedMoreDetail() {
+      statusText.textContent = "Need a bit more detail";
+      decisionBadge.className = "badge warn";
+      decisionBadge.textContent = "More detail needed";
+      confidenceBadge.className = "badge";
+      confidenceBadge.textContent = "Confidence: —";
+      decisionTitle.textContent = "Add a slightly more specific idea";
+      decisionCopy.textContent = "Try including who it is for, what problem it solves, and what the product does.";
+      overallScoreValue.textContent = "—";
+      scoreQualifier.textContent = "No score yet";
+      meterFill.style.width = "0%";
+      scoreGrid.innerHTML = "";
+      fullEvalCta.style.display = "none";
+      stickyCta.classList.remove("visible");
+      resetEvaluationTracking();
+    }
+
     function runDemo(source = "manual") {
       const idea = ideaInput.value.trim();
       const audience = audienceInput.value.trim();
@@ -1847,40 +1888,8 @@
       lastSubmissionSource = source;
 
       if (!idea || idea.length < 18) {
-        statusText.textContent = "Need a bit more detail";
-        decisionBadge.className = "badge warn";
-        decisionBadge.textContent = "More detail needed";
-        decisionTitle.textContent = "Add a slightly more specific idea";
-        decisionCopy.textContent = "Try including who it is for, what problem it solves, and what the product does.";
-        overallScoreValue.textContent = "—";
-        scoreQualifier.textContent = "No score yet";
-        meterFill.style.width = "0%";
-        scoreGrid.innerHTML = "";
-        strengthsList.innerHTML = `<li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>`;
-        risksList.innerHTML = `<li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>`;
-        distributionList.innerHTML = `<li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>`;
-        distributionChannelsList.innerHTML = `<li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the paid founder evaluation.</span></li>`;
-        bestMoves.innerHTML = `
-          <div class="step">
-            <div class="step-num">1</div>
-            <div>
-              <strong>Run the demo</strong>
-              <p>Your next best actions will appear here.</p>
-            </div>
-          </div>
-        `;
-        validationSprint.innerHTML = `
-          <div class="step">
-            <div class="step-num">1</div>
-            <div>
-              <strong>Locked for full evaluation</strong>
-              <p>Your full 7-day validation sprint appears in the paid founder evaluation.</p>
-            </div>
-          </div>
-        `;
-        fullEvalCta.style.display = "none";
-        stickyCta.classList.remove("visible");
-        resetEvaluationTracking();
+        showNeedMoreDetail();
+        ideaInput.focus();
         return;
       }
 
@@ -1896,12 +1905,10 @@
 
       showLoadingState();
 
-      const payload = { idea, audience, problem, stage, priority };
-
       setTimeout(() => {
-        const output = buildDemoOutput(payload);
+        const output = buildDemoOutput({ idea, audience, problem, stage, priority });
         showOutput(output);
-      }, 1050);
+      }, 850);
     }
 
     function shareScore() {
@@ -1927,12 +1934,8 @@ https://zyqerion.ai/demo.html`;
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text)
-          .then(() => {
-            alert("Copied. Paste it on X, LinkedIn, or anywhere you want.");
-          })
-          .catch(() => {
-            alert(text);
-          });
+          .then(() => alert("Copied. Paste it wherever you want."))
+          .catch(() => alert(text));
       } else {
         alert(text);
       }
@@ -1958,8 +1961,8 @@ https://zyqerion.ai/demo.html`;
       decisionBadge.textContent = "Waiting for idea";
       confidenceBadge.className = "badge";
       confidenceBadge.textContent = "Confidence: —";
-      decisionTitle.textContent = "No evaluation yet";
-      decisionCopy.textContent = "Run the demo to see whether this idea looks worth pursuing, what weakens it, and what to test next.";
+      decisionTitle.textContent = "No verdict yet";
+      decisionCopy.textContent = "Run the demo to get a sharper signal on whether this idea deserves more time.";
       overallScoreValue.textContent = "—";
       scoreQualifier.textContent = "No score yet";
       meterFill.style.width = "0%";
@@ -1967,8 +1970,9 @@ https://zyqerion.ai/demo.html`;
 
       strengthsList.innerHTML = `<li><strong>Nothing yet</strong><span>Your strongest signals will appear here.</span></li>`;
       risksList.innerHTML = `<li><strong>Nothing yet</strong><span>Your biggest risks will appear here.</span></li>`;
-      distributionList.innerHTML = `<li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach your first users.</span></li>`;
-      distributionChannelsList.innerHTML = `<li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the paid founder evaluation.</span></li>`;
+      distributionList.innerHTML = `<li><strong>No distribution signal yet</strong><span>Run the demo to see how easy or hard it may be to reach first users.</span></li>`;
+      distributionChannelsList.innerHTML = `<li><strong>Locked for full evaluation</strong><span>Your best first-user channels are included in the full founder evaluation.</span></li>`;
+
       bestMoves.innerHTML = `
         <div class="step">
           <div class="step-num">1</div>
@@ -1978,6 +1982,7 @@ https://zyqerion.ai/demo.html`;
           </div>
         </div>
       `;
+
       validationSprint.innerHTML = `
         <div class="step">
           <div class="step-num">1</div>
@@ -1995,6 +2000,7 @@ https://zyqerion.ai/demo.html`;
     function fillIdeaFromUrl() {
       const params = new URLSearchParams(window.location.search);
       const urlIdea = params.get("idea");
+
       if (urlIdea) {
         ideaInput.value = urlIdea;
         usedExampleIdea = false;
@@ -2007,19 +2013,14 @@ https://zyqerion.ai/demo.html`;
 
     ideaInput.addEventListener("focus", () => {
       trackDemoStarted("input_focus");
-
-      if (!inputFocusedTracked) {
-        inputFocusedTracked = true;
-        trackEvent("idea_input_focused", {
-          field_id: "ideaInput"
-        });
-      }
+      trackEvent("idea_input_focused", { field_id: "ideaInput" });
     }, { once: true });
 
     runDemoBtn.addEventListener("click", () => runDemo("run_button"));
 
-    ideaInput.addEventListener("keydown", (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+    ideaInput.addEventListener("keydown", (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        event.preventDefault();
         runDemo("keyboard_shortcut");
       }
     });
@@ -2033,6 +2034,7 @@ https://zyqerion.ai/demo.html`;
         updateCharCount();
 
         const label = chip.querySelector("strong")?.textContent?.trim() || "example";
+
         trackEvent("example_idea_used", {
           example_name: normalizeText(label).slice(0, 60)
         });
@@ -2043,11 +2045,12 @@ https://zyqerion.ai/demo.html`;
 
     shareScoreBtn.addEventListener("click", shareScore);
 
-    [navCtaBtn, fullEvalBtn, stickyCtaBtn].forEach((el) => {
-      if (!el) return;
-      el.addEventListener("click", () => {
+    [navCtaBtn, fullEvalBtn, stickyCtaBtn].forEach((element) => {
+      if (!element) return;
+
+      element.addEventListener("click", () => {
         trackEvent("full_evaluation_cta_clicked", {
-          cta_location: el.id || "unknown",
+          cta_location: element.id || "unknown",
           current_verdict: decisionBadge.textContent || "unknown",
           current_score: parseNumericScore(overallScoreValue.textContent)
         });
