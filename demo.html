@@ -1134,7 +1134,7 @@
             </div>
           </section>
 
-          <section class="output-shell">
+          <section id="decisionSection" class="output-shell">
             <div class="status">
               <span class="status-dot"></span>
               <span id="statusText">Ready</span>
@@ -1492,6 +1492,12 @@ Get full access today for $9 (normally $39). Manually reviewed. Delivered within
     }
 
     function showLoadingState() {
+      setTimeout(() => {
+  document.getElementById("decisionSection")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}, 200);
       statusText.textContent = "Understanding your situation...";
       decisionBadge.className = "badge warn";
       decisionBadge.textContent = "Analyzing";
