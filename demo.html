@@ -2118,10 +2118,7 @@ https://zyqerion.ai/demo.html`;
     return;
   }
 
-  fullEvalCta?.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
+  window.location.href = stickyCtaBtn.href;
 });
     [navCtaBtn, fullEvalBtn, stickyCtaBtn].forEach((element) => {
       if (!element) return;
