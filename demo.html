@@ -1935,6 +1935,8 @@ Get full access today for $9 (normally $39). Manually reviewed. Delivered within
         ideaInput.focus();
         return;
       }
+      hasRunDemo = true;
+      navCtaBtn.textContent = "Unlock full evaluation";
 
       trackEvent("idea_submitted", {
         submission_source: source,
