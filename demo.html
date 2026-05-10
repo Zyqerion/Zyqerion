@@ -2121,16 +2121,30 @@ https://zyqerion.ai/demo.html`;
   window.location.href = stickyCtaBtn.href;
 });
     [navCtaBtn, fullEvalBtn, stickyCtaBtn].forEach((element) => {
-      if (!element) return;
+  if (!element) return;
 
-      element.addEventListener("click", () => {
-        trackEvent("full_evaluation_cta_clicked", {
-          cta_location: element.id || "unknown",
-          current_verdict: decisionBadge.textContent || "unknown",
-          current_score: parseNumericScore(overallScoreValue.textContent)
-        });
-      });
+  element.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    trackEvent("full_evaluation_cta_clicked", {
+      cta_location: element.id || "unknown",
+      current_verdict: decisionBadge.textContent || "unknown",
+      current_score: parseNumericScore(overallScoreValue.textContent)
     });
+
+    if (!hasRunDemo) {
+      document.getElementById("ideaSection")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      ideaInput.focus();
+      return;
+    }
+
+    window.location.href = element.href;
+  });
+});
 
     window.addEventListener("load", () => {
       updateCharCount();
